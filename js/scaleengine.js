@@ -6,6 +6,10 @@ class ScaleEngine {
 	}
 	
 	isScale(symbol) {
+		if (!this.parser.hasIsolatedRoot(symbol)) {
+			return false;
+		}
+		
 		var isValid = false;
 		this.validScaleNames.some(function(name, index, array) {
 			isValid = symbol.toLowerCase().includes(name);

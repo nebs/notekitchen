@@ -8,6 +8,10 @@ class Parser {
 		return query.match(/[ABCDEFG](b?#?)([^ABCDEFG])*/g);
 	}
 	
+	hasIsolatedRoot(query) {
+		return query.search(/[ABCDEFG]b?#?\s/g) >= 0;
+	}
+	
 	findRoot(query) {
 		const results = query.match(/[ABCDEFG]b?#?/);
 		if (results && results.length > 0) {
