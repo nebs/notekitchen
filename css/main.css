@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin+Condensed');
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	background: #FFF;
+	color: #333;
+	font-weight: 200;
+	font-size: 1.05em;
+	font-family: 'Cabin Condensed', sans-serif;	
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: #DDD;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: #DDD;
+	opacity: 1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: #DDD;
+	opacity: 1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	color: #DDD;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+	color: #DDD;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+	padding: 20px;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 300px;
+}
+
+#canvas {
+	margin-top: 10px;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-size: 2em;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+input[type="text"] {
+  border: none;
+}
