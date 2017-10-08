@@ -31,7 +31,7 @@ class PianoView {
 		const blackNoteHeight = whiteNoteHeight * 0.7;
 
 		var i = 0;
-		var currentOctave = 0;
+		var currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
 			currentOctave = Math.floor(i / whiteNotesPerOctaveCount);
 			const x = i * whiteNoteWidth;
@@ -39,7 +39,8 @@ class PianoView {
 			const w = whiteNoteWidth;
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
-			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
+			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
+			if (selectedNotes.includes(indexToCheck)) {
 				ctx.fillStyle = '#A8B272';
 			} else {
 				ctx.fillStyle = '#FFF';
