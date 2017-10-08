@@ -1,6 +1,19 @@
 class ChordEngine {
 	constructor() {
 	}
+
+	numbersWithModifier(input, modifier) {
+		var numbers = []
+		var re = new RegExp("(" + modifier + "\\d{1,})(?!.*\\1)", "g");
+		var results = input.match(re);
+		if (!results) {
+			return [];
+		}
+		numbers = results.map(function(x) {
+		   return parseInt(x.slice(1), 10);
+		});
+		return numbers
+	}
 	
 	extractNotes(symbol) {
 		if (symbol === undefined || symbol.length == 0) {
@@ -32,8 +45,8 @@ class ChordEngine {
 			return [];
 		}
 
-		var flats = numbersWithModifier(symbol, 'b');
-		var sharps = numbersWithModifier(symbol, '#');
+		var flats = this.numbersWithModifier(symbol, 'b');
+		var sharps = this.numbersWithModifier(symbol, '#');
 
 		var third_index = root_index + 4;
 		if (symbol.includes('m')) { third_index = root_index + 3; }
