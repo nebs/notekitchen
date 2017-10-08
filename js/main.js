@@ -129,6 +129,7 @@ var processInput = function(input) {
 document.addEventListener("DOMContentLoaded", function(event) { 
 	var input = document.getElementById("in");
 	var container = document.getElementById("container");
+	var canvas = document.getElementById('canvas');
 	
 	input.onkeyup = function(e) {
 		e.preventDefault();
@@ -143,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	
 	var showNames = false;
 	
-	const keyboard = new PianoKeyboardUI();
+	const keyboard = new PianoKeyboardUI(canvas);
 	
 	input.focus();
 	input.oninput = function () {				
