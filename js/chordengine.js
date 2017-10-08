@@ -7,12 +7,12 @@ class ChordEngine {
 		var notes = [];
 		const rootString = this.parser.findRoot(symbol);
 		if (!rootString) {
-			return null;
+			return [];
 		}
 		
 		const rootIndex = this.parser.noteStringToIndex(rootString);
 		if (!rootIndex) {
-			return null;
+			return [];
 		}
 		
 		var flats = this.parser.findFlats(symbol);

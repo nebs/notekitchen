@@ -21,14 +21,14 @@ class App {
 				return;
 			}
 			
-			const scaleNotes = scaleEngine.parse(query);
-			if (scaleNotes) {
+			const scaleNotes = scaleEngine.getNotesFromQuery(query);
+			if (scaleNotes.length > 0) {
 				pianoView.draw(scaleNotes);
 				return;
 			}
 			
 			const chordNotes = chordEngine.getNotesFromQuery(query);
-			if (chordNotes) {
+			if (chordNotes.length > 0) {
 				pianoView.draw(chordNotes);
 				return;
 			}				

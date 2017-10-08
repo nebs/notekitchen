@@ -5,47 +5,34 @@ class ScaleEngine {
 		this.majorIntervals = [2, 2, 1, 2, 2, 2, 1];
 	}
 	
-	isScale(query) {
+	isScale(symbol) {
 		var isValid = false;
 		this.validScaleNames.some(function(name, index, array) {
-			isValid = query.toLowerCase().includes(name);
+			isValid = symbol.toLowerCase().includes(name);
 			return isValid;
 		});
 		return isValid;
 	}
 	
-	parse(query) {
-		if (!this.isScale(query)) {
-			return null;
+	getNotesFromSymbol(symbol) {
+		if (!this.isScale(symbol)) {
+			return [];
 		}
 		
-		var notes = [];
-		
-		var note_letters = ['C','_','D','_','E','F','_','G','_','A','_','B'];
-	  	var root_index = -1;
-	  	var root_letter = '';
-	
-		note_letters.some(function(letter, i, array) {
-			if (query.includes(letter)) {
-				root_index = i + 1;
-				root_letter = letter;
-				return true;
-			}
-		
-			return false;
-		});
-
-		if (query.includes(root_letter + '#')) { root_index++; }
-		if (query.includes(root_letter + 'b')) { root_index--; }			
-		root_index = root_index % 12;
-		if (root_index == 0) { root_index = 12; }
-
-		if (root_index < 0) {
-			return null;
+		const rootString = this.parser.findRoot(symbol);
+		if (!rootString) {
+			return [];
 		}
 		
-		if (query.toLowerCase().includes('major')) {
-			var nextNote = root_index;			
+		const rootIndex = this.parser.noteStringToIndex(rootString);
+		if (!rootIndex) {
+			return [];
+		}
+		
+		var notes = [];		
+		
+		if (symbol.toLowerCase().includes('major')) {
+			var nextNote = rootIndex;			
 			this.majorIntervals.forEach(function(interval, index, array) {
 				notes.push(nextNote);
 				nextNote += interval;
@@ -62,12 +49,16 @@ class ScaleEngine {
 			notes = notes.concat(notesOctave);
 		}
 		
-		// /([ABCDEFG](#?|b?)(?=\s|m|M|dim|aug|$|\d))(?!(^\s*|/\s*))/g
-		
-		// Find root notes: /([ABCDEFG](b?#?))/g
-		// Find all chords: /([ABCDEFG](b?#?))[^\s]*/g
-		// Find all clusters of strings that start with a root note: /[ABCDEFG](b?#?)([^ABCDEFG])*/g
-		
 		return notes;
 	}
+	
+	getNotesFromQuery(query) {	
+		var notes = [];
+		const symbols = this.parser.findSymbols(query);
+		symbols.forEach(function(symbol, index, array) {
+			const symbolNotes = this.getNotesFromSymbol(symbol);
+			notes = notes.concat(symbolNotes);
+		}, this);
+		return notes;
+	}	
 }
