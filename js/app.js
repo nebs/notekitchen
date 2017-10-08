@@ -3,8 +3,9 @@ class App {
 		$input.onkeyup = function(e) {
 			e.preventDefault();
 			if (e.keyCode == 13) {
-				if (commandEngine.parse($input.value)) {
+				if (commandEngine.execute($input.value)) {
 					$input.value = '';
+					pianoView.clear();
 				}
 			}
 		}
@@ -16,7 +17,7 @@ class App {
 				return;
 			}			
 			
-			if (commandEngine.parse(query)) {
+			if (commandEngine.isCommand(query)) {
 				pianoView.clear();				
 				return;
 			}

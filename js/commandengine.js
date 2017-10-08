@@ -3,8 +3,12 @@ class CommandEngine {
 		this.settings = settings;
 	}
 	
-	parse(query) {
-		if (query[0] != ':') {
+	isCommand(query) {
+		return query[0] == ':';
+	}
+	
+	execute(query) {
+		if (!this.isCommand(query)) {
 			return false;
 		}
 		
