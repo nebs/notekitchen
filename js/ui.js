@@ -1,9 +1,13 @@
-class PianoKeyboardUI {
+class PianoView {
 	constructor(canvas) {
 		this.canvas = canvas;
 		this.width = canvas.width;
 		this.height = canvas.height;
 	}
+  
+  	clear() {
+  		this.draw([]);
+  	}
   
 	draw(selectedNotes, showNames) {
 		if (!this.canvas.getContext) {
