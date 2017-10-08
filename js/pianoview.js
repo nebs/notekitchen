@@ -1,8 +1,8 @@
 class PianoView {
-	constructor(canvas, settings) {
-		this.canvas = canvas;
-		this.width = canvas.width;
-		this.height = canvas.height;
+	constructor($canvas, settings) {
+		this.$canvas = $canvas;
+		this.width = $canvas.width;
+		this.height = $canvas.height;
 		this.settings = settings;
 	}
   
@@ -11,14 +11,14 @@ class PianoView {
   	}
   
 	draw(selectedNotes) {
-		if (!this.canvas.getContext) {
+		if (!this.$canvas.getContext) {
 			return;
 		}
 		
 		const totalOctaves = Config.totalOctaves;
 		const notesPerOctave = Config.notesPerOctave;
 		
-		var ctx = this.canvas.getContext('2d');
+		var ctx = this.$canvas.getContext('2d');
 		const whiteNoteIndexes = [1,3,5,6,8,10,12];
 		const blackNoteIndexes = [2,4,7,9,11];
 		const whiteNotesPerOctaveCount = 7;			
