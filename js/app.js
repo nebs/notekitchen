@@ -17,6 +17,7 @@ class App {
 			}			
 			
 			if (commandEngine.parse(query)) {
+				pianoView.clear();				
 				return;
 			}
 			

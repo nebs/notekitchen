@@ -1,15 +1,16 @@
 class PianoView {
-	constructor(canvas) {
+	constructor(canvas, settings) {
 		this.canvas = canvas;
 		this.width = canvas.width;
 		this.height = canvas.height;
+		this.settings = settings;
 	}
   
   	clear() {
   		this.draw([]);
   	}
   
-	draw(selectedNotes, showNames) {
+	draw(selectedNotes) {
 		if (!this.canvas.getContext) {
 			return;
 		}
@@ -48,7 +49,7 @@ class PianoView {
 			ctx.fillRect(x, y, w, h);				
 			ctx.strokeRect(x, y, w, h);	
 
-			if (showNames) {
+			if (this.settings.isNamesOn) {
 				var note_letters = ['C','D','E','F','G','A','B'];
 				ctx.font = '8px sans-serif';
 				ctx.fillStyle = '#999';
