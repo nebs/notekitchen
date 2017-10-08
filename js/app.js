@@ -15,7 +15,7 @@ class App {
 				pianoView.clear();
 				return;
 			}			
-			
+
 			if (commandEngine.isCommand(query)) {
 				pianoView.clear();				
 				return;
@@ -27,7 +27,7 @@ class App {
 				return;
 			}
 			
-			const chordNotes = chordEngine.parse(query);
+			const chordNotes = chordEngine.getNotesFromQuery(query);
 			if (chordNotes) {
 				pianoView.draw(chordNotes);
 				return;

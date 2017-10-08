@@ -1,86 +1,60 @@
 class ChordEngine {
-	constructor() {
+	constructor(parser) {
+		this.parser = parser;
 	}
 
-	numbersWithModifier(input, modifier) {
-		var numbers = []
-		var re = new RegExp("(" + modifier + "\\d{1,})(?!.*\\1)", "g");
-		var results = input.match(re);
-		if (!results) {
-			return [];
-		}
-		numbers = results.map(function(x) {
-		   return parseInt(x.slice(1), 10);
-		});
-		return numbers
-	}
-	
-	parse(query) {	
+	getNotesFromSymbol(symbol) {
 		var notes = [];
-
-		var note_letters = ['C','_','D','_','E','F','_','G','_','A','_','B'];
-	  	var root_index = -1;
-	  	var root_letter = '';
-	
-		note_letters.some(function(letter, i, array) {
-			if (query.includes(letter)) {
-				root_index = i + 1;
-				root_letter = letter;
-				return true;
-			}
-		
-			return false;
-		});
-
-		if (query.includes(root_letter + '#')) { root_index++; }
-		if (query.includes(root_letter + 'b')) { root_index--; }			
-		root_index = root_index % 12;
-		if (root_index == 0) { root_index = 12; }
-
-		if (root_index < 0) {
+		const rootString = this.parser.findRoot(symbol);
+		if (!rootString) {
 			return null;
 		}
+		
+		const rootIndex = this.parser.noteStringToIndex(rootString);
+		if (!rootIndex) {
+			return null;
+		}
+		
+		var flats = this.parser.findFlats(symbol);
+		var sharps = this.parser.findSharps(symbol);
 
-		var flats = this.numbersWithModifier(query, 'b');
-		var sharps = this.numbersWithModifier(query, '#');
+		var thirdIndex = rootIndex + 4;
+		if (symbol.includes('m')) { thirdIndex = rootIndex + 3; }
+		if (symbol.includes('dim')) { thirdIndex = rootIndex + 3; }			
 
-		var third_index = root_index + 4;
-		if (query.includes('m')) { third_index = root_index + 3; }
-		if (query.includes('dim')) { third_index = root_index + 3; }			
+		var fifthIndex = rootIndex + 7;
+		if (symbol.includes('dim')) { fifthIndex = rootIndex + 6; }
+		if (symbol.includes('b5')) { fifthIndex = rootIndex + 6; }
+		if (symbol.includes('#5')) { fifthIndex = rootIndex + 8; }
+		if (symbol.includes('aug')) { fifthIndex = rootIndex + 8; }									
 
-		var fifth_index = root_index + 7;
-		if (query.includes('dim')) { fifth_index = root_index + 6; }
-		if (query.includes('b5')) { fifth_index = root_index + 6; }
-		if (query.includes('#5')) { fifth_index = root_index + 8; }
-		if (query.includes('aug')) { fifth_index = root_index + 8; }									
+		var seventhIndex = rootIndex;
+		if (symbol.includes('7')) { seventhIndex = rootIndex + 10; }
+		if (symbol.includes('9')) { seventhIndex = rootIndex + 10; }
+		if (symbol.includes('11')) { seventhIndex = rootIndex + 10; }
+		if (symbol.includes('13')) { seventhIndex = rootIndex + 10; }
+		if (symbol.includes('M7')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('M9')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('M11')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('M13')) { seventhIndex = rootIndex + 11; }			
+		if (symbol.includes('dim') && seventhIndex == rootIndex + 10) { seventhIndex--; }												
 
-		var seventh_index = root_index;
-		if (query.includes('7')) { seventh_index = root_index + 10; }
-		if (query.includes('9')) { seventh_index = root_index + 10; }
-		if (query.includes('11')) { seventh_index = root_index + 10; }
-		if (query.includes('13')) { seventh_index = root_index + 10; }
-		if (query.includes('M7')) { seventh_index = root_index + 11; }
-		if (query.includes('M9')) { seventh_index = root_index + 11; }
-		if (query.includes('M11')) { seventh_index = root_index + 11; }
-		if (query.includes('M13')) { seventh_index = root_index + 11; }			
-		if (query.includes('dim') && seventh_index == root_index + 10) { seventh_index--; }												
-
-		var ninth_index = root_index;
+		var ninthIndex = rootIndex;
 		if (!flats.includes(9) && !sharps.includes(9)) {
-			if (query.includes('9')) { ninth_index = root_index + 14; }
-			if (query.includes('11')) { ninth_index = root_index + 14; }
-			if (query.includes('13')) { ninth_index = root_index + 14; }				
+			if (symbol.includes('9')) { ninthIndex = rootIndex + 14; }
+			if (symbol.includes('11')) { ninthIndex = rootIndex + 14; }
+			if (symbol.includes('13')) { ninthIndex = rootIndex + 14; }				
 		}
 
-		var eleventh_index = root_index;
+		var eleventhIndex = rootIndex;
 		if (!flats.includes(11) && !sharps.includes(11)) {
-			if (query.includes('11')) { eleventh_index = root_index + 17; }
-			if (query.includes('13')) { eleventh_index = root_index + 17; }
+			if (symbol.includes('11')) { eleventhIndex = rootIndex + 17; }
+			if (symbol.includes('13')) { eleventhIndex = rootIndex + 17; }
 		}
 	
-		var thirteenth_index = root_index;
+		var thirteenthIndex = rootIndex;
 		if (!flats.includes(13) && !sharps.includes(13)) {			
-			if (query.includes('13')) { thirteenth_index = root_index + 21; }
+			if (symbol.includes('13')) { thirteenthIndex = rootIndex + 21; }
 		}
 	
 		var addToNotes = function(index) {
@@ -96,7 +70,7 @@ class ChordEngine {
 		const majorIntervals = [2, 2, 1, 2, 2, 2, 1];
 		flats.forEach(function(flatIndex, i, array) {
 			var noteIndex = 0;
-			var flatValue = root_index;
+			var flatValue = rootIndex;
 			for (noteIndex = 0; noteIndex < flatIndex - 1; noteIndex++) {
 				flatValue += majorIntervals[noteIndex % majorIntervals.length];					
 			}
@@ -104,21 +78,31 @@ class ChordEngine {
 		});
 		sharps.forEach(function(sharpIndex, i, array) {
 			var noteIndex = 0;
-			var sharpValue = root_index;
+			var sharpValue = rootIndex;
 			for (noteIndex = 0; noteIndex < sharpIndex - 1; noteIndex++) {
 				sharpValue += majorIntervals[noteIndex % majorIntervals.length];					
 			}
 			addToNotes(sharpValue + 1);
 		});			
 	
-		addToNotes(root_index);
-		addToNotes(third_index);
-		addToNotes(fifth_index);
-		addToNotes(seventh_index);
-		addToNotes(ninth_index);
-		addToNotes(eleventh_index);
-		addToNotes(thirteenth_index);
+		addToNotes(rootIndex);
+		addToNotes(thirdIndex);
+		addToNotes(fifthIndex);
+		addToNotes(seventhIndex);
+		addToNotes(ninthIndex);
+		addToNotes(eleventhIndex);
+		addToNotes(thirteenthIndex);
 	
 		return notes;		
+	}
+	
+	getNotesFromQuery(query) {	
+		var notes = [];
+		const symbols = this.parser.findSymbols(query);
+		symbols.forEach(function(symbol, index, array) {
+			const symbolNotes = this.getNotesFromSymbol(symbol);
+			notes = notes.concat(symbolNotes);
+		}, this);
+		return notes;
 	}
 }

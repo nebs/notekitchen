@@ -1,5 +1,6 @@
 class ScaleEngine {
-	constructor() {
+	constructor(parser) {
+		this.parser = parser;
 		this.validScaleNames = ['major'];
 		this.majorIntervals = [2, 2, 1, 2, 2, 2, 1];
 	}
@@ -60,6 +61,12 @@ class ScaleEngine {
 			});
 			notes = notes.concat(notesOctave);
 		}
+		
+		// /([ABCDEFG](#?|b?)(?=\s|m|M|dim|aug|$|\d))(?!(^\s*|/\s*))/g
+		
+		// Find root notes: /([ABCDEFG](b?#?))/g
+		// Find all chords: /([ABCDEFG](b?#?))[^\s]*/g
+		// Find all clusters of strings that start with a root note: /[ABCDEFG](b?#?)([^ABCDEFG])*/g
 		
 		return notes;
 	}
