@@ -26,12 +26,14 @@ var processInput = function(input) {
   	var root_index = -1;
   	var root_letter = '';
 	
-	note_letters.forEach(function(letter, i, array) {
+	note_letters.some(function(letter, i, array) {
 		if (input.includes(letter)) {
 			root_index = i + 1;
 			root_letter = letter;
-			return;
+			return true;
 		}
+		
+		return false;
 	});
 
 	if (input.includes(root_letter + '#')) { root_index++; }
