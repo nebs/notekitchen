@@ -62,7 +62,10 @@ var processInput = function(input) {
 	if (input.includes('9')) { seventh_index = root_index + 10; }
 	if (input.includes('11')) { seventh_index = root_index + 10; }
 	if (input.includes('13')) { seventh_index = root_index + 10; }
-	if (input.includes('M')) { seventh_index = root_index + 11; }												
+	if (input.includes('M7')) { seventh_index = root_index + 11; }
+	if (input.includes('M9')) { seventh_index = root_index + 11; }
+	if (input.includes('M11')) { seventh_index = root_index + 11; }
+	if (input.includes('M13')) { seventh_index = root_index + 11; }			
 	if (input.includes('dim') && seventh_index == root_index + 10) { seventh_index--; }												
 
 	var ninth_index = root_index;
