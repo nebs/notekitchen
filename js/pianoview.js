@@ -14,13 +14,16 @@ class PianoView {
 			return;
 		}
 		
+		const totalOctaves = Config.totalOctaves;
+		const notesPerOctave = Config.notesPerOctave;
+		
 		var ctx = this.canvas.getContext('2d');
 		const whiteNoteIndexes = [1,3,5,6,8,10,12];
 		const blackNoteIndexes = [2,4,7,9,11];
 		const whiteNotesPerOctaveCount = 7;			
 		const blackNotesPerOctaveCount = 5;
-		const whiteNoteCount = TOTAL_OCTAVES * whiteNotesPerOctaveCount;
-		const blackNoteCount = TOTAL_OCTAVES * blackNotesPerOctaveCount;
+		const whiteNoteCount = totalOctaves * whiteNotesPerOctaveCount;
+		const blackNoteCount = totalOctaves * blackNotesPerOctaveCount;
 		const whiteNoteWidth = this.width / whiteNoteCount;
 		const blackNoteWidth = whiteNoteWidth * 0.5;
 		const whiteNoteHeight = this.height;
@@ -35,7 +38,7 @@ class PianoView {
 			const w = whiteNoteWidth;
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
-			if (selectedNotes.includes(noteIndex + (currentOctave * NOTES_PER_OCTAVE))) {
+			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
 				ctx.fillStyle = '#A8B272';
 			} else {
 				ctx.fillStyle = '#FFF';
@@ -55,7 +58,7 @@ class PianoView {
 
 		const blackNoteOffsets = [1, 1, 2, 2, 2];
 		currentOctave = 0;
-		const octaveWidth = this.width / TOTAL_OCTAVES;
+		const octaveWidth = this.width / totalOctaves;
 		for (i=0; i<blackNoteCount; i++) {
 			currentOctave = Math.floor(i / blackNotesPerOctaveCount);
 			const offsetIndex = i % blackNoteOffsets.length;
@@ -65,7 +68,7 @@ class PianoView {
 			const w = blackNoteWidth;
 			const h = blackNoteHeight;
 			const noteIndex = blackNoteIndexes[i % blackNoteIndexes.length];
-			if (selectedNotes.includes(noteIndex + (currentOctave * NOTES_PER_OCTAVE))) {
+			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
 				ctx.fillStyle = '#A8B272';			
 			} else {
 				ctx.fillStyle = '#333';

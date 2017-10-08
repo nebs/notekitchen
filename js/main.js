@@ -1,7 +1,3 @@
-const TOTAL_OCTAVES = 3;
-const NOTES_PER_OCTAVE = 12;
-const TOTAL_NOTES = TOTAL_OCTAVES * NOTES_PER_OCTAVE;
-
 document.addEventListener("DOMContentLoaded", function(event) { 
 	var $query = document.getElementById("query");
 	var $canvas = document.getElementById('canvas');

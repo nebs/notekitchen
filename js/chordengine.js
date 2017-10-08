@@ -84,7 +84,7 @@ class ChordEngine {
 		}
 	
 		var addToNotes = function(index) {
-			var val = index % TOTAL_NOTES;
+			var val = index % Config.totalNotes;
 			if (val == 0) {
 				val = 12;
 			}
