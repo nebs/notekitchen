@@ -5,7 +5,18 @@ class Parser {
 	}
 	
 	findSymbols(query) {
-		return query.match(/[ABCDEFG](b?#?)([^ABCDEFG])*/g);
+		if (!query) {
+			return null;
+		}
+		
+		const symbols = query.match(/[ABCDEFG](b?#?)([^ABCDEFG])*/g);
+		if (!symbols) {
+			return null;
+		}
+		
+		return symbols.map(function(symbol) {
+			return symbol.trim().replace(/\s+/g,' ');
+		});
 	}
 	
 	hasIsolatedRoot(query) {
