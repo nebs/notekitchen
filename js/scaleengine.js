@@ -42,9 +42,14 @@ class ScaleEngine {
 		// Duplicates notes across remaining octaves
 		var notesOctave = notes.slice(0);
 		var i = 1;
-		for (i = 1; i < Config.totalOctaves; i++) {
+		for (i = 1; i < Config.totalOctaves + 1; i++) {
 			notesOctave = notesOctave.map(function(n) {
-			   return n + Config.notesPerOctave;
+				const value = n + Config.notesPerOctave;
+				if (value == Config.totalNotes) {
+					return value;
+				} else {
+					return value % Config.totalNotes;					
+				}
 			});
 			notes = notes.concat(notesOctave);
 		}
