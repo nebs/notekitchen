@@ -42,7 +42,6 @@ var processInput = function(input) {
 	if (root_index == 0) { root_index = 12; }
 
 	if (root_index < 0) {
-		console.log("Invalid root note");
 		return [];
 	}
 
@@ -127,7 +126,7 @@ var processInput = function(input) {
 	return notes;
 }
 
-function drawKeyboard(selectedNotes) {
+function drawKeyboard(selectedNotes, showNames) {
   var canvas = document.getElementById('canvas');
   if (canvas.getContext) {
     var ctx = canvas.getContext('2d');
@@ -160,7 +159,14 @@ function drawKeyboard(selectedNotes) {
 		ctx.strokeStyle = '#000';
 		ctx.lineWidth = 1;				
 		ctx.fillRect(x, y, w, h);				
-		ctx.strokeRect(x, y, w, h);				
+		ctx.strokeRect(x, y, w, h);	
+		
+		if (showNames) {
+			var note_letters = ['C','D','E','F','G','A','B'];
+			ctx.font = '8px sans-serif';
+			ctx.fillStyle = '#999';
+			ctx.fillText(note_letters[i % note_letters.length], 4 + x, 46);					
+		}
 	}
 
 	const blackNoteOffsets = [1, 1, 2, 2, 2];
@@ -183,8 +189,8 @@ function drawKeyboard(selectedNotes) {
 		ctx.strokeStyle = '#000';
 		ctx.lineWidth = 1;
 		ctx.fillRect(x, y, w, h);				
-		ctx.strokeRect(x, y, w, h);								
-	}			
+		ctx.strokeRect(x, y, w, h);
+	}				
   }
 }		
 
@@ -192,11 +198,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	var input = document.getElementById("in");
 	var container = document.getElementById("container");
 	
-	input.focus();
-	input.oninput = function () {				
-		var notes = processInput(input.value);
-		drawKeyboard(notes);				
+	input.onkeyup = function(e) {
+		e.preventDefault();
+		if (e.keyCode == 13) {
+			if (input.value.toLowerCase().includes('show names')) {
+				input.value = '';
+			} else if (input.value.toLowerCase().includes('hide names')) {
+				input.value = '';
+			}
+		}
 	}
 	
-	drawKeyboard([]);
+	var showNames = false;
+	
+	input.focus();
+	input.oninput = function () {				
+		if (input.value.toLowerCase().includes('show names')) {
+			showNames = true;
+		} else if (input.value.toLowerCase().includes('hide names')) {
+			showNames = false;
+		}
+		var notes = processInput(input.value);
+		drawKeyboard(notes, showNames);				
+	}
+	
+	drawKeyboard([], showNames);
 });
