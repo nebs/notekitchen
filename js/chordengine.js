@@ -99,6 +99,9 @@ class ChordEngine {
 	getNotesFromQuery(query) {	
 		var notes = [];
 		const symbols = this.parser.findSymbols(query);
+		if (!symbols) {
+			return [];
+		}		
 		symbols.forEach(function(symbol, index, array) {
 			const symbolNotes = this.getNotesFromSymbol(symbol);
 			notes = notes.concat(symbolNotes);

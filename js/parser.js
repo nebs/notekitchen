@@ -9,7 +9,7 @@ class Parser {
 	}
 	
 	findRoot(query) {
-		const results = query.match(/([ABCDEFG]b?#?)/);
+		const results = query.match(/[ABCDEFG]b?#?/);
 		if (results && results.length > 0) {
 			return results[0];
 		}
