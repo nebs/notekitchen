@@ -4,7 +4,8 @@ class CommandEngine {
 	}
 	
 	isCommand(query) {
-		return query[0] == ':';
+		const trimmedQuery = query.trim();
+		return trimmedQuery[0] == 's' || trimmedQuery[0] == 'h';
 	}
 	
 	execute(query) {
@@ -13,9 +14,9 @@ class CommandEngine {
 		}
 		
 		if (query.includes('names')) {
-			if (query.includes('on')) {
+			if (query.includes('show')) {
 				this.settings.isNamesOn = true;
-			} else if (query.includes('off')) {
+			} else if (query.includes('hide')) {
 				this.settings.isNamesOn = false;
 			}
 		}
