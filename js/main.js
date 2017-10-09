@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const chordEngine = new ChordEngine(parser);
 	const scaleEngine = new ScaleEngine(parser);	
 	const commandEngine = new CommandEngine(settings);
-	const app = new App($query, noteEngine, chordEngine, scaleEngine, commandEngine, shadowView, pianoView, parser, settings);
+	const app = new App($query, 
+					    noteEngine, 
+						chordEngine, 
+						scaleEngine, 
+						commandEngine, 
+						shadowView, 
+						pianoView, 
+						parser, 
+						settings);
 	app.start();
 });

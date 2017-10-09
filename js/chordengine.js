@@ -79,12 +79,11 @@ class ChordEngine {
 			}
 		};
 	
-		const majorIntervals = [2, 2, 1, 2, 2, 2, 1];
 		flats.forEach(function(flatIndex, i, array) {
 			var noteIndex = 0;
 			var flatValue = rootIndex;
 			for (noteIndex = 0; noteIndex < flatIndex - 1; noteIndex++) {
-				flatValue += majorIntervals[noteIndex % majorIntervals.length];					
+				flatValue += MusicLibrary.majorScaleIntervals[noteIndex % MusicLibrary.majorScaleIntervals.length];
 			}
 			addToNotes(flatValue - 1);
 		});
@@ -92,7 +91,7 @@ class ChordEngine {
 			var noteIndex = 0;
 			var sharpValue = rootIndex;
 			for (noteIndex = 0; noteIndex < sharpIndex - 1; noteIndex++) {
-				sharpValue += majorIntervals[noteIndex % majorIntervals.length];					
+				sharpValue += MusicLibrary.majorScaleIntervals[noteIndex % MusicLibrary.majorScaleIntervals.length];
 			}
 			addToNotes(sharpValue + 1);
 		});			
