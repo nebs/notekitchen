@@ -1,13 +1,8 @@
 class Parser {
-	constructor() {
-		this.sharpNoteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-		this.flatNoteNames  = ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];		
-	}
-	
 	transposeNote(noteString, amount) {
-		var noteIndex = this.sharpNoteNames.indexOf(noteString);
+		var noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
 		if (noteIndex < 0) {			
-			noteIndex = this.flatNoteNames.indexOf(noteString);
+			noteIndex = MusicLibrary.flatNoteNames.indexOf(noteString);
 		}
 		if (noteIndex < 0) {
 			return noteString;
@@ -21,9 +16,9 @@ class Parser {
 		
 		var transposedNoteString = noteString;
 		if (amount < 0) {
-			transposedNoteString = this.flatNoteNames[noteIndex];
+			transposedNoteString = MusicLibrary.flatNoteNames[noteIndex];
 		} else {
-			transposedNoteString = this.sharpNoteNames[noteIndex];			
+			transposedNoteString = MusicLibrary.sharpNoteNames[noteIndex];			
 		}
 		return transposedNoteString;
 	}
@@ -94,9 +89,9 @@ class Parser {
 	}
 	
 	noteStringToIndex(noteString) {
-		var noteIndex = this.sharpNoteNames.indexOf(noteString);
+		var noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
 		if (noteIndex < 0) {
-			noteIndex = this.flatNoteNames.indexOf(noteString);
+			noteIndex = MusicLibrary.flatNoteNames.indexOf(noteString);
 		}
 
 		if (noteIndex < 0) {
