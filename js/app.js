@@ -25,10 +25,33 @@ class App {
 				this.activeNotes = null;				
 				this.draw();			
 			} else if (e.keyCode == 38) { // UP
+				if (!this.activeNotes) {
+					return;
+				}
 				
+				this.activeNotes = this.activeNotes.map(function(note, i, array) {
+					const newNote = note + 1;
+					if (newNote == Config.totalNotes) {
+						return newNote;
+					}
+					return newNote % Config.totalNotes;
+				});
+				this.draw();
 			} else if (e.keyCode == 40) { // DOWN
+				if (!this.activeNotes) {
+					return;
+				}				
 				
+				this.activeNotes = this.activeNotes.map(function(note, i, array) {
+					var newNote = note - 1;
+					if (newNote == 0) {
+						newNote = Config.totalNotes;
+					}
+					return newNote;
+				});
+				this.draw();				
 			}
+
 		}.bind(this);
 	
 		this.$input.oninput = function() {
