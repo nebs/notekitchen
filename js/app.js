@@ -1,11 +1,13 @@
 class App {
-	constructor($input, chordEngine, scaleEngine, commandEngine, pianoView, parser) {
+	constructor($input, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
 		this.$input = $input; 
+		this.noteEngine = noteEngine;
 		this.chordEngine = chordEngine; 
 		this.scaleEngine = scaleEngine; 
 		this.commandEngine = commandEngine;
 		this.pianoView = pianoView;
 		this.parser = parser;
+		this.settings = settings;
 		this.activeNotes = null;
 	}
 	
@@ -34,6 +36,15 @@ class App {
 			this.activeNotes = null;				
 			this.draw();
 			return;
+		}
+
+		if (this.settings.onlyShowRoots) {
+			const singleNotes = this.noteEngine.getNotesFromQuery(query);
+			if (singleNotes.length > 0) {
+				this.activeNotes = singleNotes;
+				this.draw();
+				return;
+			}
 		}
 		
 		const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
@@ -68,6 +79,9 @@ class App {
 				this.processQuery();				
 			} else if (e.keyCode == 40) { // DOWN
 				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
+				this.processQuery();
+			} else if (e.keyCode == 18) { // ALT
+				this.settings.toggleOnlyShowRoots();
 				this.processQuery();
 			}
 		}.bind(this);
