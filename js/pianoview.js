@@ -70,7 +70,7 @@ class PianoView {
 				var note_letters = ['C','D','E','F','G','A','B'];
 				ctx.font = '8px sans-serif';
 				ctx.fillStyle = textColor;
-				ctx.fillText(note_letters[i % note_letters.length], 6 + x, y + h - 3);
+				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
 			}
 		}
 
