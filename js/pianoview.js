@@ -15,7 +15,6 @@ class PianoView {
 			return;
 		}
 		
-		const backgroundColor = '#172429';
 		const keyboardContainerTopPadding = 35;
 		const keyboardContainerBottomPadding = 5;
 		const keyboardContainerSidePadding = 8;
@@ -37,7 +36,7 @@ class PianoView {
 		const blackNoteHeight = whiteNoteHeight * 0.7;
 
 		var ctx = this.$canvas.getContext('2d');
-		ctx.fillStyle = backgroundColor;
+		ctx.fillStyle = Style.pianoBackgroundColor;
 		ctx.fillRect(0, 0, this.width, this.height);
 
 		var i = 0;
@@ -50,25 +49,25 @@ class PianoView {
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
-			var textColor = '#888';
+			var textColor = Style.pianoDarkTextColor;
 			if (selectedNotes.includes(indexToCheck)) {
-				ctx.fillStyle = '#D80152';
+				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
-				ctx.fillStyle = '#A1013D';
+				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
 				ctx.fillRect(x + w - 3, y, 3, h);
 				ctx.fillRect(x, y, 2, h);				
 				ctx.fillRect(x, y, w, 2);				
-				textColor = '#DDD';
+				textColor = Style.pianoLightTextColor;
 			} else {
-				ctx.fillStyle = '#FFF';
+				ctx.fillStyle = Style.pianoWhiteNoteColor;
 				ctx.fillRect(x, y, w, h);
-				ctx.fillStyle = '#DDD';
+				ctx.fillStyle = Style.pianoWhiteNoteShadowColor;
 				ctx.fillRect(x, y, w, 3);
 			}
 
 			if (this.settings.isNamesOn) {
 				var note_letters = ['C','D','E','F','G','A','B'];
-				ctx.font = '8px sans-serif';
+				ctx.font = noteNameFont;
 				ctx.fillStyle = textColor;
 				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
 			}
@@ -87,17 +86,17 @@ class PianoView {
 			const h = blackNoteHeight;
 			const noteIndex = blackNoteIndexes[i % blackNoteIndexes.length];
 			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
-				ctx.fillStyle = '#D80152';
+				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
-				ctx.fillStyle = '#A1013D';
+				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
 				ctx.fillRect(x, y, w, 2);
 				ctx.fillRect(x, y, 2, h);
-				ctx.fillStyle = '#F5015D';
+				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
 				ctx.fillRect(x, y + h - 2, w, 2);
 			} else {
-				ctx.fillStyle = '#333';
+				ctx.fillStyle = Style.pianoBlackNoteColor;
 				ctx.fillRect(x, y, w, h);
-				ctx.fillStyle = '#444';
+				ctx.fillStyle = Style.pianoBlackNoteHighlightColor;
 				ctx.fillRect(x, y + h - 4, w, 4);
 			}						
 		}
