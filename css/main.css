@@ -66,8 +66,8 @@ input[type="text"] {
 	border-radius: none;
 }
 
-.valid-command {
-	color: #7CBFDA;
+input[type="text"].valid-command {
+	color: #FFF134;
 }
 
 input[type="text"]:focus {
