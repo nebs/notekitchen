@@ -91,8 +91,9 @@ class PianoView {
 				ctx.fillRect(x, y, w, h);
 				ctx.fillStyle = '#A1013D';
 				ctx.fillRect(x, y, w, 2);
+				ctx.fillRect(x, y, 2, h);
 				ctx.fillStyle = '#F5015D';
-				ctx.fillRect(x, y + h - 2, w, 2);				
+				ctx.fillRect(x, y + h - 2, w, 2);
 			} else {
 				ctx.fillStyle = '#333';
 				ctx.fillRect(x, y, w, h);
