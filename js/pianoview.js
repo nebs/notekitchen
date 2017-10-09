@@ -50,22 +50,27 @@ class PianoView {
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
+			var textColor = '#888';
 			if (selectedNotes.includes(indexToCheck)) {
 				ctx.fillStyle = '#D80152';
 				ctx.fillRect(x, y, w, h);
 				ctx.fillStyle = '#A1013D';
-				ctx.fillRect(x, y, 3, h);
-				ctx.fillRect(x, y, w, 3);
+				ctx.fillRect(x + w - 3, y, 3, h);
+				ctx.fillRect(x, y, 2, h);				
+				ctx.fillRect(x, y, w, 2);				
+				textColor = '#DDD';
 			} else {
 				ctx.fillStyle = '#FFF';
 				ctx.fillRect(x, y, w, h);
+				ctx.fillStyle = '#DDD';
+				ctx.fillRect(x, y, w, 3);
 			}
 
 			if (this.settings.isNamesOn) {
 				var note_letters = ['C','D','E','F','G','A','B'];
 				ctx.font = '8px sans-serif';
-				ctx.fillStyle = '#999';
-				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
+				ctx.fillStyle = textColor;
+				ctx.fillText(note_letters[i % note_letters.length], 6 + x, y + h - 3);
 			}
 		}
 
@@ -85,11 +90,15 @@ class PianoView {
 				ctx.fillStyle = '#D80152';
 				ctx.fillRect(x, y, w, h);
 				ctx.fillStyle = '#A1013D';
-				ctx.fillRect(x, y, w, 4);
+				ctx.fillRect(x, y, w, 2);
+				ctx.fillStyle = '#F5015D';
+				ctx.fillRect(x, y + h - 2, w, 2);				
 			} else {
 				ctx.fillStyle = '#333';
 				ctx.fillRect(x, y, w, h);
-			}			
+				ctx.fillStyle = '#444';
+				ctx.fillRect(x, y + h - 4, w, 4);
+			}						
 		}
 
 		ctx.font = '25px Grand Hotel';
