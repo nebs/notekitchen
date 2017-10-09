@@ -100,10 +100,5 @@ class PianoView {
 				ctx.fillRect(x, y + h - 4, w, 4);
 			}						
 		}
-
-		ctx.font = '25px Grand Hotel';
-		ctx.textAlign = 'center';
-		ctx.fillStyle = '#FFF';
-		ctx.fillText('note kitchen', this.width / 2, 26);		
 	} 
 }
