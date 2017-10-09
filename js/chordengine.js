@@ -20,7 +20,7 @@ class ChordEngine {
 
 		var thirdIndex = rootIndex + 4;
 		if (symbol.includes('m') && !symbol.includes('maj')) { thirdIndex = rootIndex + 3; }
-		if (symbol.includes('-')) { thirdIndex = rootIndex + 3; }		
+		if (symbol.includes(rootString + '-')) { thirdIndex = rootIndex + 3; }		
 		if (symbol.includes('dim')) { thirdIndex = rootIndex + 3; }			
 		if (symbol.includes('sus4')) { thirdIndex = rootIndex + 5; }
 		if (symbol.includes('sus2')) { thirdIndex = rootIndex + 2; }
@@ -29,7 +29,8 @@ class ChordEngine {
 		if (symbol.includes('dim')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('b5')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('#5')) { fifthIndex = rootIndex + 8; }
-		if (symbol.includes('+')) { fifthIndex = rootIndex + 8; }
+		if (symbol.includes('+5')) { fifthIndex = rootIndex + 8; }
+		if (symbol.includes('+7')) { fifthIndex = rootIndex + 8; }
 		if (symbol.includes('aug')) { fifthIndex = rootIndex + 8; }
 
 		var seventhIndex = rootIndex;

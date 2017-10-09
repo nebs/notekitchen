@@ -106,8 +106,8 @@ class Parser {
 		}
 	}
 	
-	findNumbersFollowingModifier(query, modifier) {
-		const re = new RegExp(modifier + "\\d+", "g");
+	findNumbersFollowingModifiers(query, modifiers) {
+		const re = new RegExp("(" + modifiers.join('|') + ")\\d+", "g");
 		const results = query.match(re);
 		if (!results) {
 			return [];
@@ -124,10 +124,10 @@ class Parser {
 	}
 	
 	findFlats(query) {
-		return this.findNumbersFollowingModifier(query, 'b');
+		return this.findNumbersFollowingModifiers(query, ['b', '-']);
 	}
 	
 	findSharps(query) {
-		return this.findNumbersFollowingModifier(query, '#');
+		return this.findNumbersFollowingModifiers(query, ['#','\\+']);
 	}	
 }
