@@ -6,29 +6,29 @@
 .clearfix:after { clear: both; }
 
 body {
-	background: #FFF;
-	color: #333;
+	background: #7CBFDA;
+	color: #FFF;
 	font-weight: 200;
 	font-size: 1.05em;
 	font-family: 'Cabin Condensed', sans-serif;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-	color: #DDD;
+	color: #6EAAC2;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	color: #DDD;
+	color: #6EAAC2;
 	opacity: 1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-	color: #DDD;
+	color: #6EAAC2;
 	opacity: 1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: #DDD;
+	color: #6EAAC2;
 }
 ::-ms-input-placeholder { /* Microsoft Edge */
-	color: #DDD;
+	color: #6EAAC2;
 }
 
 .outer {
@@ -55,13 +55,15 @@ body {
 }
 
 input[type="text"] {
-  display: block;
-  margin: 0;
-  width: 100%;
-  font-size: 2em;
-  appearance: none;
-  box-shadow: none;
-  border-radius: none;
+	color: #FFF;
+	background: none;
+	display: block;
+	margin: 0;
+	width: 100%;
+	font-size: 2em;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;
 }
 
 .valid-command {
@@ -69,9 +71,9 @@ input[type="text"] {
 }
 
 input[type="text"]:focus {
-  outline: none;
+	outline: none;
 }
 
 input[type="text"] {
-  border: none;
+	border: none;
 }
