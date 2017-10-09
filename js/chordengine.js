@@ -28,6 +28,7 @@ class ChordEngine {
 		if (symbol.includes('dim')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('b5')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('#5')) { fifthIndex = rootIndex + 8; }
+		if (symbol.includes('+')) { fifthIndex = rootIndex + 8; }
 		if (symbol.includes('aug')) { fifthIndex = rootIndex + 8; }
 
 		var seventhIndex = rootIndex;
