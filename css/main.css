@@ -13,6 +13,15 @@ body {
 	font-family: 'Cabin Condensed', sans-serif;
 }
 
+::selection {
+	color: #7CBFDA;
+	background: #FFF134; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+	color: #7CBFDA;	
+	background: #FFF134; /* Gecko Browsers */
+}
+
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 	color: #6EAAC2;
 }
