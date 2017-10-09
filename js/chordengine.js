@@ -33,6 +33,9 @@ class ChordEngine {
 		if (symbol.includes('+7')) { fifthIndex = rootIndex + 8; }
 		if (symbol.includes('aug')) { fifthIndex = rootIndex + 8; }
 
+		var sixthIndex = rootIndex;
+		if (symbol.includes('6')) { sixthIndex = rootIndex + 9; }
+
 		var seventhIndex = rootIndex;
 		if (symbol.includes('7')) { seventhIndex = rootIndex + 10; }
 		if (symbol.includes('9')) { seventhIndex = rootIndex + 10; }
@@ -97,6 +100,7 @@ class ChordEngine {
 		addToNotes(rootIndex);
 		addToNotes(thirdIndex);
 		addToNotes(fifthIndex);
+		addToNotes(sixthIndex);
 		addToNotes(seventhIndex);
 		addToNotes(ninthIndex);
 		addToNotes(eleventhIndex);
