@@ -1,10 +1,11 @@
 class App {
-	constructor($input, chordEngine, scaleEngine, commandEngine, pianoView) {
+	constructor($input, chordEngine, scaleEngine, commandEngine, pianoView, parser) {
 		this.$input = $input; 
 		this.chordEngine = chordEngine; 
 		this.scaleEngine = scaleEngine; 
 		this.commandEngine = commandEngine;
 		this.pianoView = pianoView;
+		this.parser = parser;
 		this.activeNotes = null;
 	}
 	
@@ -16,6 +17,38 @@ class App {
 		}
 	}
 	
+	processQuery() {
+		const query = this.$input.value;
+		if (query === undefined || query.length == 0) {
+			this.activeNotes = null;				
+			this.draw();
+			return;
+		}			
+
+		if (this.commandEngine.isCommand(query)) {
+			this.activeNotes = null;				
+			this.draw();
+			return;
+		}
+		
+		const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
+		if (scaleNotes.length > 0) {
+			this.activeNotes = scaleNotes;
+			this.draw();
+			return;
+		}
+		
+		const chordNotes = this.chordEngine.getNotesFromQuery(query);
+		if (chordNotes.length > 0) {
+			this.activeNotes = chordNotes;
+			this.draw();				
+			return;
+		}				
+		
+		this.activeNotes = null;				
+		this.draw();		
+	}
+	
 	start() {
 		this.$input.onkeyup = function(e) {
 			e.preventDefault();
@@ -25,65 +58,17 @@ class App {
 				this.activeNotes = null;				
 				this.draw();			
 			} else if (e.keyCode == 38) { // UP
-				if (!this.activeNotes) {
-					return;
-				}
-				
-				this.activeNotes = this.activeNotes.map(function(note, i, array) {
-					const newNote = note + 1;
-					if (newNote == Config.totalNotes) {
-						return newNote;
-					}
-					return newNote % Config.totalNotes;
-				});
-				this.draw();
+				this.$input.value = this.parser.transposeQuery(this.$input.value, 1);
+				this.processQuery();				
 			} else if (e.keyCode == 40) { // DOWN
-				if (!this.activeNotes) {
-					return;
-				}				
-				
-				this.activeNotes = this.activeNotes.map(function(note, i, array) {
-					var newNote = note - 1;
-					if (newNote == 0) {
-						newNote = Config.totalNotes;
-					}
-					return newNote;
-				});
-				this.draw();				
+				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
+				this.processQuery();
 			}
 
 		}.bind(this);
 	
 		this.$input.oninput = function() {
-			const query = this.$input.value;
-			if (query === undefined || query.length == 0) {
-				this.activeNotes = null;				
-				this.draw();
-				return;
-			}			
-
-			if (this.commandEngine.isCommand(query)) {
-				this.activeNotes = null;				
-				this.draw();
-				return;
-			}
-			
-			const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
-			if (scaleNotes.length > 0) {
-				this.activeNotes = scaleNotes;
-				this.draw();
-				return;
-			}
-			
-			const chordNotes = this.chordEngine.getNotesFromQuery(query);
-			if (chordNotes.length > 0) {
-				this.activeNotes = chordNotes;
-				this.draw();				
-				return;
-			}				
-			
-			this.activeNotes = null;				
-			this.draw();
+			this.processQuery();
 		}.bind(this);
 		
 		this.$input.focus();
