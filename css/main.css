@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Grand+Hotel');
 
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 .clearfix:before, .clearfix:after { content: ''; display: table; }
@@ -9,11 +10,7 @@ body {
 	color: #333;
 	font-weight: 200;
 	font-size: 1.05em;
-	font-family: 'Cabin Condensed', sans-serif;	
-}
-
-h3 {
-	margin-bottom: 0px;
+	font-family: 'Cabin Condensed', sans-serif;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
