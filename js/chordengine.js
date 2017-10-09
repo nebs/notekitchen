@@ -20,6 +20,7 @@ class ChordEngine {
 
 		var thirdIndex = rootIndex + 4;
 		if (symbol.includes('m') && !symbol.includes('maj')) { thirdIndex = rootIndex + 3; }
+		if (symbol.includes('-')) { thirdIndex = rootIndex + 3; }		
 		if (symbol.includes('dim')) { thirdIndex = rootIndex + 3; }			
 		if (symbol.includes('sus4')) { thirdIndex = rootIndex + 5; }
 		if (symbol.includes('sus2')) { thirdIndex = rootIndex + 2; }
