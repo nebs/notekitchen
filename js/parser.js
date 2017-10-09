@@ -13,11 +13,11 @@ class Parser {
 			return noteString;
 		}
 		
-		noteIndex += amount;
+		noteIndex += amount;		
 		noteIndex = noteIndex % Config.notesPerOctave;
 		if (noteIndex < 0) {
-			noteIndex = Config.notesPerOctave - 1;
-		}
+			noteIndex = Config.notesPerOctave + noteIndex;
+		}		
 		
 		var transposedNoteString = noteString;
 		if (amount < 0) {
