@@ -1,6 +1,7 @@
 class ShadowView {
-	constructor($canvas) {
+	constructor($canvas, $pianoCanvas) {
 		this.$canvas = $canvas;
+		this.$pianoCanvas = $pianoCanvas;
 	}
     
 	draw() {
@@ -14,8 +15,8 @@ class ShadowView {
 		const height = window.innerHeight;
 		const centerX = width / 2;
 		const centerY = height / 2;
-		const keyboardWidth = 299;
-		const keyboardHeight = 80;
+		const keyboardWidth = this.$pianoCanvas.width - 1;
+		const keyboardHeight = this.$pianoCanvas.height;
 		const keyboardY = 20;
 		const offset = Math.max(width, height);
 		var x = centerX - (keyboardWidth / 2);
@@ -36,7 +37,7 @@ class ShadowView {
 		y = centerY - (keyboardHeight / 2) + keyboardY;
 		ctx.lineTo(x, y);
 		ctx.closePath();
-		ctx.fillStyle = '#6EAAC2';		
+		ctx.fillStyle = Style.primaryShadowColor;
 		ctx.fill();		
 	} 
 }
