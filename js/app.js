@@ -5,6 +5,15 @@ class App {
 		this.scaleEngine = scaleEngine; 
 		this.commandEngine = commandEngine;
 		this.pianoView = pianoView;
+		this.activeNotes = null;
+	}
+	
+	draw() {
+		if (!this.activeNotes) {
+			this.pianoView.clear();
+		} else {
+			this.pianoView.draw(this.activeNotes);
+		}
 	}
 	
 	start() {
@@ -12,8 +21,9 @@ class App {
 			e.preventDefault();
 			if (e.keyCode == 13) { // ENTER
 				this.commandEngine.execute(this.$input.value);
-				this.$input.value = '';				
-				this.pianoView.clear();				
+				this.$input.value = '';
+				this.activeNotes = null;				
+				this.draw();			
 			} else if (e.keyCode == 38) { // UP
 				
 			} else if (e.keyCode == 40) { // DOWN
@@ -24,31 +34,36 @@ class App {
 		this.$input.oninput = function() {
 			const query = this.$input.value;
 			if (query === undefined || query.length == 0) {
-				this.pianoView.clear();
+				this.activeNotes = null;				
+				this.draw();
 				return;
 			}			
 
 			if (this.commandEngine.isCommand(query)) {
-				this.pianoView.clear();				
+				this.activeNotes = null;				
+				this.draw();
 				return;
 			}
 			
 			const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
 			if (scaleNotes.length > 0) {
-				this.pianoView.draw(scaleNotes);
+				this.activeNotes = scaleNotes;
+				this.draw();
 				return;
 			}
 			
 			const chordNotes = this.chordEngine.getNotesFromQuery(query);
 			if (chordNotes.length > 0) {
-				this.pianoView.draw(chordNotes);
+				this.activeNotes = chordNotes;
+				this.draw();				
 				return;
 			}				
 			
-			this.pianoView.clear();
+			this.activeNotes = null;				
+			this.draw();
 		}.bind(this);
 		
 		this.$input.focus();
-		this.pianoView.clear();		
+		this.draw();
 	}
 }
