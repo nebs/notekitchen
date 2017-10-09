@@ -9,4 +9,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const scaleEngine = new ScaleEngine(parser);	
 	const commandEngine = new CommandEngine(settings);
 	const app = new App($query, chordEngine, scaleEngine, commandEngine, pianoView);
+	app.start();
 });

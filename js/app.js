@@ -1,42 +1,54 @@
 class App {
 	constructor($input, chordEngine, scaleEngine, commandEngine, pianoView) {
-		$input.onkeyup = function(e) {
-			e.preventDefault();
-			if (e.keyCode == 13) {
-				commandEngine.execute($input.value);
-				$input.value = '';				
-				pianoView.clear();				
-			}
-		}
+		this.$input = $input; 
+		this.chordEngine = chordEngine; 
+		this.scaleEngine = scaleEngine; 
+		this.commandEngine = commandEngine;
+		this.pianoView = pianoView;
+	}
 	
-		$input.oninput = function() {
-			const query = $input.value;
+	start() {
+		this.$input.onkeyup = function(e) {
+			e.preventDefault();
+			if (e.keyCode == 13) { // ENTER
+				this.commandEngine.execute(this.$input.value);
+				this.$input.value = '';				
+				this.pianoView.clear();				
+			} else if (e.keyCode == 38) { // UP
+				
+			} else if (e.keyCode == 40) { // DOWN
+				
+			}
+		}.bind(this);
+	
+		this.$input.oninput = function() {
+			const query = this.$input.value;
 			if (query === undefined || query.length == 0) {
-				pianoView.clear();
+				this.pianoView.clear();
 				return;
 			}			
 
-			if (commandEngine.isCommand(query)) {
-				pianoView.clear();				
+			if (this.commandEngine.isCommand(query)) {
+				this.pianoView.clear();				
 				return;
 			}
 			
-			const scaleNotes = scaleEngine.getNotesFromQuery(query);
+			const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
 			if (scaleNotes.length > 0) {
-				pianoView.draw(scaleNotes);
+				this.pianoView.draw(scaleNotes);
 				return;
 			}
 			
-			const chordNotes = chordEngine.getNotesFromQuery(query);
+			const chordNotes = this.chordEngine.getNotesFromQuery(query);
 			if (chordNotes.length > 0) {
-				pianoView.draw(chordNotes);
+				this.pianoView.draw(chordNotes);
 				return;
 			}				
 			
-			pianoView.clear();
-		}
+			this.pianoView.clear();
+		}.bind(this);
 		
-		$input.focus();
-		pianoView.clear();
+		this.$input.focus();
+		this.pianoView.clear();		
 	}
 }
