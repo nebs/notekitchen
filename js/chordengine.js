@@ -19,7 +19,7 @@ class ChordEngine {
 		var sharps = this.parser.findSharps(symbol);
 
 		var thirdIndex = rootIndex + 4;
-		if (symbol.includes('m')) { thirdIndex = rootIndex + 3; }
+		if (symbol.includes('m') && !symbol.includes('maj')) { thirdIndex = rootIndex + 3; }
 		if (symbol.includes('dim')) { thirdIndex = rootIndex + 3; }			
 		if (symbol.includes('sus4')) { thirdIndex = rootIndex + 5; }
 		if (symbol.includes('sus2')) { thirdIndex = rootIndex + 2; }
@@ -39,7 +39,11 @@ class ChordEngine {
 		if (symbol.includes('M7')) { seventhIndex = rootIndex + 11; }
 		if (symbol.includes('M9')) { seventhIndex = rootIndex + 11; }
 		if (symbol.includes('M11')) { seventhIndex = rootIndex + 11; }
-		if (symbol.includes('M13')) { seventhIndex = rootIndex + 11; }			
+		if (symbol.includes('M13')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('maj7')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('maj9')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('maj11')) { seventhIndex = rootIndex + 11; }
+		if (symbol.includes('maj13')) { seventhIndex = rootIndex + 11; }
 		if (symbol.includes('dim') && seventhIndex == rootIndex + 10) { seventhIndex--; }												
 
 		var ninthIndex = rootIndex;
