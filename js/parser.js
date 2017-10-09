@@ -82,6 +82,10 @@ class Parser {
 	}
 	
 	findRoot(query) {
+		if (!query) {
+			return null;
+		}
+		
 		const results = query.match(/[ABCDEFG]b?#?/);
 		if (results && results.length > 0) {
 			return results[0];

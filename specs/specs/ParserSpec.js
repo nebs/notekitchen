@@ -151,6 +151,73 @@ describe("Parser", function() {
 		});						
 	});
 
+	describe("transposeQuery", function() {
+		describe("when transposing up by 1", function() {
+			it("returns the query with all notes transposed", function() {
+				const testData = {
+					'C':  'C#',
+					'Gm7   F# locrian #2   BbM7(b13) #11':  'G#m7   G locrian #2   BM7(b13) #11',
+					'BbM7 F#m7b5 B locrian Db F# Gb minor': 'BM7 Gm7b5 C locrian D G G minor',
+					'ABCDEFG': 'A#CC#D#FF#G#',
+					'CCC': 'C#C#C#',
+					'': '',
+				};
+				
+				for (query in testData) {
+					const output = parser.transposeQuery(query, 1);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+		
+		describe("when transposing down by 1", function() {
+			it("returns the query with all notes transposed", function() {
+				const testData = {
+					'C':  'B',
+					'Gm7   F# locrian #2   BbM7(b13) #11':  'Gbm7   F locrian #2   AM7(b13) #11',
+					'BbM7 F#m7b5 B locrian Db F# Gb minor': 'AM7 Fm7b5 Bb locrian C F F minor',
+					'ABCDEFG': 'AbBbBDbEbEGb',
+					'C#C#C#': 'CCC',
+					'': '',
+				};
+				
+				for (query in testData) {
+					const output = parser.transposeQuery(query, -1);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+		
+		describe("when transposing back and forth downwards", function() {
+			it("returns the query with sharps converted to flats", function() {
+				var query = 'Cm7 GM9 F# Locrian Bbdim7';
+				query = parser.transposeQuery(query, 1);
+				query = parser.transposeQuery(query, 1);
+				query = parser.transposeQuery(query, 1);
+				query = parser.transposeQuery(query, -3);												
+				expect(query).toEqual('Cm7 GM9 Gb Locrian Bbdim7');
+			});
+		});				
+
+		describe("when transposing back and forth upwards", function() {
+			it("returns the query with flats converted to sharps", function() {
+				var query = 'Cm7 GM9 F# Locrian Bbdim7';
+				query = parser.transposeQuery(query, -1);
+				query = parser.transposeQuery(query, -1);
+				query = parser.transposeQuery(query, -1);
+				query = parser.transposeQuery(query, 3);												
+				expect(query).toEqual('Cm7 GM9 F# Locrian A#dim7');
+			});
+		});
+		
+		describe("when the query is null", function() {
+			it("returns null", function() {
+				const output = parser.transposeQuery(null, 3);												
+				expect(output).toBeNull();
+			});
+		});						
+	});
+
 	describe("findSymbols", function() {
 		describe("when the query is valid", function() {
 			it("should return the proper symbols", function() {
