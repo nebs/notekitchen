@@ -25,7 +25,12 @@ class App {
 			return;
 		}			
 
+		this.$input.classList.remove(Config.validCommandCSSClass);
 		if (this.commandEngine.isCommand(query)) {
+			if (this.commandEngine.isValidCommand(query)) {
+				this.$input.classList.add(Config.validCommandCSSClass);
+			}
+			
 			this.activeNotes = null;				
 			this.draw();
 			return;
@@ -54,6 +59,7 @@ class App {
 			e.preventDefault();
 			if (e.keyCode == 13) { // ENTER
 				this.commandEngine.execute(this.$input.value);
+				this.$input.classList.remove(Config.validCommandCSSClass);				
 				this.$input.value = '';
 				this.activeNotes = null;				
 				this.draw();			

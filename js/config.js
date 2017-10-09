@@ -10,4 +10,8 @@ class Config {
 	static get totalNotes() {
 		return this.totalOctaves * this.notesPerOctave;
 	}
+	
+	static get validCommandCSSClass() {
+		return 'valid-command';
+	}	
 }

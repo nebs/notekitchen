@@ -8,8 +8,16 @@ class CommandEngine {
 		return trimmedQuery[0] == 's' || trimmedQuery[0] == 'h';
 	}
 	
-	execute(query) {
+	isValidCommand(query) {
 		if (!this.isCommand(query)) {
+			return false;
+		}
+		
+		return query.includes('names') && (query.includes('show') || query.includes('hide'));
+	}
+	
+	execute(query) {
+		if (!this.isValidCommand(query)) {
 			return false;
 		}
 		
