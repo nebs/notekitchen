@@ -51,11 +51,15 @@ class PianoView {
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
 			if (selectedNotes.includes(indexToCheck)) {
-				ctx.fillStyle = '#A8B272';
+				ctx.fillStyle = '#D80152';
+				ctx.fillRect(x, y, w, h);
+				ctx.fillStyle = '#A1013D';
+				ctx.fillRect(x, y, 3, h);
+				ctx.fillRect(x, y, w, 3);
 			} else {
 				ctx.fillStyle = '#FFF';
-			}				
-			ctx.fillRect(x, y, w, h);
+				ctx.fillRect(x, y, w, h);
+			}
 
 			if (this.settings.isNamesOn) {
 				var note_letters = ['C','D','E','F','G','A','B'];
@@ -78,15 +82,16 @@ class PianoView {
 			const h = blackNoteHeight;
 			const noteIndex = blackNoteIndexes[i % blackNoteIndexes.length];
 			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
-				ctx.fillStyle = '#A8B272';			
+				ctx.fillStyle = '#D80152';
+				ctx.fillRect(x, y, w, h);
+				ctx.fillStyle = '#A1013D';
+				ctx.fillRect(x, y, w, 4);
 			} else {
 				ctx.fillStyle = '#333';
-			}
-			ctx.fillRect(x, y, w, h);				
+				ctx.fillRect(x, y, w, h);
+			}			
 		}
-		
-		ctx.fillStyle = '#E30035';
-		ctx.fillRect(keyboardContainerX, keyboardContainerY, keyboardContainerWidth, 1);
+
 		ctx.font = '25px Grand Hotel';
 		ctx.textAlign = 'center';
 		ctx.fillStyle = '#FFF';
