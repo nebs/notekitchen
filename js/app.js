@@ -70,7 +70,14 @@ class App {
 				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
 				this.processQuery();
 			}
+		}.bind(this);
 
+		this.$input.onkeydown = function(e) {
+			if (e.keyCode == 38) { // UP
+				e.preventDefault();
+			} else if (e.keyCode == 40) { // DOWN
+				e.preventDefault();
+			}			
 		}.bind(this);
 	
 		this.$input.oninput = function() {
