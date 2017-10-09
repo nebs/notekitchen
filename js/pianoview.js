@@ -15,7 +15,7 @@ class PianoView {
 			return;
 		}
 		
-		const backgroundColor = '#000';
+		const backgroundColor = '#172429';
 		const keyboardContainerTopPadding = 35;
 		const keyboardContainerBottomPadding = 5;
 		const keyboardContainerSidePadding = 8;
