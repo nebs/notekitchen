@@ -35,15 +35,14 @@ class PianoView {
 		const whiteNoteHeight = keyboardContainerHeight;
 		const blackNoteHeight = whiteNoteHeight * 0.7;
 
-		var ctx = this.$canvas.getContext('2d');
-		ctx.fillStyle = Style.pianoBackgroundColor;
-		ctx.fillRect(0, 0, this.width, this.height);
-		ctx.fillStyle = Style.pianoHighlightColor;
-		ctx.fillRect(0, 0, this.width, 2);
-        ctx.fillRect(0, 0, 2, this.height);
-        ctx.fillStyle = Style.pianoShadowColor;
-		ctx.fillRect(0, this.height - 2, this.width, 2);
-        ctx.fillRect(this.width - 2, 0, 2, this.height);
+		const ctx = this.$canvas.getContext('2d');
+        const ch = new CanvasHelper(ctx);
+        ch.fillStyle = Style.pianoBackgroundColor;
+        ch.highlightStyle = Style.pianoHighlightColor;
+        ch.shadowStyle = Style.pianoShadowColor;
+        ch.highlightSize = 2;
+        ch.shadowSize = 2;
+        ch.fillRect(0, 0, this.width, this.height);
         
 		var i = 0;
 		var currentOctave = 0;		
