@@ -38,7 +38,13 @@ class PianoView {
 		var ctx = this.$canvas.getContext('2d');
 		ctx.fillStyle = Style.pianoBackgroundColor;
 		ctx.fillRect(0, 0, this.width, this.height);
-
+		ctx.fillStyle = Style.pianoHighlightColor;
+		ctx.fillRect(0, 0, this.width, 2);
+        ctx.fillRect(0, 0, 2, this.height);
+        ctx.fillStyle = Style.pianoShadowColor;
+		ctx.fillRect(0, this.height - 2, this.width, 2);
+        ctx.fillRect(this.width - 2, 0, 2, this.height);
+        
 		var i = 0;
 		var currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
@@ -54,15 +60,14 @@ class PianoView {
 				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
 				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
-				ctx.fillRect(x + w - 3, y, 3, h);
 				ctx.fillRect(x, y, 2, h);				
-				ctx.fillRect(x, y, w, 2);				
+				ctx.fillRect(x, y, w, 4);				
 				textColor = Style.pianoLightTextColor;
 			} else {
 				ctx.fillStyle = Style.pianoWhiteNoteColor;
 				ctx.fillRect(x, y, w, h);
 				ctx.fillStyle = Style.pianoWhiteNoteShadowColor;
-				ctx.fillRect(x, y, w, 3);
+				ctx.fillRect(x, y, w, 2);
 			}
 
 			if (this.settings.isNamesOn) {
