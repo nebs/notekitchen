@@ -1,6 +1,6 @@
 class Parser {
 	transposeNote(noteString, amount) {
-		var noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
+		let noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
 		if (noteIndex < 0) {			
 			noteIndex = MusicLibrary.flatNoteNames.indexOf(noteString);
 		}
@@ -14,7 +14,7 @@ class Parser {
 			noteIndex = Config.notesPerOctave + noteIndex;
 		}		
 		
-		var transposedNoteString = noteString;
+		let transposedNoteString = noteString;
 		if (amount < 0) {
 			transposedNoteString = MusicLibrary.flatNoteNames[noteIndex];
 		} else {
@@ -28,19 +28,19 @@ class Parser {
 			return query;
 		}
 		
-		var re = /[ABCDEFG]b?#?/g;
-		var match = null;
-		var indexes = [];
-		var notes = [];
-		var noteCount = 0;
+		let re = /[ABCDEFG]b?#?/g;
+		let match = null;
+		let indexes = [];
+		let notes = [];
+		let noteCount = 0;
 		while ((match = re.exec(query)) != null) {
 			indexes.push(match.index);
 			notes.push(match[0]);
 			noteCount++;
 		}
 
-		var newQuery = query;
-		var i = 0;
+		let newQuery = query;
+		let i = 0;
 		for (i = noteCount - 1; i >= 0; i--) {
 			const index = indexes[i];
 			const note = notes[i];
@@ -89,7 +89,7 @@ class Parser {
 	}
 	
 	noteStringToIndex(noteString) {
-		var noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
+		let noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
 		if (noteIndex < 0) {
 			noteIndex = MusicLibrary.flatNoteNames.indexOf(noteString);
 		}

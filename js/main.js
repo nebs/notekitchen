@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
-	var $query = document.getElementById("query");
-	var $pianoCanvas = document.getElementById('piano-canvas');
-	var $shadowCanvas = document.getElementById('shadow-canvas');
+	let $query = document.getElementById("query");
+	let $pianoCanvas = document.getElementById('piano-canvas');
+	let $shadowCanvas = document.getElementById('shadow-canvas');
 	
 	const parser = new Parser();
 	const settings = new Settings();		

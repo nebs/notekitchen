@@ -4,7 +4,7 @@ class ChordEngine {
 	}
 
 	getNotesFromSymbol(symbol) {
-		var notes = [];
+		let notes = [];
 		const rootString = this.parser.findRoot(symbol);
 		if (!rootString) {
 			return [];
@@ -15,17 +15,17 @@ class ChordEngine {
 			return [];
 		}
 		
-		var flats = this.parser.findFlats(symbol);
-		var sharps = this.parser.findSharps(symbol);
+		let flats = this.parser.findFlats(symbol);
+		let sharps = this.parser.findSharps(symbol);
 
-		var thirdIndex = rootIndex + 4;
+		let thirdIndex = rootIndex + 4;
 		if (symbol.includes('m') && !symbol.includes('maj')) { thirdIndex = rootIndex + 3; }
 		if (symbol.includes(rootString + '-')) { thirdIndex = rootIndex + 3; }		
 		if (symbol.includes('dim')) { thirdIndex = rootIndex + 3; }			
 		if (symbol.includes('sus4')) { thirdIndex = rootIndex + 5; }
 		if (symbol.includes('sus2')) { thirdIndex = rootIndex + 2; }
 
-		var fifthIndex = rootIndex + 7;
+		let fifthIndex = rootIndex + 7;
 		if (symbol.includes('dim')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('b5')) { fifthIndex = rootIndex + 6; }
 		if (symbol.includes('#5')) { fifthIndex = rootIndex + 8; }
@@ -33,10 +33,10 @@ class ChordEngine {
 		if (symbol.includes('+7')) { fifthIndex = rootIndex + 8; }
 		if (symbol.includes('aug')) { fifthIndex = rootIndex + 8; }
 
-		var sixthIndex = rootIndex;
+		let sixthIndex = rootIndex;
 		if (symbol.includes('6')) { sixthIndex = rootIndex + 9; }
 
-		var seventhIndex = rootIndex;
+		let seventhIndex = rootIndex;
 		if (symbol.includes('7')) { seventhIndex = rootIndex + 10; }
 		if (symbol.includes('9')) { seventhIndex = rootIndex + 10; }
 		if (symbol.includes('11')) { seventhIndex = rootIndex + 10; }
@@ -51,26 +51,26 @@ class ChordEngine {
 		if (symbol.includes('maj13')) { seventhIndex = rootIndex + 11; }
 		if (symbol.includes('dim') && seventhIndex == rootIndex + 10) { seventhIndex--; }												
 
-		var ninthIndex = rootIndex;
+		let ninthIndex = rootIndex;
 		if (!flats.includes(9) && !sharps.includes(9)) {
 			if (symbol.includes('9')) { ninthIndex = rootIndex + 14; }
 			if (symbol.includes('11')) { ninthIndex = rootIndex + 14; }
 			if (symbol.includes('13')) { ninthIndex = rootIndex + 14; }				
 		}
 
-		var eleventhIndex = rootIndex;
+		let eleventhIndex = rootIndex;
 		if (!flats.includes(11) && !sharps.includes(11)) {
 			if (symbol.includes('11')) { eleventhIndex = rootIndex + 17; }
 			if (symbol.includes('13')) { eleventhIndex = rootIndex + 17; }
 		}
 	
-		var thirteenthIndex = rootIndex;
+		let thirteenthIndex = rootIndex;
 		if (!flats.includes(13) && !sharps.includes(13)) {			
 			if (symbol.includes('13')) { thirteenthIndex = rootIndex + 21; }
 		}
 	
-		var addToNotes = function(index) {
-			var val = index % Config.totalNotes;
+		let addToNotes = function(index) {
+			let val = index % Config.totalNotes;
 			if (val == 0) {
 				val = 12;
 			}
@@ -80,16 +80,16 @@ class ChordEngine {
 		};
 	
 		flats.forEach(function(flatIndex, i, array) {
-			var noteIndex = 0;
-			var flatValue = rootIndex;
+			let noteIndex = 0;
+			let flatValue = rootIndex;
 			for (noteIndex = 0; noteIndex < flatIndex - 1; noteIndex++) {
 				flatValue += MusicLibrary.majorScaleIntervals[noteIndex % MusicLibrary.majorScaleIntervals.length];
 			}
 			addToNotes(flatValue - 1);
 		});
 		sharps.forEach(function(sharpIndex, i, array) {
-			var noteIndex = 0;
-			var sharpValue = rootIndex;
+			let noteIndex = 0;
+			let sharpValue = rootIndex;
 			for (noteIndex = 0; noteIndex < sharpIndex - 1; noteIndex++) {
 				sharpValue += MusicLibrary.majorScaleIntervals[noteIndex % MusicLibrary.majorScaleIntervals.length];
 			}
@@ -109,7 +109,7 @@ class ChordEngine {
 	}
 	
 	getNotesFromQuery(query) {	
-		var notes = [];
+		let notes = [];
 		const symbols = this.parser.findSymbols(query);
 		if (!symbols) {
 			return [];

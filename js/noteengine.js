@@ -4,7 +4,7 @@ class NoteEngine {
 	}
 
 	getNotesFromSymbol(symbol) {
-		var notes = [];
+		let notes = [];
 		const rootString = this.parser.findRoot(symbol);
 		if (!rootString) {
 			return [];
@@ -19,7 +19,7 @@ class NoteEngine {
 	}
 	
 	getNotesFromQuery(query) {	
-		var notes = [];
+		let notes = [];
 		
 		const symbols = this.parser.findSymbols(query);
 		if (!symbols) {

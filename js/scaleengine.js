@@ -9,7 +9,7 @@ class ScaleEngine {
 			return false;
 		}
 		
-		var isValid = false;
+		let isValid = false;
 		this.validScaleNames.some(function(name, index, array) {
 			isValid = symbol.toLowerCase().includes(name);
 			return isValid;
@@ -32,10 +32,10 @@ class ScaleEngine {
 			return [];
 		}
 		
-		var notes = [];		
+		let notes = [];		
 		
 		if (symbol.toLowerCase().includes('major')) {
-			var nextNote = rootIndex;			
+			let nextNote = rootIndex;			
 			MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
 				notes.push(nextNote);
 				nextNote += interval;
@@ -43,8 +43,8 @@ class ScaleEngine {
 		}
 		
 		// Duplicates notes across remaining octaves
-		var notesOctave = notes.slice(0);
-		var i = 1;
+		let notesOctave = notes.slice(0);
+		let i = 1;
 		for (i = 1; i < Config.totalOctaves + 1; i++) {
 			notesOctave = notesOctave.map(function(n) {
 				const value = n + Config.notesPerOctave;
@@ -61,7 +61,7 @@ class ScaleEngine {
 	}
 	
 	getNotesFromQuery(query) {	
-		var notes = [];
+		let notes = [];
 		const symbols = this.parser.findSymbols(query);
 		if (!symbols) {
 			return [];

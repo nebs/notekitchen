@@ -1,5 +1,5 @@
 describe("Parser", function() {
-	var parser;
+	let parser;
 
 	beforeEach(function() {
 		parser = new Parser();
@@ -190,7 +190,7 @@ describe("Parser", function() {
 		
 		describe("when transposing back and forth downwards", function() {
 			it("returns the query with sharps converted to flats", function() {
-				var query = 'Cm7 GM9 F# Locrian Bbdim7';
+				let query = 'Cm7 GM9 F# Locrian Bbdim7';
 				query = parser.transposeQuery(query, 1);
 				query = parser.transposeQuery(query, 1);
 				query = parser.transposeQuery(query, 1);
@@ -201,7 +201,7 @@ describe("Parser", function() {
 
 		describe("when transposing back and forth upwards", function() {
 			it("returns the query with flats converted to sharps", function() {
-				var query = 'Cm7 GM9 F# Locrian Bbdim7';
+				let query = 'Cm7 GM9 F# Locrian Bbdim7';
 				query = parser.transposeQuery(query, -1);
 				query = parser.transposeQuery(query, -1);
 				query = parser.transposeQuery(query, -1);

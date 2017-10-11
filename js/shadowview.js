@@ -9,7 +9,7 @@ class ShadowView {
 			return;
 		}
 		
-		var ctx = this.$canvas.getContext('2d');
+		let ctx = this.$canvas.getContext('2d');
 		
 		const width = window.innerWidth;
 		const height = window.innerHeight;
@@ -19,11 +19,11 @@ class ShadowView {
 		const keyboardHeight = this.$pianoCanvas.height;
 		const keyboardY = 20;
 		const offset = Math.max(width, height);
-		var x = centerX - (keyboardWidth / 2);
-		var y = centerY + (keyboardHeight / 2) + keyboardY;
-		var gradient0 = {x: 0, y: 0};
-        var gradient1 = {x: 0, y: 0};
-        var gradientFade = 0.5;
+		let x = centerX - (keyboardWidth / 2);
+		let y = centerY + (keyboardHeight / 2) + keyboardY;
+		let gradient0 = {x: 0, y: 0};
+        let gradient1 = {x: 0, y: 0};
+        let gradientFade = 0.5;
         
 		this.$canvas.width = width;
 		this.$canvas.height = height;
@@ -45,7 +45,7 @@ class ShadowView {
 		ctx.lineTo(x, y);
 		ctx.closePath();
         
-        var gradient = ctx.createLinearGradient(gradient0.x, gradient0.y, gradient1.x, gradient1.y);
+        let gradient = ctx.createLinearGradient(gradient0.x, gradient0.y, gradient1.x, gradient1.y);
         gradient.addColorStop(0, Style.primaryShadowColor2);
         gradient.addColorStop(1, Style.primaryShadowColor1);
         ctx.fillStyle = gradient;

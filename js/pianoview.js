@@ -65,8 +65,8 @@ class PianoView {
         const stripeWidth = 5;
         const stripeGap = 5;
         const stripeCount = 3;
-        var stripeRightMargin = 50;
-        for (var i=0; i<stripeCount; i++) {
+        let stripeRightMargin = 50;
+        for (let i=0; i<stripeCount; i++) {
             // Stripe
             ctx.fillStyle = Style.pianoStripeColor;
             ctx.fillRect(this.width - stripeRightMargin, pianoHighlightShadowSize, stripeWidth, keyboardContainerTopPadding - pianoHighlightShadowSize);
@@ -81,8 +81,8 @@ class PianoView {
         const knobCount = 3;
         const knobRadius = 5;
         const knobGap = 5;
-        var knobLeftMargin = 20;
-        for (var i=0; i<knobCount; i++) {
+        let knobLeftMargin = 20;
+        for (let i=0; i<knobCount; i++) {
             ctx.fillStyle = Style.pianoKnobColor;
             ctx.strokeStyle = Style.pianoKnobBorderColor;
             ctx.lineWidth = 2;
@@ -94,8 +94,8 @@ class PianoView {
             knobLeftMargin += (knobRadius * 2) + knobGap;
         }
         
-		var i = 0;
-		var currentOctave = 0;		
+		let i = 0;
+		let currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
 			currentOctave = Math.floor(i / whiteNotesPerOctaveCount);
 			const x = i * whiteNoteWidth + keyboardContainerX + 1;
@@ -104,7 +104,7 @@ class PianoView {
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
-			var textColor = Style.pianoDarkTextColor;
+			let textColor = Style.pianoDarkTextColor;
 			if (selectedNotes.includes(indexToCheck)) {
                 textColor = Style.pianoLightTextColor;
                 
@@ -136,7 +136,7 @@ class PianoView {
 			}
 
 			if (this.settings.isNamesOn) {
-				var note_letters = ['C','D','E','F','G','A','B'];
+				let note_letters = ['C','D','E','F','G','A','B'];
 				ctx.font = Style.pianoNoteNameFont;
 				ctx.fillStyle = textColor;
 				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
