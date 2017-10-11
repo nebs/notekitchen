@@ -34,7 +34,8 @@ class PianoView {
 		const blackNoteWidth = whiteNoteWidth * 0.5;
 		const whiteNoteHeight = keyboardContainerHeight;
 		const blackNoteHeight = whiteNoteHeight * 0.7;
-
+        const pianoHighlightShadowSize = 2;
+        
 		const ctx = this.$canvas.getContext('2d');
         
         // Draw keyboard background
@@ -42,8 +43,8 @@ class PianoView {
         ch.fillStyle = Style.pianoBackgroundColor;
         ch.highlightStyle = Style.pianoHighlightColor;
         ch.shadowStyle = Style.pianoShadowColor;
-        ch.highlightSize = 2;
-        ch.shadowSize = 2;
+        ch.highlightSize = pianoHighlightShadowSize;
+        ch.shadowSize = pianoHighlightShadowSize;
         ch.fillRect(0, 0, this.width, this.height);
         
         // Draw background behind the keys
@@ -59,6 +60,39 @@ class PianoView {
 		ctx.closePath();
         ctx.fillStyle = Style.pianoShadowColor;
         ctx.fill();
+        
+        // Draw decoration stripes
+        const stripeWidth = 5;
+        const stripeGap = 5;
+        const stripeCount = 3;
+        var stripeRightMargin = 50;
+        for (var i=0; i<stripeCount; i++) {
+            // Stripe
+            ctx.fillStyle = Style.pianoStripeColor;
+            ctx.fillRect(this.width - stripeRightMargin, pianoHighlightShadowSize, stripeWidth, keyboardContainerTopPadding - pianoHighlightShadowSize);
+            
+            // Highlight
+            ctx.fillStyle = Style.pianoStripeHighlightColor;
+            ctx.fillRect(this.width - stripeRightMargin, 0, stripeWidth, pianoHighlightShadowSize);
+            stripeRightMargin -= stripeWidth + stripeGap;
+        }
+        
+        // Draw knobs
+        const knobCount = 3;
+        const knobRadius = 5;
+        const knobGap = 5;
+        var knobLeftMargin = 20;
+        for (var i=0; i<knobCount; i++) {
+            ctx.fillStyle = Style.pianoKnobColor;
+            ctx.strokeStyle = Style.pianoKnobBorderColor;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(knobLeftMargin, pianoHighlightShadowSize + ((keyboardContainerTopPadding - pianoHighlightShadowSize) / 2), knobRadius, 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            knobLeftMargin += (knobRadius * 2) + knobGap;
+        }
         
 		var i = 0;
 		var currentOctave = 0;		
