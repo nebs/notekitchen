@@ -58,7 +58,7 @@ class PianoView {
 		ctx.lineTo(this.width - keyboardContainerSidePadding, this.height - keyboardContainerBottomPadding);
 		ctx.closePath();
         ctx.fillStyle = Style.pianoShadowColor;
-        ctx.fill()
+        ctx.fill();
         
 		var i = 0;
 		var currentOctave = 0;		
@@ -90,7 +90,7 @@ class PianoView {
                 ctx.lineTo(x + 2, y);
                 ctx.closePath();
                 ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
-                ctx.fill()                
+                ctx.fill();               
 			} else {
                 // Draw the key
 				ctx.fillStyle = Style.pianoWhiteNoteColor;
