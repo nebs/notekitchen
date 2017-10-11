@@ -137,7 +137,7 @@ class PianoView {
 
 			if (this.settings.isNamesOn) {
 				var note_letters = ['C','D','E','F','G','A','B'];
-				ctx.font = noteNameFont;
+				ctx.font = Style.pianoNoteNameFont;
 				ctx.fillStyle = textColor;
 				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
 			}
