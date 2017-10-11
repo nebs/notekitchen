@@ -36,6 +36,8 @@ class PianoView {
 		const blackNoteHeight = whiteNoteHeight * 0.7;
 
 		const ctx = this.$canvas.getContext('2d');
+        
+        // Draw keyboard background
         const ch = new CanvasHelper(ctx);
         ch.fillStyle = Style.pianoBackgroundColor;
         ch.highlightStyle = Style.pianoHighlightColor;
@@ -44,9 +46,11 @@ class PianoView {
         ch.shadowSize = 2;
         ch.fillRect(0, 0, this.width, this.height);
         
+        // Draw background behind the keys
         ctx.fillStyle = Style.pianoShadowColor;
         ctx.fillRect(keyboardContainerSidePadding, keyboardContainerTopPadding, keyboardContainerWidth, keyboardContainerHeight);
         
+        // Draw shadow below the keys
 		ctx.beginPath();
 		ctx.moveTo(keyboardContainerSidePadding + 1, this.height - keyboardContainerBottomPadding);
 		ctx.lineTo(keyboardContainerSidePadding + keyboardContainerBottomPadding + 1, this.height);
@@ -70,11 +74,15 @@ class PianoView {
 			if (selectedNotes.includes(indexToCheck)) {
                 textColor = Style.pianoLightTextColor;
                 
+                // Draw the key
 				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
+                
+                // Draw top shadow
 				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;		
 				ctx.fillRect(x, y, w, 2);
                 
+                // Draw slanted shadow
                 ctx.beginPath();
                 ctx.moveTo(x, y);
                 ctx.lineTo(x, y + h);
@@ -84,8 +92,11 @@ class PianoView {
                 ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
                 ctx.fill()                
 			} else {
+                // Draw the key
 				ctx.fillStyle = Style.pianoWhiteNoteColor;
 				ctx.fillRect(x, y, w, h);
+                
+                // Draw top shadow
 				ctx.fillStyle = Style.pianoWhiteNoteShadowColor;
 				ctx.fillRect(x, y, w, 2);
 			}
@@ -111,16 +122,21 @@ class PianoView {
 			const h = blackNoteHeight;
 			const noteIndex = blackNoteIndexes[i % blackNoteIndexes.length];
 			if (selectedNotes.includes(noteIndex + (currentOctave * notesPerOctave))) {
+                // Draw the key
 				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
+                
+                // Draw top and side shadows
 				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
 				ctx.fillRect(x, y, w, 2);
 				ctx.fillRect(x, y, 2, h);
-				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
 				ctx.fillRect(x, y + h - 2, w, 2);
 			} else {
+                // Draw the key
 				ctx.fillStyle = Style.pianoBlackNoteColor;
 				ctx.fillRect(x, y, w, h);
+                
+                // Draw bottom highlight
 				ctx.fillStyle = Style.pianoBlackNoteHighlightColor;
 				ctx.fillRect(x, y + h - 4, w, 4);
 			}						
