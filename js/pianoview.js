@@ -44,6 +44,15 @@ class PianoView {
         ch.shadowSize = 2;
         ch.fillRect(0, 0, this.width, this.height);
         
+		ctx.beginPath();
+		ctx.moveTo(keyboardContainerSidePadding + 1, this.height - keyboardContainerBottomPadding);
+		ctx.lineTo(keyboardContainerSidePadding + keyboardContainerBottomPadding + 1, this.height);
+		ctx.lineTo(this.width, this.height);
+		ctx.lineTo(this.width - keyboardContainerSidePadding, this.height - keyboardContainerBottomPadding);
+		ctx.closePath();
+        ctx.fillStyle = Style.pianoShadowColor;
+        ctx.fill()
+        
 		var i = 0;
 		var currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
