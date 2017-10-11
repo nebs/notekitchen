@@ -94,6 +94,20 @@ class PianoView {
             knobLeftMargin += (knobRadius * 2) + knobGap;
         }
         
+        // Draw LED
+        ctx.beginPath();
+        ctx.arc(this.width - 12, 12, 2, 0, Math.PI * 2, false);
+        ctx.closePath();
+        ctx.strokeStyle = Style.pianoLEDBorderColor;
+        ctx.lineWidth = 1;
+        if (this.settings.onlyShowRoots) {
+            ctx.fillStyle = Style.pianoLEDOnColor;
+        } else {
+            ctx.fillStyle = Style.pianoLEDOffColor;
+        }
+        ctx.fill();
+        ctx.stroke();        
+        
 		let i = 0;
 		let currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
