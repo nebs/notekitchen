@@ -44,6 +44,9 @@ class PianoView {
         ch.shadowSize = 2;
         ch.fillRect(0, 0, this.width, this.height);
         
+        ctx.fillStyle = Style.pianoShadowColor;
+        ctx.fillRect(keyboardContainerSidePadding, keyboardContainerTopPadding, keyboardContainerWidth, keyboardContainerHeight);
+        
 		ctx.beginPath();
 		ctx.moveTo(keyboardContainerSidePadding + 1, this.height - keyboardContainerBottomPadding);
 		ctx.lineTo(keyboardContainerSidePadding + keyboardContainerBottomPadding + 1, this.height);
@@ -65,12 +68,21 @@ class PianoView {
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
 			var textColor = Style.pianoDarkTextColor;
 			if (selectedNotes.includes(indexToCheck)) {
+                textColor = Style.pianoLightTextColor;
+                
 				ctx.fillStyle = Style.pianoNoteSelectedColor;
 				ctx.fillRect(x, y, w, h);
-				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
-				ctx.fillRect(x, y, 2, h);				
-				ctx.fillRect(x, y, w, 4);				
-				textColor = Style.pianoLightTextColor;
+				ctx.fillStyle = Style.pianoNoteSelectedShadowColor;		
+				ctx.fillRect(x, y, w, 2);
+                
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, y + h);
+                ctx.lineTo(x + w/3, y + h);
+                ctx.lineTo(x + 2, y);
+                ctx.closePath();
+                ctx.fillStyle = Style.pianoNoteSelectedShadowColor;
+                ctx.fill()                
 			} else {
 				ctx.fillStyle = Style.pianoWhiteNoteColor;
 				ctx.fillRect(x, y, w, h);
