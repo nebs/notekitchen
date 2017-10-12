@@ -2,7 +2,7 @@ class Style {
 	static get pianoBackgroundColor() { return '#db7a7a'; }
     static get pianoHighlightColor() { return '#e58a8a'; }
     static get pianoHighlightSpeckColor() { return '#e8c5c5'; }
-    static get pianoShadowColor() { return '#c65353'; }
+    static get pianoShadowColor() { return '#b23b3b'; }
 	static get pianoDarkTextColor() { return '#888'; }
 	static get pianoLightTextColor() { return '#DDD'; }
 	static get pianoNoteSelectedColor() { return '#D80152'; }
