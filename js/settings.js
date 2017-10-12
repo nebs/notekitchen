@@ -1,5 +1,5 @@
 class Settings {
 	constructor() {
-		this.isNamesOn = false;
+		this.isShowingLetters = false;
 	}
 }

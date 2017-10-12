@@ -1,6 +1,9 @@
 class CommandEngine {
 	constructor(settings) {
 		this.settings = settings;
+        this.lettersKeyword = 'letters'
+        this.showKeyword = 'show';
+        this.hideKeyword = 'hide';
 	}
 	
 	isCommand(query) {
@@ -13,7 +16,11 @@ class CommandEngine {
 			return false;
 		}
 		
-		return query.includes('names') && (query.includes('show') || query.includes('hide'));
+        const hasLettersKeyword = query.includes(this.lettersKeyword);
+        const hasShowKeyword = query.includes(this.showKeyword);
+        const hasHideKeyword = query.includes(this.hideKeyword);
+        
+        return hasLettersKeyword && (hasShowKeyword || hasHideKeyword);
 	}
 	
 	execute(query) {
@@ -21,11 +28,15 @@ class CommandEngine {
 			return false;
 		}
 		
-		if (query.includes('names')) {
-			if (query.includes('show')) {
-				this.settings.isNamesOn = true;
-			} else if (query.includes('hide')) {
-				this.settings.isNamesOn = false;
+        const hasLettersKeyword = query.includes(this.lettersKeyword);
+        const hasShowKeyword = query.includes(this.showKeyword);
+        const hasHideKeyword = query.includes(this.hideKeyword);        
+        
+		if (hasLettersKeyword) {
+			if (hasShowKeyword) {
+				this.settings.isShowingLetters = true;
+			} else if (hasHideKeyword) {
+				this.settings.isShowingLetters = false;
 			}
 		}
 				

@@ -11,7 +11,7 @@ class Style {
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
 	static get pianoBlackNoteHighlightColor() { return '#555'; }		
-	static get pianoNoteNameFont() { return '8px sans-serif'; }
+	static get pianoLettersFont() { return '8px sans-serif'; }
     static get pianoStripeColor() { return '#e09191'; }
     static get pianoStripeHighlightColor() { return '#e6a9a9'; }    
     static get pianoKnobColor() { return '#af4646'; }

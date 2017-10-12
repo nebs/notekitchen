@@ -154,11 +154,11 @@ class PianoView {
 				ctx.fillRect(x, y, w, 2);
 			}
 
-			if (this.settings.isNamesOn) {
-				let note_letters = ['C','D','E','F','G','A','B'];
-				ctx.font = Style.pianoNoteNameFont;
+			if (this.settings.isShowingLetters) {
+				let noteLetters = ['C','D','E','F','G','A','B'];
+				ctx.font = Style.pianoLettersFont;
 				ctx.fillStyle = textColor;
-				ctx.fillText(note_letters[i % note_letters.length], 3 + x, y + h - 3);
+				ctx.fillText(noteLetters[i % noteLetters.length], 3 + x, y + h - 3);
 			}
 		}
 
