@@ -42,7 +42,7 @@ class App {
 			return;
 		}
 
-		if (this.settings.onlyShowRoots) {
+		if (query.includes('root')) {
 			const singleNotes = this.noteEngine.getNotesFromQuery(query);
 			if (singleNotes.length > 0) {
 				this.activeNotes = singleNotes;
