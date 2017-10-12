@@ -4,8 +4,13 @@ class PianoView {
 		this.width = $canvas.width;
 		this.height = $canvas.height;
 		this.settings = settings;
+        this.isLEDOn = false;
 	}
   
+    toggleLED() {
+        this.isLEDOn = !this.isLEDOn;
+    }
+    
   	clear() {
   		this.draw([]);
   	}
@@ -100,7 +105,7 @@ class PianoView {
         ctx.closePath();
         ctx.strokeStyle = Style.pianoLEDBorderColor;
         ctx.lineWidth = 1;
-        if (this.settings.onlyShowRoots) {
+        if (this.isLEDOn) {
             ctx.fillStyle = Style.pianoLEDOnColor;
         } else {
             ctx.fillStyle = Style.pianoLEDOffColor;

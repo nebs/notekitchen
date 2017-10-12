@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const settings = new Settings();		
 	const pianoView = new PianoView($pianoCanvas, settings);
 	const shadowView = new ShadowView($shadowCanvas, $pianoCanvas);
+    const soundEngine = new SoundEngine();
 	const noteEngine = new NoteEngine(parser);
 	const chordEngine = new ChordEngine(parser);
 	const scaleEngine = new ScaleEngine(parser);	
 	const commandEngine = new CommandEngine(settings);
 	const app = new App($query, 
+                        soundEngine,
 					    noteEngine, 
 						chordEngine, 
 						scaleEngine, 

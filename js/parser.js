@@ -124,5 +124,5 @@ class Parser {
 	
 	findSharps(query) {
 		return this.findNumbersFollowingModifiers(query, ['#','\\+']);
-	}	
+	}
 }

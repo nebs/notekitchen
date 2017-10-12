@@ -1,6 +1,7 @@
 class App {
-	constructor($input, noteEngine, chordEngine, scaleEngine, commandEngine, shadowView, pianoView, parser, settings) {
+	constructor($input, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, shadowView, pianoView, parser, settings) {
 		this.$input = $input; 
+        this.soundEngine = soundEngine;
 		this.noteEngine = noteEngine;
 		this.chordEngine = chordEngine; 
 		this.scaleEngine = scaleEngine; 
@@ -15,8 +16,10 @@ class App {
 	draw() {
 		if (!this.activeNotes) {
 			this.pianoView.clear();
+            this.soundEngine.clear();
 		} else {
 			this.pianoView.draw(this.activeNotes);
+            this.soundEngine.queueNotes(this.activeNotes);
 		}
 	}
 	
@@ -87,7 +90,8 @@ class App {
 				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
 				this.processQuery();
 			} else if (e.keyCode == 18) { // ALT
-				this.settings.toggleOnlyShowRoots();
+                this.soundEngine.togglePlayback();
+                this.pianoView.toggleLED();
 				this.processQuery();
 			}
 		}.bind(this);
