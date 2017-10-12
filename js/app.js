@@ -11,23 +11,31 @@ class App {
 		this.parser = parser;
 		this.settings = settings;
 		this.activeNotes = null;
+        this.highlightedNotes = null;
 	}
 	
+    updateActiveNotes(newActiveNotes) {
+        this.activeNotes = newActiveNotes;
+		if (!this.activeNotes) {
+            this.soundEngine.clear();
+		} else {
+            this.soundEngine.queueNotes(this.activeNotes);
+		}
+        this.draw();
+    }
+    
 	draw() {
 		if (!this.activeNotes) {
 			this.pianoView.clear();
-            this.soundEngine.clear();
 		} else {
-			this.pianoView.draw(this.activeNotes);
-            this.soundEngine.queueNotes(this.activeNotes);
+			this.pianoView.draw(this.activeNotes, this.highlightedNotes);
 		}
 	}
 	
 	processQuery() {
 		const query = this.$input.value;
 		if (query === undefined || query.length == 0) {
-			this.activeNotes = null;				
-			this.draw();
+            this.updateActiveNotes(null);
 			return;
 		}			
 
@@ -36,37 +44,32 @@ class App {
 			if (this.commandEngine.isValidCommand(query)) {
 				this.$input.classList.add(Config.validCommandCSSClass);
 			}
-			
-			this.activeNotes = null;				
-			this.draw();
+
+            this.updateActiveNotes(null);
 			return;
 		}
 
 		if (query.includes('root')) {
 			const singleNotes = this.noteEngine.getNotesFromQuery(query);
 			if (singleNotes.length > 0) {
-				this.activeNotes = singleNotes;
-				this.draw();
+                this.updateActiveNotes(singleNotes);
 				return;
 			}
 		}
 		
 		const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
 		if (scaleNotes.length > 0) {
-			this.activeNotes = scaleNotes;
-			this.draw();
+            this.updateActiveNotes(scaleNotes);
 			return;
 		}
 		
 		const chordNotes = this.chordEngine.getNotesFromQuery(query);
 		if (chordNotes.length > 0) {
-			this.activeNotes = chordNotes;
-			this.draw();				
+            this.updateActiveNotes(chordNotes);
 			return;
 		}				
 		
-		this.activeNotes = null;				
-		this.draw();		
+        this.updateActiveNotes(null);
 	}
 	
 	start() {
@@ -81,8 +84,7 @@ class App {
 				this.commandEngine.execute(this.$input.value);
 				this.$input.classList.remove(Config.validCommandCSSClass);				
 				this.$input.value = '';
-				this.activeNotes = null;				
-				this.draw();			
+                this.updateActiveNotes(null);
 			} else if (e.keyCode == 38) { // UP
 				this.$input.value = this.parser.transposeQuery(this.$input.value, 1);
 				this.processQuery();				
@@ -108,6 +110,11 @@ class App {
 			this.processQuery();
 		}.bind(this);
 		
+        this.soundEngine.playCallback = function(note) {
+            this.highlightedNotes = [note];
+            this.draw();
+        }.bind(this);
+        
 		this.$input.focus();
 		this.draw();
 	}

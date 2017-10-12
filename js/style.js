@@ -7,7 +7,8 @@ class Style {
 	static get pianoLightTextColor() { return '#DDD'; }
 	static get pianoNoteSelectedColor() { return '#D80152'; }
 	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
-	static get pianoNoteSelectedHighlightColor() { return '#F5015D'; }
+    static get pianoNoteHighlightedColor() { return '#01c6f5'; }
+    static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }

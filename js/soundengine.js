@@ -1,6 +1,20 @@
 class SoundEngine {
-    constructor() {
-        this.synth = new Tone.Synth().toMaster();        
+    constructor(parser) {
+        this.synth = new Tone.Synth().toMaster();
+        this.playCallback = null;
+        this.parser = parser;
+    }
+    
+    noteIndexToString(noteIndex, baseOctave) {
+        const offsetIndex = noteIndex - 1;
+        const octave = Math.floor(offsetIndex / 12) + baseOctave;
+        const index = offsetIndex % MusicLibrary.flatNoteNames.length;
+        return MusicLibrary.flatNoteNames[index] + octave.toString();        
+    }
+    
+    noteStringToIndex(noteString) {
+        const rootString = this.parser.findRoot(noteString);
+        return this.parser.noteStringToIndex(rootString);
     }
     
     clear() {
@@ -16,15 +30,16 @@ class SoundEngine {
         const baseOctave = 4;
         let noteNames = [];
         for (let i in notes) {
-            const octave = Math.floor((notes[i] - 1) / 12) + baseOctave;
-            const index = (notes[i] - 1) % MusicLibrary.flatNoteNames.length;
-            const name = MusicLibrary.flatNoteNames[index] + octave.toString();
+            const name = this.noteIndexToString(notes[i], baseOctave);
             noteNames.push(name);
         }
         
-        const synth = this.synth;
+        const that = this;
         this.sequence = new Tone.Sequence(function(time, note) {
-            synth.triggerAttackRelease(note, "8n", time);
+            that.synth.triggerAttackRelease(note, "8n", time);
+            if (that.playCallback) {
+                that.playCallback(that.noteStringToIndex(note));
+            }
         }, noteNames, "4n");
         
         if (wasPlaying) {
