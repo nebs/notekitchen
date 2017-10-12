@@ -4,6 +4,7 @@ class CanvasHelper {
         this.fillStyle = '';
         this.highlightStyle = '';
         this.shadowStyle = '';
+        this.highlightSpeckStyle = '';
         this.highlightSize = 0;
         this.shadowSize = 0;
     }
@@ -28,7 +29,15 @@ class CanvasHelper {
         this.ctx.lineTo(x + w, y);
         this.ctx.lineTo(x, y);
         this.ctx.closePath();
-        this.ctx.fillStyle = this.highlightStyle;
+        
+        let gradient = this.ctx.createLinearGradient(x, y, x + w, y);
+        gradient.addColorStop(0, this.highlightStyle);
+        gradient.addColorStop(0.3, this.highlightSpeckStyle);
+        gradient.addColorStop(1, this.highlightStyle);
+        this.ctx.fillStyle = gradient;
+
+        
+        //this.ctx.fillStyle = this.highlightStyle;
         this.ctx.fill();
     }
 }

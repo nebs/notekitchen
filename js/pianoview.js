@@ -47,6 +47,7 @@ class PianoView {
         const ch = new CanvasHelper(ctx);
         ch.fillStyle = Style.pianoBackgroundColor;
         ch.highlightStyle = Style.pianoHighlightColor;
+        ch.highlightSpeckStyle = Style.pianoHighlightSpeckColor;
         ch.shadowStyle = Style.pianoShadowColor;
         ch.highlightSize = pianoHighlightShadowSize;
         ch.shadowSize = pianoHighlightShadowSize;
