@@ -3,18 +3,27 @@ class SoundEngine {
         this.synth = new Tone.Synth().toMaster();
         this.playCallback = null;
         this.parser = parser;
+        this.baseOctave = 4;
+        this.isPlaying = false;
     }
     
-    noteIndexToString(noteIndex, baseOctave) {
+    noteIndexToString(noteIndex) {
         const offsetIndex = noteIndex - 1;
-        const octave = Math.floor(offsetIndex / 12) + baseOctave;
+        const octave = Math.floor(offsetIndex / 12) + this.baseOctave;
         const index = offsetIndex % MusicLibrary.flatNoteNames.length;
         return MusicLibrary.flatNoteNames[index] + octave.toString();        
     }
     
     noteStringToIndex(noteString) {
         const rootString = this.parser.findRoot(noteString);
-        return this.parser.noteStringToIndex(rootString);
+        let octave = this.parser.findOctave(noteString);
+        if (!octave) {
+            octave = 0;
+        } else {
+            octave -= this.baseOctave;
+        }
+        let index = this.parser.noteStringToIndex(rootString);
+        return index + (octave * Config.notesPerOctave);
     }
     
     clear() {
@@ -24,13 +33,12 @@ class SoundEngine {
     }
     
     queueNotes(notes) {
-        const wasPlaying = this.sequence && this.sequence.state == "started";
+        const wasPlaying = this.isPlaying;
         this.stop();
         
-        const baseOctave = 4;
         let noteNames = [];
         for (let i in notes) {
-            const name = this.noteIndexToString(notes[i], baseOctave);
+            const name = this.noteIndexToString(notes[i]);
             noteNames.push(name);
         }
         
@@ -48,23 +56,26 @@ class SoundEngine {
     }
     
     play() {
-        this.sequence.start();
+        this.isPlaying = true;
+        if (this.sequence) {
+            this.sequence.start();
+        }
         Tone.Transport.start();
     }
     
     stop() {
+        this.isPlaying = false;
         if (this.sequence) {
             this.sequence.stop();            
             this.sequence.removeAll();
             this.sequence.dispose();
         }
-
         Tone.Transport.stop();
         this.sequence = null;
     }
     
     togglePlayback() {
-        if (!this.sequence || this.sequence.state == "stopped") {
+        if (!this.isPlaying) {
             this.play();
         } else {
             this.stop();

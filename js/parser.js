@@ -88,6 +88,18 @@ class Parser {
 		return null;
 	}
 	
+    findOctave(query) {
+		if (!query) {
+			return null;
+		}
+		
+		const results = query.match(/\d+/);
+		if (results && results.length > 0) {
+			return parseInt(results[0], 10);
+		}
+		return null;        
+    }
+    
 	noteStringToIndex(noteString) {
 		let noteIndex = MusicLibrary.sharpNoteNames.indexOf(noteString);
 		if (noteIndex < 0) {

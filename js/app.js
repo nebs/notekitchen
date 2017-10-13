@@ -93,6 +93,9 @@ class App {
 				this.processQuery();
 			} else if (e.keyCode == 18) { // ALT
                 this.soundEngine.togglePlayback();
+                if (!this.soundEngine.isPlaying) {
+                    this.highlightedNotes = null;
+                }
                 this.pianoView.toggleLED();
 				this.processQuery();
 			}
