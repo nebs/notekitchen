@@ -13,6 +13,18 @@ body {
 	font-family: 'Cabin Condensed', sans-serif;
 }
 
+.footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1em;
+}
+
+.footer a:link { color: #2b7f9b; text-decoration: none; }
+.footer a:visited { color: #2b7f9b; }
+.footer a:hover { color: #ffffff; }
+.footer a:active { color: #2b7f9b; }
+
 .piano-title {
 	color: #FFF;
 	display: block;
