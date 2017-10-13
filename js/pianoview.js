@@ -87,11 +87,30 @@ class PianoView {
         const knobCount = 3;
         const knobOuterRadius = 6;
         const knobInnerRadius = 4;
-        const knobGap = 5;
+        const knobGap = 10;
+        const cos45 = 0.70710678118;
         let knobLeftMargin = 20;
         for (let i=0; i<knobCount; i++) {
             const knobCenterX = knobLeftMargin;
             const knobCenterY = pianoHighlightShadowSize + ((keyboardContainerTopPadding - pianoHighlightShadowSize) / 2);
+            
+            // Shadow
+            const shadowX0 = knobCenterX - (knobOuterRadius * cos45);
+            const shadowY0 = knobCenterY + (knobOuterRadius * cos45);
+            const shadowX1 = shadowX0 + (keyboardContainerTopPadding - shadowY0);
+            const shadowY1 = keyboardContainerTopPadding;
+            const shadowX3 = knobCenterX + (knobOuterRadius * cos45);
+            const shadowY3 = knobCenterY - (knobOuterRadius * cos45);            
+            const shadowX2 = shadowX3 + (keyboardContainerTopPadding - shadowY3);
+            const shadowY2 = keyboardContainerTopPadding;                        
+            ctx.beginPath();
+            ctx.moveTo(shadowX0, shadowY0);
+            ctx.lineTo(shadowX1, shadowY1);
+            ctx.lineTo(shadowX2, shadowY2);
+            ctx.lineTo(shadowX3, shadowY3);
+            ctx.closePath();
+            ctx.fillStyle = Style.pianoKnobShadowColor;            
+            ctx.fill();
             
             // Outer
             let gradient = ctx.createLinearGradient(knobCenterX - knobOuterRadius, knobCenterY - knobOuterRadius, knobCenterX + knobOuterRadius, knobCenterY + knobOuterRadius);
@@ -103,7 +122,7 @@ class PianoView {
             ctx.closePath();
             ctx.fill();
             
-            // Innter
+            // Inner
             ctx.fillStyle = Style.pianoInnerKnobColor;
             ctx.beginPath();
             ctx.arc(knobCenterX, knobCenterY, knobInnerRadius, 0, Math.PI * 2, false);

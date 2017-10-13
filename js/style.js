@@ -17,8 +17,9 @@ class Style {
     static get pianoStripeColor() { return '#e09191'; }
     static get pianoStripeHighlightColor() { return '#e6a9a9'; }    
     static get pianoInnerKnobColor() { return '#af4646'; }
-    static get pianoOuterKnobColor() { return '#d1a0a0'; }
+    static get pianoOuterKnobColor() { return '#c48282'; }
     static get pianoOuterKnobHighlightColor() { return '#ffffff'; }
+    static get pianoKnobShadowColor() { return '#be4f4f'; }
     static get pianoLEDOnColor() { return '#fffa80'; }
     static get pianoLEDOffColor() { return '#333'; }
     static get pianoLEDBorderColor() { return '#edcfcf'; }
