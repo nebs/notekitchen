@@ -271,4 +271,53 @@ describe("Parser", function() {
 			});
 		});					
 	});
+    
+    describe("findNotes", function() {
+		describe("when querying for notes", function() {
+			it("returns a list of the root notes", function() {
+				const testData = {
+					'C':  ['C'],
+                    'ABCDEFGA#B#C#D#E#F#G#AbBbCbDbEbFbGb':  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'A#', 'C', 'C#', 'D#', 'F', 'F#', 'G#', 'Ab', 'Bb', 'B', 'Db', 'Eb', 'E', 'Gb'],
+                    'BbM7 Cm7 F Locrian Gbdim7C#9':  ['Bb', 'C', 'F', 'Gb', 'C#'],
+                    'xofjlkbjflkjj ks#jdh fl$kjnew kfjsd':  null,
+                    ',mxcnv,nkjnBbfjlksdjfluwhC#fdskjnksjnlsdiuG': ['Bb', 'C#', 'G'],
+                    'bbc#f': null,
+                    'CCCF#F#BbBb': ['C', 'C', 'C', 'F#', 'F#', 'Bb', 'Bb'],
+                    'C major stuff Bbm7(b13)(#11)': ['C', 'Bb'],
+				};
+				
+				for (query in testData) {
+					const output = parser.findNotes(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns null", function() {
+                expect(parser.findNotes(null)).toBeNull();
+			});
+		});        
+    });
+    
+    describe("hasIsolatedRoot", function() {
+    });    
+    
+    describe("findRoot", function() {
+    });
+    
+    describe("findOctave", function() {
+    });
+    
+    describe("noteStringToIndex", function() {
+    });
+    
+    describe("findNumbersFollowingModifiers", function() {
+    });
+    
+    describe("findFlats", function() {
+    });
+    
+    describe("findSharps", function() {
+    });
 });

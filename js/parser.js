@@ -54,7 +54,27 @@ class Parser {
 	}
 	
 	findNotes(query) {
-		return query.match(/[ABCDEFG]b?#?/g);
+        if (!query) {
+            return null;
+        }
+        
+		const notes = query.match(/[ABCDEFG]b?#?/g);
+        if (!notes) {
+            return null;
+        }
+        return notes.map(function(note) {
+            if (note == 'Cb') {
+                return 'B';
+            } else if (note == 'B#') {
+                return 'C';
+            } else if (note == 'E#') {
+                return 'F';
+            } else if (note == 'Fb') {
+                return 'E';
+            } else {
+                return note;
+            }
+        });
 	}
 	
 	findSymbols(query) {
