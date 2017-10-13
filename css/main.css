@@ -17,13 +17,13 @@ body {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    font-size: 1em;
+    font-size: 0.9em;
 }
 
-.footer a:link { color: #2b7f9b; text-decoration: none; }
-.footer a:visited { color: #2b7f9b; }
-.footer a:hover { color: #ffffff; }
-.footer a:active { color: #2b7f9b; }
+.footer a:link { color: #fff; text-decoration: none; }
+.footer a:visited { color: #fff; text-decoration: none; }
+.footer a:hover { color: #fff; text-decoration: underline; }
+.footer a:active { color: #fff; text-decoration: none; }
 
 .piano-title {
 	color: #f0c2c2;
