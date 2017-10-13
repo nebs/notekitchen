@@ -93,7 +93,11 @@ class Parser {
 	}
 	
 	hasIsolatedRoot(query) {
-		return query.search(/[ABCDEFG]b?#?\s/g) >= 0;
+        if (!query) {
+            return false;
+        }
+        
+		return query.search(/[ABCDEFG]b?#?(\s|$)/g) >= 0;
 	}
 	
 	findRoot(query) {

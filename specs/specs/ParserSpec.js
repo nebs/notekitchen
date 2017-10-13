@@ -301,6 +301,31 @@ describe("Parser", function() {
     });
     
     describe("hasIsolatedRoot", function() {
+		describe("when checking if it includes an isolated root", function() {
+			it("returns true or false", function() {
+				const testData = {
+                    'C': true,
+					'C locrian':  true,
+                    'Cm7':  false,
+                    'Fm7 Bb7 GM7(b13) F locrian': true,
+                    'Fm7 Bb7 GM7(b13) Fdim7': false,
+                    'Bbm7 GM7 F#': true,
+                    '': false,
+                    'C D E F G': true,
+				};
+				
+				for (query in testData) {
+					const output = parser.hasIsolatedRoot(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns false", function() {
+                expect(parser.hasIsolatedRoot(null)).toBeFalsy();
+			});
+		});        
     });    
     
     describe("findRoot", function() {
