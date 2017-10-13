@@ -85,19 +85,32 @@ class PianoView {
         
         // Draw knobs
         const knobCount = 3;
-        const knobRadius = 5;
+        const knobOuterRadius = 6;
+        const knobInnerRadius = 4;
         const knobGap = 5;
         let knobLeftMargin = 20;
         for (let i=0; i<knobCount; i++) {
-            ctx.fillStyle = Style.pianoKnobColor;
-            ctx.strokeStyle = Style.pianoKnobBorderColor;
-            ctx.lineWidth = 2;
+            const knobCenterX = knobLeftMargin;
+            const knobCenterY = pianoHighlightShadowSize + ((keyboardContainerTopPadding - pianoHighlightShadowSize) / 2);
+            
+            // Outer
+            let gradient = ctx.createLinearGradient(knobCenterX - knobOuterRadius, knobCenterY - knobOuterRadius, knobCenterX + knobOuterRadius, knobCenterY + knobOuterRadius);
+            gradient.addColorStop(0, Style.pianoOuterKnobHighlightColor);
+            gradient.addColorStop(1, Style.pianoOuterKnobColor);
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.arc(knobLeftMargin, pianoHighlightShadowSize + ((keyboardContainerTopPadding - pianoHighlightShadowSize) / 2), knobRadius, 0, Math.PI * 2, false);
+            ctx.arc(knobCenterX, knobCenterY, knobOuterRadius, 0, Math.PI * 2, false);
             ctx.closePath();
             ctx.fill();
-            ctx.stroke();
-            knobLeftMargin += (knobRadius * 2) + knobGap;
+            
+            // Innter
+            ctx.fillStyle = Style.pianoInnerKnobColor;
+            ctx.beginPath();
+            ctx.arc(knobCenterX, knobCenterY, knobInnerRadius, 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.fill();
+
+            knobLeftMargin += (knobOuterRadius * 2) + knobGap;
         }
         
         // Draw LED
