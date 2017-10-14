@@ -14,10 +14,10 @@ class ThemeRed {
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
-	static get pianoBlackNoteHighlightColor() { return '#555'; }		
+	static get pianoBlackNoteHighlightColor() { return '#555'; }
 	static get pianoLettersFont() { return '8px sans-serif'; }
     static get pianoStripeColor() { return '#e09191'; }
-    static get pianoStripeHighlightColor() { return '#e6a9a9'; }    
+    static get pianoStripeHighlightColor() { return '#e6a9a9'; }
     static get pianoInnerKnobColor() { return '#af4646'; }
     static get pianoOuterKnobColor() { return '#c48282'; }
     static get pianoOuterKnobHighlightColor() { return '#ffffff'; }
@@ -30,7 +30,7 @@ class ThemeRed {
 }
 
 class ThemeBlue {
-    static get cssClass() { return 'theme-blue'; }    
+    static get cssClass() { return 'theme-blue'; }
     static get primaryBackgroundColor() { return '#e2988e'; }
 	static get pianoBackgroundColor() { return '#6bbde2'; }
     static get pianoHighlightColor() { return '#b3d4f0'; }
@@ -45,10 +45,10 @@ class ThemeBlue {
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
-	static get pianoBlackNoteHighlightColor() { return '#555'; }		
+	static get pianoBlackNoteHighlightColor() { return '#555'; }
 	static get pianoLettersFont() { return '8px sans-serif'; }
     static get pianoStripeColor() { return '#97c7f0'; }
-    static get pianoStripeHighlightColor() { return '#c4e2fc'; }    
+    static get pianoStripeHighlightColor() { return '#c4e2fc'; }
     static get pianoInnerKnobColor() { return '#1c5d95'; }
     static get pianoOuterKnobColor() { return '#84c6ff'; }
     static get pianoOuterKnobHighlightColor() { return '#ffffff'; }
