@@ -35,9 +35,6 @@ class CanvasHelper {
         gradient.addColorStop(0.3, this.highlightSpeckStyle);
         gradient.addColorStop(1, this.highlightStyle);
         this.ctx.fillStyle = gradient;
-
-        
-        //this.ctx.fillStyle = this.highlightStyle;
         this.ctx.fill();
     }
 }

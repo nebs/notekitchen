@@ -7,8 +7,12 @@ class CommandEngine {
 	}
 	
 	isCommand(query) {
+        if (!query) {
+            return false;
+        }
+        
 		const trimmedQuery = query.trim();
-		return trimmedQuery[0] == 's' || trimmedQuery[0] == 'h';
+		return trimmedQuery[0] == this.showKeyword[0] || trimmedQuery[0] == this.hideKeyword[0];
 	}
 	
 	isValidCommand(query) {
