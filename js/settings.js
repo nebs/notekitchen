@@ -1,18 +1,18 @@
 class Settings {
 	constructor() {
 		this.isShowingLetters = false;
-        this.activeStyleIndex = 0;
-        this.allStyles = [StyleRed, StyleBlue];
+        this.activeThemeIndex = 0;
+        this.allThemes = [ThemeRed, ThemeBlue];
 	}
     
-    activeStyle() {
-        return this.allStyles[this.activeStyleIndex];
+    activeTheme() {
+        return this.allThemes[this.activeThemeIndex];
     }
     
     toggleTheme() {
-        this.activeStyleIndex++;
-        if (this.activeStyleIndex >= this.allStyles.length) {
-            this.activeStyleIndex = 0;
+        this.activeThemeIndex++;
+        if (this.activeThemeIndex >= this.allThemes.length) {
+            this.activeThemeIndex = 0;
         }
     }
 }

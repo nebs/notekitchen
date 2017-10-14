@@ -1,5 +1,5 @@
-class StyleRed {
-    static get themeCSSClass() { return 'theme-red'; }
+class ThemeRed {
+    static get cssClass() { return 'theme-red'; }
     static get primaryBackgroundColor() { return '#7CBFDA'; }
 	static get pianoBackgroundColor() { return '#db7a7a'; }
     static get pianoHighlightColor() { return '#e58a8a'; }
@@ -29,8 +29,8 @@ class StyleRed {
     static get primaryShadowColor2() { return '#7CBFDA'; }
 }
 
-class StyleBlue {
-    static get themeCSSClass() { return 'theme-blue'; }    
+class ThemeBlue {
+    static get cssClass() { return 'theme-blue'; }    
     static get primaryBackgroundColor() { return '#e2988e'; }
 	static get pianoBackgroundColor() { return '#6bbde2'; }
     static get pianoHighlightColor() { return '#b3d4f0'; }
