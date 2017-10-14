@@ -137,28 +137,45 @@ class Parser {
 		}
 	}
 	
-	findNumbersFollowingModifiers(query, modifiers) {
-		const re = new RegExp("(" + modifiers.join('|') + ")\\d+", "g");
-		const results = query.match(re);
+	findFlats(query) {
+        if (!query) {
+            return [];
+        }
+        
+        const safeQuery = query.replace(/([ABCDEFG](b|#)?)-?\d+/g, '');
+		const results = safeQuery.match(/(b|-)\d+/g);
 		if (!results) {
 			return [];
 		}
 		
-		const flats = [];
-		results.forEach(function(flatString, i, array) {
-			const number = parseInt(flatString.slice(1), 10);
-			if (!flats.includes(number)) {
-				flats.push(number);
+		const output = [];
+		results.forEach(function(substring, i, array) {
+			const number = parseInt(substring.slice(1), 10);
+			if (!output.includes(number)) {
+				output.push(number);
 			}
 		});
-		return flats;				
-	}
-	
-	findFlats(query) {
-		return this.findNumbersFollowingModifiers(query, ['b', '-']);
+		return output;
 	}
 	
 	findSharps(query) {
-		return this.findNumbersFollowingModifiers(query, ['#','\\+']);
+        if (!query) {
+            return [];
+        }
+        
+        const safeQuery = query.replace(/([ABCDEFG](b|#)?)\+?\d+/g, '');
+		const results = safeQuery.match(/(#|\+)\d+/g);
+		if (!results) {
+			return [];
+		}
+		
+		const output = [];
+		results.forEach(function(substring, i, array) {
+			const number = parseInt(substring.slice(1), 10);
+			if (!output.includes(number)) {
+				output.push(number);
+			}
+		});
+		return output;
 	}
 }

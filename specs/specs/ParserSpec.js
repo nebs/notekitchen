@@ -337,12 +337,61 @@ describe("Parser", function() {
     describe("noteStringToIndex", function() {
     });
     
-    describe("findNumbersFollowingModifiers", function() {
-    });
-    
     describe("findFlats", function() {
+		describe("when querying for flats", function() {
+			it("returns a list of flats", function() {
+				const testData = {
+                    'b9': [9],
+                    'Bb9': [],
+                    'C-13': [],
+                    'C7(#9)(b25)(#4)(b11)': [25, 11],
+                    'b430980b2222#439839 b9fkjhk bfkjh': [430980, 2222, 9],
+                    '-11': [11],
+                    'Cm7-9 F#M7b13#9 F Locrian b2 Gm7#11b9 Bbm7-78': [9, 13, 2, 78],
+                    'Cb9 b9 -9 #7': [9],
+                    'Cb10 F#b11 Bbb12 F#b13 C-14 F#-15 Bb-16 B#17 Fm7#18(b19) b20 C7': [11, 12, 13, 19, 20], 
+				};
+				
+				for (query in testData) {
+					const output = parser.findFlats(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns an empty array", function() {
+                expect(parser.findFlats(null)).toEqual([]);
+			});
+		});        
     });
     
     describe("findSharps", function() {
+		describe("when querying for sharps", function() {
+			it("returns a list of sharps", function() {
+				const testData = {
+                    '#9': [9],
+                    'F#9': [],
+                    'C+13': [],
+                    'C7(b9)(#25)(b4)(#11)': [25, 11],
+                    '#430980#2222b439839 #9fkjhk #fkjh': [430980, 2222, 9],
+                    '+11': [11],
+                    'Cm7+9 BbM7#13b9 F Locrian #2 Gm7b11#9 F#m7+78': [9, 13, 2, 78],
+                    'C#9 #9 +9 b7': [9],
+                    'C#10 Bb#11 C##12 Bb##13 C+14 Bb+15 C#+16 Bb17 Fm7b18(#19) #20 C7': [11, 12, 13, 19, 20], 
+				};
+				
+				for (query in testData) {
+					const output = parser.findSharps(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns an empty array", function() {
+                expect(parser.findSharps(null)).toEqual([]);
+			});
+		});        
     });
 });
