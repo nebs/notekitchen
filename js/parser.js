@@ -117,7 +117,12 @@ class Parser {
 			return null;
 		}
 		
-		const results = query.match(/\d+/);
+        const validQuery = query.match(/[ABCDEFG](#|b)?\d+/);
+        if (!validQuery || validQuery.length == 0) {
+            return null;
+        }
+        
+		const results = validQuery[0].match(/\d+/);
 		if (results && results.length > 0) {
 			return parseInt(results[0], 10);
 		}

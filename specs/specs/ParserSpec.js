@@ -374,10 +374,37 @@ describe("Parser", function() {
 			it("returns null", function() {
                 expect(parser.findRoot(null)).toBeNull();
 			});
-		});        
+		});      
     });
     
     describe("findOctave", function() {
+		describe("when querying for octave", function() {
+			it("returns the octave", function() {
+				const testData = {
+                    '': null,
+                    'foo': null,
+                    'C': null,
+                    'C4': 4,
+                    'Bb65': 65,
+                    'F#5': 5,
+                    'Foobar C#4 Bb5': 4,
+                    '5C': null,
+                    'C 5': null,
+                    '  Bb 11  12Bb   6F G 7 C5  Bb8 F#9 Bb10 ': 5,
+				};
+				
+				for (query in testData) {
+					const output = parser.findOctave(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns null", function() {
+                expect(parser.findOctave(null)).toBeNull();
+			});
+		});        
     });
     
     describe("noteStringToIndex", function() {
