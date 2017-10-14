@@ -42,14 +42,6 @@ body {
     padding-bottom: 10px;
 }
 
-body.theme-red #piano-title {
-    color: #f0c2c2;
-}
-
-body.theme-blue #piano-title {
-    color: #d2e5f5;
-}
-
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -62,17 +54,6 @@ body.theme-blue #piano-title {
 
 ::selection { color: #7CBFDA; background: #FFF134; }
 ::-moz-selection { color: #7CBFDA; background: #FFF134; }
-
-body.theme-red ::-webkit-input-placeholder { color: #6EAAC2; }
-body.theme-blue ::-webkit-input-placeholder { color: #D47D71; }
-body.theme-red :-moz-placeholder { color: #6EAAC2; opacity: 1; }
-body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
-body.theme-red ::-moz-placeholder { color: #6EAAC2; opacity: 1; }
-body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
-body.theme-red :-ms-input-placeholder { color: #6EAAC2; }
-body.theme-blue :-ms-input-placeholder { color: #D47D71; }
-body.theme-red ::-ms-input-placeholder { color: #6EAAC2; }
-body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
 
 .outer {
     display: table;
@@ -117,3 +98,18 @@ input[type="text"]:focus {
 input[type="text"] {
 	border: none;
 }
+
+/* THEMES */
+body.theme-red #piano-title { color: #f0c2c2; }
+body.theme-red ::-webkit-input-placeholder { color: #6EAAC2; }
+body.theme-red :-moz-placeholder { color: #6EAAC2; opacity: 1; }
+body.theme-red ::-moz-placeholder { color: #6EAAC2; opacity: 1; }
+body.theme-red :-ms-input-placeholder { color: #6EAAC2; }
+body.theme-red ::-ms-input-placeholder { color: #6EAAC2; }
+
+body.theme-blue #piano-title { color: #d2e5f5; }
+body.theme-blue ::-webkit-input-placeholder { color: #D47D71; }
+body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
+body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
+body.theme-blue :-ms-input-placeholder { color: #D47D71; }
+body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
