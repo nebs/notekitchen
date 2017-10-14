@@ -1,6 +1,7 @@
 class App {
-	constructor($input, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
+	constructor($input, $title, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
 		this.$input = $input; 
+        this.$title = $title;
         this.soundEngine = soundEngine;
 		this.noteEngine = noteEngine;
 		this.chordEngine = chordEngine; 
@@ -110,7 +111,12 @@ class App {
 		this.$input.oninput = function() {
 			this.processQuery();
 		}.bind(this);
-		
+
+        this.$title.onclick = function(e) {
+            this.settings.toggleTheme();
+            this.draw();
+        }.bind(this);
+        
         this.soundEngine.playCallback = function(note) {
             this.highlightedNotes = [note];
             this.draw();
