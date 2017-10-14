@@ -1,12 +1,11 @@
 class App {
-	constructor($input, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, shadowView, pianoView, parser, settings) {
+	constructor($input, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
 		this.$input = $input; 
         this.soundEngine = soundEngine;
 		this.noteEngine = noteEngine;
 		this.chordEngine = chordEngine; 
 		this.scaleEngine = scaleEngine; 
 		this.commandEngine = commandEngine;
-		this.shadowView = shadowView;
 		this.pianoView = pianoView;
 		this.parser = parser;
 		this.settings = settings;
@@ -74,9 +73,8 @@ class App {
 	
 	start() {
 		window.onresize = function() {
-			this.shadowView.draw();
+			this.draw();
 		}.bind(this);	
-		this.shadowView.draw();		
 		
 		this.$input.onkeyup = function(e) {
 			e.preventDefault();

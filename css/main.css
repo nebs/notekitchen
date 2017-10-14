@@ -5,6 +5,10 @@
 .clearfix:before, .clearfix:after { content: ''; display: table; }
 .clearfix:after { clear: both; }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
 	background: #7CBFDA;
 	color: #FFF;
@@ -32,9 +36,12 @@ body {
 	font-size: 25px;
 	font-family: 'Grand Hotel', cursive;
 	position: absolute;
-	margin-top: 13px;
 	width: 300px;
     cursor: default;
+}
+
+#query {
+    padding-bottom: 10px;
 }
 
 .noselect {
@@ -91,10 +98,7 @@ body {
     margin-left: auto;
     margin-right: auto; 
     width: 300px;
-}
-
-#piano-canvas {
-	margin-top: 10px;
+    margin-bottom: 116px;
 }
 
 input[type="text"] {

@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
 	let $query = document.getElementById("query");
-	let $pianoCanvas = document.getElementById('piano-canvas');
-	let $shadowCanvas = document.getElementById('shadow-canvas');
+	let $canvas = document.getElementById('canvas');
 	
 	const parser = new Parser();
 	const settings = new Settings();		
-	const pianoView = new PianoView($pianoCanvas, settings);
-	const shadowView = new ShadowView($shadowCanvas, $pianoCanvas);
+	const pianoView = new PianoView($canvas, settings);
     const soundEngine = new SoundEngine(parser);
 	const noteEngine = new NoteEngine(parser);
 	const chordEngine = new ChordEngine(parser);
@@ -18,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						chordEngine, 
 						scaleEngine, 
 						commandEngine, 
-						shadowView, 
 						pianoView, 
 						parser, 
 						settings);

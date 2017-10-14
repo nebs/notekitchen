@@ -1,8 +1,6 @@
 class PianoView {
 	constructor($canvas, settings) {
 		this.$canvas = $canvas;
-		this.width = $canvas.width;
-		this.height = $canvas.height;
 		this.settings = settings;
         this.isLEDOn = false;
 	}
@@ -15,18 +13,69 @@ class PianoView {
   		this.draw([]);
   	}
   
+    drawShadow(ctx, pianoX, pianoY, pianoW, pianoH, canvasW, canvasH) {
+		const offset = Math.max(canvasW, canvasH);
+		let gradient0 = {x: 0, y: 0};
+        let gradient1 = {x: 0, y: 0};
+        let gradientFade = 0.5;
+        
+		ctx.beginPath();
+        
+        // Top left
+		let x = pianoX;
+		let y = pianoY + pianoH;        
+		ctx.moveTo(x, y);
+
+        // Bottom left
+        x += offset;
+		y += offset;
+        gradient0.x = x * gradientFade;
+        gradient0.y = y * gradientFade;
+		ctx.lineTo(x, y);
+        
+        // Bottom right
+		x += pianoW;
+		y -= pianoH;
+		ctx.lineTo(x, y);
+        
+        // Top right
+		x = pianoX + pianoW;
+		y = pianoY;
+        gradient1.x = x * gradientFade;
+        gradient1.y = y * gradientFade;
+		ctx.lineTo(x, y);
+        
+		ctx.closePath();
+        
+        let gradient = ctx.createLinearGradient(gradient0.x, gradient0.y, gradient1.x, gradient1.y);
+        gradient.addColorStop(0, Style.primaryShadowColor2);
+        gradient.addColorStop(1, Style.primaryShadowColor1);
+        ctx.fillStyle = gradient;
+		ctx.fill();        
+    }
+    
 	draw(selectedNotes, highlightedNotes) {
 		if (!this.$canvas.getContext) {
 			return;
 		}
+        
+		const canvasW = window.innerWidth;
+		const canvasH = window.innerHeight;        
+        const pianoW = 300;
+        const pianoH = 80;
+        const pianoX = (canvasW / 2) - (pianoW / 2);
+        const pianoY = (canvasH / 2) - (pianoH / 2);
+        
+        this.$canvas.width = canvasW;
+        this.$canvas.height = canvasH;
 		
 		const keyboardContainerTopPadding = 35;
 		const keyboardContainerBottomPadding = 5;
 		const keyboardContainerSidePadding = 8;
-		const keyboardContainerX = keyboardContainerSidePadding;
-		const keyboardContainerY = keyboardContainerTopPadding;
-		const keyboardContainerWidth = this.width - (keyboardContainerSidePadding * 2);
-		const keyboardContainerHeight = this.height - (keyboardContainerTopPadding + keyboardContainerBottomPadding);
+		const keyboardContainerX = pianoX + keyboardContainerSidePadding;
+		const keyboardContainerY = pianoY + keyboardContainerTopPadding;
+		const keyboardContainerWidth = pianoW - (keyboardContainerSidePadding * 2);
+		const keyboardContainerHeight = pianoH - (keyboardContainerTopPadding + keyboardContainerBottomPadding);
 		const totalOctaves = Config.totalOctaves;
 		const notesPerOctave = Config.notesPerOctave;
 		const whiteNoteIndexes = [1,3,5,6,8,10,12];
@@ -43,6 +92,9 @@ class PianoView {
         
 		const ctx = this.$canvas.getContext('2d');
         
+        // Draw shadow
+        this.drawShadow(ctx, pianoX, pianoY, pianoW, pianoH, canvasW, canvasH);
+        
         // Draw keyboard background
         const ch = new CanvasHelper(ctx);
         ch.fillStyle = Style.pianoBackgroundColor;
@@ -51,18 +103,18 @@ class PianoView {
         ch.shadowStyle = Style.pianoShadowColor;
         ch.highlightSize = pianoHighlightShadowSize;
         ch.shadowSize = pianoHighlightShadowSize;
-        ch.fillRect(0, 0, this.width, this.height);
+        ch.fillRect(pianoX, pianoY, pianoW, pianoH);
         
         // Draw background behind the keys
         ctx.fillStyle = Style.pianoShadowColor;
-        ctx.fillRect(keyboardContainerSidePadding, keyboardContainerTopPadding, keyboardContainerWidth, keyboardContainerHeight);
+        ctx.fillRect(keyboardContainerX, keyboardContainerY, keyboardContainerWidth, keyboardContainerHeight);
         
         // Draw shadow below the keys
 		ctx.beginPath();
-		ctx.moveTo(keyboardContainerSidePadding + 1, this.height - keyboardContainerBottomPadding);
-		ctx.lineTo(keyboardContainerSidePadding + keyboardContainerBottomPadding + 1, this.height);
-		ctx.lineTo(this.width, this.height);
-		ctx.lineTo(this.width - keyboardContainerSidePadding, this.height - keyboardContainerBottomPadding);
+		ctx.moveTo(keyboardContainerX + 1, pianoY + pianoH - keyboardContainerBottomPadding);
+		ctx.lineTo(keyboardContainerX + keyboardContainerBottomPadding + 1, pianoY + pianoH);
+		ctx.lineTo(pianoX + pianoW, pianoY + pianoH);
+		ctx.lineTo(pianoX + pianoW - keyboardContainerSidePadding, pianoY + pianoH - keyboardContainerBottomPadding);
 		ctx.closePath();
         ctx.fillStyle = Style.pianoShadowColor;
         ctx.fill();
@@ -75,11 +127,11 @@ class PianoView {
         for (let i=0; i<stripeCount; i++) {
             // Stripe
             ctx.fillStyle = Style.pianoStripeColor;
-            ctx.fillRect(this.width - stripeRightMargin, pianoHighlightShadowSize, stripeWidth, keyboardContainerTopPadding - pianoHighlightShadowSize);
+            ctx.fillRect(pianoX + pianoW - stripeRightMargin, pianoY + pianoHighlightShadowSize, stripeWidth, keyboardContainerTopPadding - pianoHighlightShadowSize);
             
             // Highlight
             ctx.fillStyle = Style.pianoStripeHighlightColor;
-            ctx.fillRect(this.width - stripeRightMargin, 0, stripeWidth, pianoHighlightShadowSize);
+            ctx.fillRect(pianoX + pianoW - stripeRightMargin, pianoY, stripeWidth, pianoHighlightShadowSize);
             stripeRightMargin -= stripeWidth + stripeGap;
         }
         
@@ -104,28 +156,28 @@ class PianoView {
             const shadowX2 = shadowX3 + (keyboardContainerTopPadding - shadowY3);
             const shadowY2 = keyboardContainerTopPadding;                        
             ctx.beginPath();
-            ctx.moveTo(shadowX0, shadowY0);
-            ctx.lineTo(shadowX1, shadowY1);
-            ctx.lineTo(shadowX2, shadowY2);
-            ctx.lineTo(shadowX3, shadowY3);
+            ctx.moveTo(pianoX + shadowX0, pianoY + shadowY0);
+            ctx.lineTo(pianoX + shadowX1, pianoY + shadowY1);
+            ctx.lineTo(pianoX + shadowX2, pianoY + shadowY2);
+            ctx.lineTo(pianoX + shadowX3, pianoY + shadowY3);
             ctx.closePath();
             ctx.fillStyle = Style.pianoKnobShadowColor;            
             ctx.fill();
             
             // Outer
-            let gradient = ctx.createLinearGradient(knobCenterX - knobOuterRadius, knobCenterY - knobOuterRadius, knobCenterX + knobOuterRadius, knobCenterY + knobOuterRadius);
+            let gradient = ctx.createLinearGradient(pianoX + knobCenterX - knobOuterRadius, pianoY + knobCenterY - knobOuterRadius, pianoX + knobCenterX + knobOuterRadius, pianoY + knobCenterY + knobOuterRadius);
             gradient.addColorStop(0, Style.pianoOuterKnobHighlightColor);
             gradient.addColorStop(1, Style.pianoOuterKnobColor);
             ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.arc(knobCenterX, knobCenterY, knobOuterRadius, 0, Math.PI * 2, false);
+            ctx.arc(pianoX + knobCenterX, pianoY + knobCenterY, knobOuterRadius, 0, Math.PI * 2, false);
             ctx.closePath();
             ctx.fill();
             
             // Inner
             ctx.fillStyle = Style.pianoInnerKnobColor;
             ctx.beginPath();
-            ctx.arc(knobCenterX, knobCenterY, knobInnerRadius, 0, Math.PI * 2, false);
+            ctx.arc(pianoX + knobCenterX, pianoY + knobCenterY, knobInnerRadius, 0, Math.PI * 2, false);
             ctx.closePath();
             ctx.fill();
 
@@ -134,7 +186,7 @@ class PianoView {
         
         // Draw LED
         ctx.beginPath();
-        ctx.arc(this.width - 12, 12, 2, 0, Math.PI * 2, false);
+        ctx.arc(pianoX + pianoW - 12, pianoY + 12, 2, 0, Math.PI * 2, false);
         ctx.closePath();
         ctx.strokeStyle = Style.pianoLEDBorderColor;
         ctx.lineWidth = 1;
