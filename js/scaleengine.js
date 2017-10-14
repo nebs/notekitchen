@@ -5,16 +5,8 @@ class ScaleEngine {
 	}
 	
 	isScale(symbol) {
-		if (!this.parser.hasIsolatedRoot(symbol)) {
-			return false;
-		}
-		
-		let isValid = false;
-		this.validScaleNames.some(function(name, index, array) {
-			isValid = symbol.toLowerCase().includes(name);
-			return isValid;
-		});
-		return isValid;
+        const re = new RegExp("[ABCDEFG](#|b)?\\s+(" + this.validScaleNames.join('|') + ")", 'gi');
+        return re.test(symbol);
 	}
 	
 	getNotesFromSymbol(symbol) {
@@ -45,7 +37,7 @@ class ScaleEngine {
 		// Duplicates notes across remaining octaves
 		let notesOctave = notes.slice(0);
 		let i = 1;
-		for (i = 1; i < Config.totalOctaves + 1; i++) {
+		for (i = 1; i < Config.totalOctaves; i++) {
 			notesOctave = notesOctave.map(function(n) {
 				const value = n + Config.notesPerOctave;
 				if (value == Config.totalNotes) {
