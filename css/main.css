@@ -113,3 +113,10 @@ body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
 body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
 body.theme-blue :-ms-input-placeholder { color: #D47D71; }
 body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
+
+body.theme-green #piano-title { color: #def0bb; }
+body.theme-green ::-webkit-input-placeholder { color: #de8851; }
+body.theme-green :-moz-placeholder { color: #de8851; opacity: 1; }
+body.theme-green ::-moz-placeholder { color: #de8851; opacity: 1; }
+body.theme-green :-ms-input-placeholder { color: #de8851; }
+body.theme-green ::-ms-input-placeholder { color: #de8851; }
