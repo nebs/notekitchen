@@ -134,6 +134,9 @@ class Parser {
 		if (noteIndex < 0) {
 			noteIndex = MusicLibrary.flatNoteNames.indexOf(noteString);
 		}
+		if (noteIndex < 0) {
+			noteIndex = MusicLibrary.altNoteNames.indexOf(noteString);
+		}
 
 		if (noteIndex < 0) {
 			return null;
