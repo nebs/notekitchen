@@ -329,6 +329,52 @@ describe("Parser", function() {
     });    
     
     describe("findRoot", function() {
+		describe("when querying for root", function() {
+			it("returns the root", function() {
+				const testData = {
+                    'C': 'C',
+                    'Bb locrian': 'Bb',
+                    'C#m7': 'C#',
+                    'F Bb G': 'F',
+                    'jldkfjslkdjC#fjsdlkjfksd': 'C#',
+                    'X#m7': null,
+                    '': null,
+                    'foo': null,
+                    'A': 'A',
+                    'A#': 'A#',
+                    'Ab': 'Ab',
+                    'B': 'B',
+                    'B#': 'B#',
+                    'Bb': 'Bb',
+                    'C': 'C',
+                    'C#': 'C#',
+                    'Cb': 'Cb',
+                    'D': 'D',
+                    'D#': 'D#',
+                    'Db': 'Db',
+                    'E': 'E',
+                    'E#': 'E#',
+                    'Eb': 'Eb',
+                    'F': 'F',
+                    'F#': 'F#',
+                    'Fb': 'Fb',
+                    'G': 'G',
+                    'G#': 'G#',
+                    'Gb': 'Gb',                    
+				};
+				
+				for (query in testData) {
+					const output = parser.findRoot(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns null", function() {
+                expect(parser.findRoot(null)).toBeNull();
+			});
+		});        
     });
     
     describe("findOctave", function() {
