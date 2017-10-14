@@ -105,7 +105,7 @@ class ChordEngine {
 		addToNotes(eleventhIndex);
 		addToNotes(thirteenthIndex);
 	
-		return notes;		
+		return notes.sort((a, b) => (a - b));
 	}
 	
 	getNotesFromQuery(query) {	
@@ -114,10 +114,14 @@ class ChordEngine {
 		if (!symbols) {
 			return [];
 		}		
-		symbols.forEach(function(symbol, index, array) {
+		symbols.forEach(function(symbol, i, a) {
 			const symbolNotes = this.getNotesFromSymbol(symbol);
-			notes = notes.concat(symbolNotes);
+            symbolNotes.forEach(function(note, j, b) {
+                if (!notes.includes(note)) {
+                    notes.push(note);
+                }
+            });
 		}, this);
-		return notes;
+		return notes.sort((a, b) => (a - b));
 	}
 }
