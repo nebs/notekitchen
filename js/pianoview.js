@@ -48,8 +48,8 @@ class PianoView {
 		ctx.closePath();
         
         let gradient = ctx.createLinearGradient(gradient0.x, gradient0.y, gradient1.x, gradient1.y);
-        gradient.addColorStop(0, Style.primaryShadowColor2);
-        gradient.addColorStop(1, Style.primaryShadowColor1);
+        gradient.addColorStop(0, this.settings.style.primaryShadowColor2);
+        gradient.addColorStop(1, this.settings.style.primaryShadowColor1);
         ctx.fillStyle = gradient;
 		ctx.fill();        
     }
@@ -59,8 +59,11 @@ class PianoView {
 			return;
 		}
         
+        document.body.classList = '';
+        document.body.classList.add(this.settings.style.themeCSSClass);
+        
 		const canvasW = window.innerWidth;
-		const canvasH = window.innerHeight;        
+		const canvasH = window.innerHeight;
         const pianoW = 300;
         const pianoH = 80;
         const pianoX = (canvasW / 2) - (pianoW / 2);
@@ -92,21 +95,25 @@ class PianoView {
         
 		const ctx = this.$canvas.getContext('2d');
         
+        // Draw canvas background
+        ctx.fillStyle = this.settings.style.primaryBackgroundColor;
+        ctx.fillRect(0, 0, canvasW, canvasH);        
+        
         // Draw shadow
         this.drawShadow(ctx, pianoX, pianoY, pianoW, pianoH, canvasW, canvasH);
         
         // Draw keyboard background
         const ch = new CanvasHelper(ctx);
-        ch.fillStyle = Style.pianoBackgroundColor;
-        ch.highlightStyle = Style.pianoHighlightColor;
-        ch.highlightSpeckStyle = Style.pianoHighlightSpeckColor;
-        ch.shadowStyle = Style.pianoShadowColor;
+        ch.fillStyle = this.settings.style.pianoBackgroundColor;
+        ch.highlightStyle = this.settings.style.pianoHighlightColor;
+        ch.highlightSpeckStyle = this.settings.style.pianoHighlightSpeckColor;
+        ch.shadowStyle = this.settings.style.pianoShadowColor;
         ch.highlightSize = pianoHighlightShadowSize;
         ch.shadowSize = pianoHighlightShadowSize;
         ch.fillRect(pianoX, pianoY, pianoW, pianoH);
         
         // Draw background behind the keys
-        ctx.fillStyle = Style.pianoShadowColor;
+        ctx.fillStyle = this.settings.style.pianoShadowColor;
         ctx.fillRect(keyboardContainerX, keyboardContainerY, keyboardContainerWidth, keyboardContainerHeight);
         
         // Draw shadow below the keys
@@ -116,7 +123,7 @@ class PianoView {
 		ctx.lineTo(pianoX + pianoW, pianoY + pianoH);
 		ctx.lineTo(pianoX + pianoW - keyboardContainerSidePadding, pianoY + pianoH - keyboardContainerBottomPadding);
 		ctx.closePath();
-        ctx.fillStyle = Style.pianoShadowColor;
+        ctx.fillStyle = this.settings.style.pianoShadowColor;
         ctx.fill();
         
         // Draw decoration stripes
@@ -126,11 +133,11 @@ class PianoView {
         let stripeRightMargin = 50;
         for (let i=0; i<stripeCount; i++) {
             // Stripe
-            ctx.fillStyle = Style.pianoStripeColor;
+            ctx.fillStyle = this.settings.style.pianoStripeColor;
             ctx.fillRect(pianoX + pianoW - stripeRightMargin, pianoY + pianoHighlightShadowSize, stripeWidth, keyboardContainerTopPadding - pianoHighlightShadowSize);
             
             // Highlight
-            ctx.fillStyle = Style.pianoStripeHighlightColor;
+            ctx.fillStyle = this.settings.style.pianoStripeHighlightColor;
             ctx.fillRect(pianoX + pianoW - stripeRightMargin, pianoY, stripeWidth, pianoHighlightShadowSize);
             stripeRightMargin -= stripeWidth + stripeGap;
         }
@@ -161,13 +168,13 @@ class PianoView {
             ctx.lineTo(pianoX + shadowX2, pianoY + shadowY2);
             ctx.lineTo(pianoX + shadowX3, pianoY + shadowY3);
             ctx.closePath();
-            ctx.fillStyle = Style.pianoKnobShadowColor;            
+            ctx.fillStyle = this.settings.style.pianoKnobShadowColor;            
             ctx.fill();
             
             // Outer
             let gradient = ctx.createLinearGradient(pianoX + knobCenterX - knobOuterRadius, pianoY + knobCenterY - knobOuterRadius, pianoX + knobCenterX + knobOuterRadius, pianoY + knobCenterY + knobOuterRadius);
-            gradient.addColorStop(0, Style.pianoOuterKnobHighlightColor);
-            gradient.addColorStop(1, Style.pianoOuterKnobColor);
+            gradient.addColorStop(0, this.settings.style.pianoOuterKnobHighlightColor);
+            gradient.addColorStop(1, this.settings.style.pianoOuterKnobColor);
             ctx.fillStyle = gradient;
             ctx.beginPath();
             ctx.arc(pianoX + knobCenterX, pianoY + knobCenterY, knobOuterRadius, 0, Math.PI * 2, false);
@@ -175,7 +182,7 @@ class PianoView {
             ctx.fill();
             
             // Inner
-            ctx.fillStyle = Style.pianoInnerKnobColor;
+            ctx.fillStyle = this.settings.style.pianoInnerKnobColor;
             ctx.beginPath();
             ctx.arc(pianoX + knobCenterX, pianoY + knobCenterY, knobInnerRadius, 0, Math.PI * 2, false);
             ctx.closePath();
@@ -188,12 +195,12 @@ class PianoView {
         ctx.beginPath();
         ctx.arc(pianoX + pianoW - 12, pianoY + 12, 2, 0, Math.PI * 2, false);
         ctx.closePath();
-        ctx.strokeStyle = Style.pianoLEDBorderColor;
+        ctx.strokeStyle = this.settings.style.pianoLEDBorderColor;
         ctx.lineWidth = 1;
         if (this.isLEDOn) {
-            ctx.fillStyle = Style.pianoLEDOnColor;
+            ctx.fillStyle = this.settings.style.pianoLEDOnColor;
         } else {
-            ctx.fillStyle = Style.pianoLEDOffColor;
+            ctx.fillStyle = this.settings.style.pianoLEDOffColor;
         }
         ctx.fill();
         ctx.stroke();        
@@ -208,15 +215,15 @@ class PianoView {
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
-			let textColor = Style.pianoDarkTextColor;
+			let textColor = this.settings.style.pianoDarkTextColor;
 			if (selectedNotes.includes(indexToCheck)) {
-                textColor = Style.pianoLightTextColor;
+                textColor = this.settings.style.pianoLightTextColor;
                 
-                let pianoNoteSelectedColor = Style.pianoNoteSelectedColor;
-                let pianoNoteSelectedShadowColor = Style.pianoNoteSelectedShadowColor;
+                let pianoNoteSelectedColor = this.settings.style.pianoNoteSelectedColor;
+                let pianoNoteSelectedShadowColor = this.settings.style.pianoNoteSelectedShadowColor;
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
-                    pianoNoteSelectedColor = Style.pianoNoteHighlightedColor;
-                    pianoNoteSelectedShadowColor = Style.pianoNoteHighlightedShadowColor;
+                    pianoNoteSelectedColor = this.settings.style.pianoNoteHighlightedColor;
+                    pianoNoteSelectedShadowColor = this.settings.style.pianoNoteHighlightedShadowColor;
                 }                
                 
                 // Draw the key
@@ -238,17 +245,17 @@ class PianoView {
                 ctx.fill();               
 			} else {
                 // Draw the key
-				ctx.fillStyle = Style.pianoWhiteNoteColor;
+				ctx.fillStyle = this.settings.style.pianoWhiteNoteColor;
 				ctx.fillRect(x, y, w, h);
                 
                 // Draw top shadow
-				ctx.fillStyle = Style.pianoWhiteNoteShadowColor;
+				ctx.fillStyle = this.settings.style.pianoWhiteNoteShadowColor;
 				ctx.fillRect(x, y, w, 2);
 			}
 
 			if (this.settings.isShowingLetters) {
 				let noteLetters = ['C','D','E','F','G','A','B'];
-				ctx.font = Style.pianoLettersFont;
+				ctx.font = this.settings.style.pianoLettersFont;
 				ctx.fillStyle = textColor;
 				ctx.fillText(noteLetters[i % noteLetters.length], 3 + x, y + h - 3);
 			}
@@ -268,11 +275,11 @@ class PianoView {
 			const noteIndex = blackNoteIndexes[i % blackNoteIndexes.length];
             const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
 			if (selectedNotes.includes(indexToCheck)) {
-                let pianoNoteSelectedColor = Style.pianoNoteSelectedColor;
-                let pianoNoteSelectedShadowColor = Style.pianoNoteSelectedShadowColor;
+                let pianoNoteSelectedColor = this.settings.style.pianoNoteSelectedColor;
+                let pianoNoteSelectedShadowColor = this.settings.style.pianoNoteSelectedShadowColor;
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
-                    pianoNoteSelectedColor = Style.pianoNoteHighlightedColor;
-                    pianoNoteSelectedShadowColor = Style.pianoNoteHighlightedShadowColor;   
+                    pianoNoteSelectedColor = this.settings.style.pianoNoteHighlightedColor;
+                    pianoNoteSelectedShadowColor = this.settings.style.pianoNoteHighlightedShadowColor;   
                 }                
                 
                 // Draw the key
@@ -286,11 +293,11 @@ class PianoView {
 				ctx.fillRect(x, y + h - 2, w, 2);
 			} else {
                 // Draw the key
-				ctx.fillStyle = Style.pianoBlackNoteColor;
+				ctx.fillStyle = this.settings.style.pianoBlackNoteColor;
 				ctx.fillRect(x, y, w, h);
                 
                 // Draw bottom highlight
-				ctx.fillStyle = Style.pianoBlackNoteHighlightColor;
+				ctx.fillStyle = this.settings.style.pianoBlackNoteHighlightColor;
 				ctx.fillRect(x, y + h - 4, w, 4);
 			}						
 		}

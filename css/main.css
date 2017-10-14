@@ -10,7 +10,6 @@ html, body {
 }
 
 body {
-	background: #7CBFDA;
 	color: #FFF;
 	font-weight: 200;
 	font-size: 1.05em;
@@ -29,8 +28,7 @@ body {
 .footer a:hover { color: #fff; text-decoration: underline; }
 .footer a:active { color: #fff; text-decoration: none; }
 
-.piano-title {
-	color: #f0c2c2;
+#piano-title {
 	display: block;
 	text-align: center;
 	font-size: 25px;
@@ -44,6 +42,14 @@ body {
     padding-bottom: 10px;
 }
 
+body.theme-red #piano-title {
+    color: #f0c2c2;
+}
+
+body.theme-blue #piano-title {
+    color: #d2e5f5;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -54,32 +60,19 @@ body {
                                   supported by Chrome and Opera */
 }
 
-::selection {
-	color: #7CBFDA;
-	background: #FFF134; /* WebKit/Blink Browsers */
-}
-::-moz-selection {
-	color: #7CBFDA;	
-	background: #FFF134; /* Gecko Browsers */
-}
+::selection { color: #7CBFDA; background: #FFF134; }
+::-moz-selection { color: #7CBFDA; background: #FFF134; }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-	color: #6EAAC2;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-	color: #6EAAC2;
-	opacity: 1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-	color: #6EAAC2;
-	opacity: 1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-	color: #6EAAC2;
-}
-::-ms-input-placeholder { /* Microsoft Edge */
-	color: #6EAAC2;
-}
+body.theme-red ::-webkit-input-placeholder { color: #6EAAC2; }
+body.theme-blue ::-webkit-input-placeholder { color: #D47D71; }
+body.theme-red :-moz-placeholder { color: #6EAAC2; opacity: 1; }
+body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
+body.theme-red ::-moz-placeholder { color: #6EAAC2; opacity: 1; }
+body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
+body.theme-red :-ms-input-placeholder { color: #6EAAC2; }
+body.theme-blue :-ms-input-placeholder { color: #D47D71; }
+body.theme-red ::-ms-input-placeholder { color: #6EAAC2; }
+body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
 
 .outer {
     display: table;
