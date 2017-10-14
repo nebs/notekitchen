@@ -482,6 +482,7 @@ describe("Parser", function() {
 			it("returns a list of sharps", function() {
 				const testData = {
                     '#9': [9],
+                    '+1#2': [1, 2],
                     'F#9': [],
                     'C+13': [],
                     'C7(b9)(#25)(b4)(#11)': [25, 11],
