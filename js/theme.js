@@ -1,6 +1,6 @@
 class Themes {
     static get all() { 
-        return [ThemeRed, ThemeBlue, ThemeGreen];
+        return [ThemeRed, ThemeBlue, ThemeGreen, ThemeGold];
     }
 }
 
@@ -95,4 +95,35 @@ class ThemeGreen {
     static get primaryBackgroundColor() { return '#f5b68e'; }    
 	static get primaryShadowColor1() { return '#d47d45'; }
     static get primaryShadowColor2() { return '#f5b68e'; }
+}
+
+class ThemeGold {
+    static get cssClass() { return 'theme-gold'; }
+	static get pianoBackgroundColor() { return '#D4AF37'; }
+    static get pianoHighlightColor() { return '#ebcf72'; }
+    static get pianoHighlightSpeckColor() { return '#faecbd'; }
+    static get pianoShadowColor() { return '#a38216'; }
+	static get pianoDarkTextColor() { return '#888'; }
+	static get pianoLightTextColor() { return '#DDD'; }
+	static get pianoNoteSelectedColor() { return '#D80152'; }
+	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
+    static get pianoNoteHighlightedColor() { return '#01c6f5'; }
+    static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
+	static get pianoWhiteNoteColor() { return '#FFF'; }
+	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
+	static get pianoBlackNoteColor() { return '#333'; }
+	static get pianoBlackNoteHighlightColor() { return '#555'; }
+	static get pianoLettersFont() { return '8px sans-serif'; }
+    static get pianoStripeColor() { return '#edd27a'; }
+    static get pianoStripeHighlightColor() { return '#faecbd'; }
+    static get pianoInnerKnobColor() { return '#a58621'; }
+    static get pianoOuterKnobColor() { return '#d4c181'; }
+    static get pianoOuterKnobHighlightColor() { return '#ffffff'; }
+    static get pianoKnobShadowColor() { return '#9b7a0e'; }
+    static get pianoLEDOnColor() { return '#fffa80'; }
+    static get pianoLEDOffColor() { return '#333'; }
+    static get pianoLEDBorderColor() { return '#f0d88a'; }
+    static get primaryBackgroundColor() { return '#cc7b9a'; }    
+	static get primaryShadowColor1() { return '#9a4767'; }
+    static get primaryShadowColor2() { return '#cc7b9a'; }
 }
