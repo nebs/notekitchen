@@ -32,11 +32,9 @@ class App {
 		}
 	}
 	
-	processQuery() {
-		const query = this.$input.value;
-		if (query === undefined || query.length == 0) {
-            this.updateActiveNotes(null);
-			return;
+	process(query) {
+		if (!query || query.length == 0) {
+			return null;
 		}			
 
 		this.$input.classList.remove(Config.validCommandCSSClass);
@@ -44,32 +42,33 @@ class App {
 			if (this.commandEngine.isValidCommand(query)) {
 				this.$input.classList.add(Config.validCommandCSSClass);
 			}
-
-            this.updateActiveNotes(null);
-			return;
+			return null;
 		}
 
 		if (query.includes('root')) {
 			const singleNotes = this.noteEngine.getNotesFromQuery(query);
 			if (singleNotes.length > 0) {
-                this.updateActiveNotes(singleNotes);
-				return;
+				return singleNotes;
 			}
 		}
 		
 		const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
 		if (scaleNotes.length > 0) {
-            this.updateActiveNotes(scaleNotes);
-			return;
+			return scaleNotes;
 		}
 		
 		const chordNotes = this.chordEngine.getNotesFromQuery(query);
 		if (chordNotes.length > 0) {
-            this.updateActiveNotes(chordNotes);
-			return;
+			return chordNotes;
 		}				
 		
-        this.updateActiveNotes(null);
+        return null;
+	}    
+    
+	processInput() {
+        const query = this.$input.value;
+        const activeNotes = this.process(query);
+        this.updateActiveNotes(activeNotes);
 	}
 	
 	start() {
@@ -86,17 +85,17 @@ class App {
                 this.updateActiveNotes(null);
 			} else if (e.keyCode == 38) { // UP
 				this.$input.value = this.parser.transposeQuery(this.$input.value, 1);
-				this.processQuery();				
+				this.processInput();				
 			} else if (e.keyCode == 40) { // DOWN
 				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
-				this.processQuery();
+				this.processInput();
 			} else if (e.keyCode == 18) { // ALT
                 this.soundEngine.togglePlayback();
                 if (!this.soundEngine.isPlaying) {
                     this.highlightedNotes = null;
                 }
                 this.pianoView.toggleLED();
-				this.processQuery();
+				this.processInput();
 			}
 		}.bind(this);
 
@@ -109,7 +108,7 @@ class App {
 		}.bind(this);
 	
 		this.$input.oninput = function() {
-			this.processQuery();
+			this.processInput();
 		}.bind(this);
 
         this.$title.onclick = function(e) {
