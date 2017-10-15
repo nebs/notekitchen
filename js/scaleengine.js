@@ -1,7 +1,7 @@
 class ScaleEngine {
 	constructor(parser) {
 		this.parser = parser;
-		this.validScaleNames = ['major'];
+		this.validScaleNames = ['major', 'ionian'];
 	}
 	
 	isScale(symbol) {
@@ -26,7 +26,7 @@ class ScaleEngine {
 		
 		let notes = [];		
 		
-		if (symbol.toLowerCase().includes('major')) {
+		if (symbol.toLowerCase().includes('major') || symbol.toLowerCase().includes('ionian')) {
 			let nextNote = rootIndex;			
 			MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
 				notes.push(nextNote);
