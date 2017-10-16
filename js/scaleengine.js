@@ -1,7 +1,7 @@
 class ScaleEngine {
 	constructor(parser) {
 		this.parser = parser;
-		this.validScaleNames = ['major', 'minor', 'natural minor', 'harmonic minor', 'whole tone'];
+		this.validScaleNames = ['major', 'minor', 'natural minor', 'harmonic minor', 'whole tone', 'chromatic'];
         this.validMajorModeNames = {
             'ionian': 12, 
             'dorian': 10, 
@@ -56,6 +56,10 @@ class ScaleEngine {
 				nextNote += interval;
 			});
 		}
+        
+		if (notes.length == 0 && symbol.toLowerCase().includes('chromatic')) {
+            notes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+		}        
         
 		if (notes.length == 0 && symbol.toLowerCase().includes('whole tone')) {
 			let nextNote = rootIndex;

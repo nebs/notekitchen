@@ -13,7 +13,7 @@ class MusicLibrary {
     
     static get wholeToneScaleIntervals() {
 		return [2, 2, 2, 2, 2, 2];
-	}    
+	}
 	
 	static get sharpNoteNames() {
 		return ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
