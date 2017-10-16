@@ -1,7 +1,7 @@
 class ScaleEngine {
 	constructor(parser) {
 		this.parser = parser;
-		this.validScaleNames = ['major', 'minor', 'natural minor', 'harmonic minor'];
+		this.validScaleNames = ['major', 'minor', 'natural minor', 'harmonic minor', 'whole tone'];
         this.validMajorModeNames = {
             'ionian': 12, 
             'dorian': 10, 
@@ -57,7 +57,15 @@ class ScaleEngine {
 			});
 		}
         
-		if (notes.length == 0 && symbol.toLowerCase().includes('harmonic minor')) {
+		if (notes.length == 0 && symbol.toLowerCase().includes('whole tone')) {
+			let nextNote = rootIndex;
+			MusicLibrary.wholeToneScaleIntervals.forEach(function(interval, index, array) {
+				notes.push(nextNote);
+				nextNote += interval;
+			});
+		}
+        
+        if (notes.length == 0 && symbol.toLowerCase().includes('harmonic minor')) {
 			let nextNote = rootIndex;
 			MusicLibrary.harmonicMinorScaleIntervals.forEach(function(interval, index, array) {
 				notes.push(nextNote);
@@ -87,7 +95,6 @@ class ScaleEngine {
 			});
 			notes = notes.concat(notesOctave);
 		}
-		console.log(notes);
 		return notes;
 	}
 	

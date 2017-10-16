@@ -10,6 +10,10 @@ class MusicLibrary {
     static get harmonicMinorScaleIntervals() {
 		return [2, 1, 2, 2, 1, 3, 1];
 	}
+    
+    static get wholeToneScaleIntervals() {
+		return [2, 2, 2, 2, 2, 2];
+	}    
 	
 	static get sharpNoteNames() {
 		return ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
