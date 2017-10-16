@@ -14,11 +14,20 @@ describe("ScaleEngine", function() {
                     'C major': true,
                     'Cmajor': false,
                     'major': false,
-                    'C minor': false,
+                    'C minor': true,
+                    'C harmonic minor': true,
+                    'C natural minor': true,
                     '        Bb        major': true,
                     'major Bb': false,
                     '   C       major': true,
                     ' Bbm7 F major': true,
+                    'C ionian': true,
+                    'C dorian': true,
+                    'C phrygian': true,
+                    'C lydian': true,
+                    'C mixolydian': true,
+                    'C aeolian': true,
+                    'C locrian': true,
 				};
 				
 				for (query in testData) {
@@ -50,6 +59,9 @@ describe("ScaleEngine", function() {
                     'A aeolian': [1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22, 24, 25, 27, 29, 30, 32, 34, 36],
                     'B locrian': [1, 3, 5, 6, 8, 10, 12, 13, 15, 17, 18, 20, 22, 24, 25, 27, 29, 30, 32, 34, 36],
                     'C# major': [2, 4, 6, 7, 9, 11, 13, 14, 16, 18, 19, 21, 23, 25, 26, 28, 30, 31, 33, 35, 1],
+                    'Gb harmonic minor': [7, 9, 10, 12, 14, 15, 18, 19, 21, 22, 24, 26, 27, 30, 31, 33, 34, 36, 2, 3, 6],
+                    'Bb minor': [11, 13, 14, 16, 18, 19, 21, 23, 25, 26, 28, 30, 31, 33, 35, 1, 2, 4, 6, 7, 9],
+                    'Bb natural minor': [11, 13, 14, 16, 18, 19, 21, 23, 25, 26, 28, 30, 31, 33, 35, 1, 2, 4, 6, 7, 9],
 				};
 				
 				for (query in testData) {
