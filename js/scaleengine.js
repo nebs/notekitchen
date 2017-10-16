@@ -1,11 +1,24 @@
 class ScaleEngine {
 	constructor(parser) {
 		this.parser = parser;
-		this.validScaleNames = ['major', 'ionian'];
+		this.validScaleNames = ['major'];
+        this.validMajorModeNames = {
+            'ionian': 12, 
+            'dorian': 10, 
+            'phrygian': 8, 
+            'lydian': 7, 
+            'mixolydian': 5, 
+            'aeolian': 3, 
+            'locrian': 1,
+        };
 	}
 	
 	isScale(symbol) {
-        const re = new RegExp("[ABCDEFG](#|b)?\\s+(" + this.validScaleNames.join('|') + ")", 'gi');
+        let allScaleNames = this.validScaleNames
+        for (let modeName in this.validMajorModeNames) {
+            allScaleNames.push(modeName);
+        }
+        const re = new RegExp("[ABCDEFG](#|b)?\\s+(" + allScaleNames.join('|') + ")", 'gi');
         return re.test(symbol);
 	}
 	
@@ -26,8 +39,18 @@ class ScaleEngine {
 		
 		let notes = [];		
 		
-		if (symbol.toLowerCase().includes('major') || symbol.toLowerCase().includes('ionian')) {
-			let nextNote = rootIndex;			
+        for (let modeName in this.validMajorModeNames) {
+            if (symbol.toLowerCase().includes(' ' + modeName)) {   
+                let nextNote = (rootIndex + this.validMajorModeNames[modeName]) % 12;                
+                MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
+                    notes.push(nextNote);
+                    nextNote += interval;
+                });                
+            }            
+        }
+        
+		if (notes.length == 0 && symbol.toLowerCase().includes('major')) {
+			let nextNote = rootIndex;
 			MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
 				notes.push(nextNote);
 				nextNote += interval;
