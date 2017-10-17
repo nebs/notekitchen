@@ -1,24 +1,10 @@
 class ScaleEngine {
 	constructor(parser) {
 		this.parser = parser;
-		this.validScaleNames = ['major', 'minor', 'natural minor', 'harmonic minor', 'whole tone', 'chromatic'];
-        this.validMajorModeNames = {
-            'ionian': 12, 
-            'dorian': 10, 
-            'phrygian': 8, 
-            'lydian': 7, 
-            'mixolydian': 5, 
-            'aeolian': 3, 
-            'locrian': 1,
-        };
 	}
 	
 	isScale(symbol) {
-        let allScaleNames = this.validScaleNames
-        for (let modeName in this.validMajorModeNames) {
-            allScaleNames.push(modeName);
-        }
-        const re = new RegExp("[ABCDEFG](#|b)?\\s+(" + allScaleNames.join('|') + ")", 'gi');
+        const re = new RegExp("[ABCDEFG](#|b)?\\s+(" + MusicLibrary.scaleNames.join('|') + ")", 'gi');
         return re.test(symbol);
 	}
 	
@@ -38,52 +24,18 @@ class ScaleEngine {
 		}
 		
 		let notes = [];		
-		
-        for (let modeName in this.validMajorModeNames) {
-            if (symbol.toLowerCase().includes(' ' + modeName)) {   
-                let nextNote = (rootIndex + this.validMajorModeNames[modeName]) % 12;                
-                MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
+        const scaleNames = MusicLibrary.scaleNames;
+        for (let i in scaleNames) {
+            const scaleName = scaleNames[i];
+            if (symbol.toLowerCase().includes(scaleName)) {
+                let nextNote = rootIndex;
+                MusicLibrary.scaleIntervals[scaleName].forEach(function(interval, index, array) {
                     notes.push(nextNote);
                     nextNote += interval;
-                });                
-            }            
+                });
+                break;
+            }    
         }
-        
-		if (notes.length == 0 && symbol.toLowerCase().includes('major')) {
-			let nextNote = rootIndex;
-			MusicLibrary.majorScaleIntervals.forEach(function(interval, index, array) {
-				notes.push(nextNote);
-				nextNote += interval;
-			});
-		}
-        
-		if (notes.length == 0 && symbol.toLowerCase().includes('chromatic')) {
-            notes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-		}        
-        
-		if (notes.length == 0 && symbol.toLowerCase().includes('whole tone')) {
-			let nextNote = rootIndex;
-			MusicLibrary.wholeToneScaleIntervals.forEach(function(interval, index, array) {
-				notes.push(nextNote);
-				nextNote += interval;
-			});
-		}
-        
-        if (notes.length == 0 && symbol.toLowerCase().includes('harmonic minor')) {
-			let nextNote = rootIndex;
-			MusicLibrary.harmonicMinorScaleIntervals.forEach(function(interval, index, array) {
-				notes.push(nextNote);
-				nextNote += interval;
-			});
-		}
-        
-        if (notes.length == 0 && (symbol.toLowerCase().includes('minor') || symbol.toLowerCase().includes('natural minor'))) {
-			let nextNote = rootIndex;
-			MusicLibrary.naturalMinorScaleIntervals.forEach(function(interval, index, array) {
-				notes.push(nextNote);
-				nextNote += interval;
-			});
-		}        
 		
 		// Duplicates notes across remaining octaves
 		let notesOctave = notes.slice(0);
@@ -99,7 +51,7 @@ class ScaleEngine {
 			});
 			notes = notes.concat(notesOctave);
 		}
-		return notes;
+		return notes.sort((a, b) => (a - b));
 	}
 	
 	getNotesFromQuery(query) {	
@@ -108,10 +60,14 @@ class ScaleEngine {
 		if (!symbols) {
 			return [];
 		}
-		symbols.forEach(function(symbol, index, array) {
+		symbols.forEach(function(symbol, i, a) {
 			const symbolNotes = this.getNotesFromSymbol(symbol);
-			notes = notes.concat(symbolNotes);
+            symbolNotes.forEach(function(note, j, b) {
+                if (!notes.includes(note)) {
+                    notes.push(note);
+                }
+            });
 		}, this);
-		return notes;
+		return notes.sort((a, b) => (a - b));
 	}	
 }

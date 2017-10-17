@@ -1,20 +1,28 @@
 class MusicLibrary {
-	static get majorScaleIntervals() {
-		return [2, 2, 1, 2, 2, 2, 1];
-	}
+    static get scaleIntervals() {
+        return {
+            'major': [2, 2, 1, 2, 2, 2, 1],
+            'natural minor': [2, 1, 2, 2, 1, 2, 2],
+            'minor': [2, 1, 2, 2, 1, 2, 2],
+            'harmonic minor': [2, 1, 2, 2, 1, 3, 1],
+            'whole tone': [2, 2, 2, 2, 2, 2],
+            'chromatic': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            'ionian': [2, 2, 1, 2, 2, 2, 1],
+            'dorian': [2, 1, 2, 2, 2, 1, 2],
+            'phrygian': [1, 2, 2, 2, 1, 2, 2],
+            'lydian': [2, 2, 2, 1, 2, 2, 1],
+            'mixolydian': [2, 2, 1, 2, 2, 1, 2],
+            'aeolian': [2, 1, 2, 2, 1, 2, 2],
+            'locrian': [1, 2, 2, 1, 2, 2, 2],
+        }        
+    }
     
-	static get naturalMinorScaleIntervals() {
-		return [2, 1, 2, 2, 1, 2, 2];
-	}
+    static get scaleNames() {
+        return Object.keys(MusicLibrary.scaleIntervals).sort(function(a, b) {
+            return b.length - a.length;
+        });        
+    }
     
-    static get harmonicMinorScaleIntervals() {
-		return [2, 1, 2, 2, 1, 3, 1];
-	}
-    
-    static get wholeToneScaleIntervals() {
-		return [2, 2, 2, 2, 2, 2];
-	}
-	
 	static get sharpNoteNames() {
 		return ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 	}
