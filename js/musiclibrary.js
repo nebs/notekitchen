@@ -1,19 +1,19 @@
 class MusicLibrary {
     static get scaleIntervals() {
         return {
-            'major': [2, 2, 1, 2, 2, 2, 1],
-            'natural minor': [2, 1, 2, 2, 1, 2, 2],
-            'minor': [2, 1, 2, 2, 1, 2, 2],
+            'major':          [2, 2, 1, 2, 2, 2, 1],
+            'natural minor':  [2, 1, 2, 2, 1, 2, 2],
+            'minor':          [2, 1, 2, 2, 1, 2, 2],
             'harmonic minor': [2, 1, 2, 2, 1, 3, 1],
-            'whole tone': [2, 2, 2, 2, 2, 2],
-            'chromatic': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            'ionian': [2, 2, 1, 2, 2, 2, 1],
-            'dorian': [2, 1, 2, 2, 2, 1, 2],
-            'phrygian': [1, 2, 2, 2, 1, 2, 2],
-            'lydian': [2, 2, 2, 1, 2, 2, 1],
-            'mixolydian': [2, 2, 1, 2, 2, 1, 2],
-            'aeolian': [2, 1, 2, 2, 1, 2, 2],
-            'locrian': [1, 2, 2, 1, 2, 2, 2],
+            'whole tone':     [2, 2, 2, 2, 2, 2],
+            'chromatic':      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            'ionian':         [2, 2, 1, 2, 2, 2, 1],
+            'dorian':         [2, 1, 2, 2, 2, 1, 2],
+            'phrygian':       [1, 2, 2, 2, 1, 2, 2],
+            'lydian':         [2, 2, 2, 1, 2, 2, 1],
+            'mixolydian':     [2, 2, 1, 2, 2, 1, 2],
+            'aeolian':        [2, 1, 2, 2, 1, 2, 2],
+            'locrian':        [1, 2, 2, 1, 2, 2, 2],
         }        
     }
     
