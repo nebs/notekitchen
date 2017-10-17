@@ -62,7 +62,7 @@ class ThemeBlue {
     static get pianoLEDOffColor() { return '#333'; }
     static get pianoLEDBorderColor() { return '#b6d8f5'; }
     static get primaryBackgroundColor() { return '#e2988e'; }    
-	static get primaryShadowColor1() { return '#bf594b'; }
+	static get primaryShadowColor1() { return '#d17669'; }
     static get primaryShadowColor2() { return '#e2988e'; }
 }
 
@@ -93,7 +93,7 @@ class ThemeGreen {
     static get pianoLEDOffColor() { return '#333'; }
     static get pianoLEDBorderColor() { return '#d2ed9e'; }
     static get primaryBackgroundColor() { return '#f5b68e'; }    
-	static get primaryShadowColor1() { return '#d47d45'; }
+	static get primaryShadowColor1() { return '#de9160'; }
     static get primaryShadowColor2() { return '#f5b68e'; }
 }
 
@@ -124,6 +124,6 @@ class ThemeGold {
     static get pianoLEDOffColor() { return '#333'; }
     static get pianoLEDBorderColor() { return '#f0d88a'; }
     static get primaryBackgroundColor() { return '#cc7b9a'; }    
-	static get primaryShadowColor1() { return '#9a4767'; }
+	static get primaryShadowColor1() { return '#b25c7d'; }
     static get primaryShadowColor2() { return '#cc7b9a'; }
 }
