@@ -54,7 +54,7 @@ class PianoView {
 		ctx.fill();        
     }
     
-	draw(selectedNotes, highlightedNotes) {
+	draw(selectedNotes, highlightedNotes, rootNotes) {
 		if (!this.$canvas.getContext) {
 			return;
 		}
@@ -224,7 +224,10 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;
-                }                
+                } else if (rootNotes && rootNotes.includes(indexToCheck)) {
+                    pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
+                    pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
+                }
                 
                 // Draw the key
                 ctx.fillStyle = pianoNoteSelectedColor;
@@ -280,7 +283,10 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;   
-                }                
+                } else if (rootNotes && rootNotes.includes(indexToCheck)) {
+                    pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
+                    pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
+                }            
                 
                 // Draw the key
 				ctx.fillStyle = pianoNoteSelectedColor;

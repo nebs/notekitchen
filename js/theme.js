@@ -16,6 +16,8 @@ class ThemeRed {
 	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
     static get pianoNoteHighlightedColor() { return '#01c6f5'; }
     static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
+    static get pianoNoteRootColor() { return '#96e24b'; }
+    static get pianoNoteRootShadowColor() { return '#74c129'; }
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
@@ -47,6 +49,8 @@ class ThemeBlue {
 	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
     static get pianoNoteHighlightedColor() { return '#01c6f5'; }
     static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
+    static get pianoNoteRootColor() { return '#96e24b'; }
+    static get pianoNoteRootShadowColor() { return '#74c129'; }    
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
@@ -78,6 +82,8 @@ class ThemeGreen {
 	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
     static get pianoNoteHighlightedColor() { return '#01c6f5'; }
     static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
+    static get pianoNoteRootColor() { return '#96e24b'; }
+    static get pianoNoteRootShadowColor() { return '#74c129'; }    
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
@@ -109,6 +115,8 @@ class ThemeGold {
 	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
     static get pianoNoteHighlightedColor() { return '#01c6f5'; }
     static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
+    static get pianoNoteRootColor() { return '#96e24b'; }
+    static get pianoNoteRootShadowColor() { return '#74c129'; }    
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }

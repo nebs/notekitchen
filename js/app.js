@@ -12,6 +12,7 @@ class App {
 		this.settings = settings;
 		this.activeNotes = null;
         this.highlightedNotes = null;
+        this.rootNotes = null;
 	}
 	
     updateActiveNotes(newActiveNotes) {
@@ -28,7 +29,7 @@ class App {
 		if (!this.activeNotes) {
 			this.pianoView.clear();
 		} else {
-			this.pianoView.draw(this.activeNotes, this.highlightedNotes);
+			this.pianoView.draw(this.activeNotes, this.highlightedNotes, this.rootNotes);
 		}
 	}
 	
@@ -45,12 +46,10 @@ class App {
 			return null;
 		}
 
-		if (query.includes('root')) {
-			const singleNotes = this.noteEngine.getNotesFromQuery(query);
-			if (singleNotes.length > 0) {
-				return singleNotes;
-			}
-		}
+        this.rootNotes = this.noteEngine.getNotesFromQuery(query);
+        if (query.includes('root') && this.rootNotes.length > 0) {
+            return this.rootNotes;
+        }
 		
 		const scaleNotes = this.scaleEngine.getNotesFromQuery(query);
 		if (scaleNotes.length > 0) {
