@@ -53,6 +53,30 @@ class Parser {
 		return newQuery;
 	}
 	
+    areSameRootNotes(noteA, noteB) {
+        if (!noteA || !noteB) {
+            return false;
+        }
+        
+        return (noteA % 12) == (noteB % 12);
+    }
+    
+    includesRoot(notes, root) {
+        if (!notes || !root) {
+            return false;
+        }
+        
+        let includes = false;
+        for (let i = 0; i < notes.length; i++) {
+            const note = notes[i];
+            if (this.areSameRootNotes(root, note)) {
+                includes = true;
+                break;
+            }            
+        }
+        return includes;
+    }
+    
 	findNotes(query) {
         if (!query) {
             return null;

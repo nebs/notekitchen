@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	
 	const parser = new Parser();
 	const settings = new Settings();		
-	const pianoView = new PianoView($canvas, settings);
+	const pianoView = new PianoView($canvas, settings, parser);
     const soundEngine = new SoundEngine(parser);
 	const noteEngine = new NoteEngine(parser);
 	const chordEngine = new ChordEngine(parser);

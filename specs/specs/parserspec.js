@@ -218,6 +218,77 @@ describe("Parser", function() {
 		});						
 	});
 
+    describe("areSameRootNotes", function() {
+		describe("when checking if a root is included", function() {
+			it("returns a boolean", function() {
+				const testData = [
+					[1, 1, true],
+                    [1, 2, false],
+                    [1, 13, true],
+                    [14, 50, true],
+                    [99, 102, false],
+                    [35, 11, true],
+				];
+				
+				for (let i in testData) {
+                    const data = testData[i];
+                    const noteA = data[0];
+                    const noteB = data[1];
+                    const expectedResult = data[2];
+					const output = parser.areSameRootNotes(noteA, noteB);
+					expect(output).toEqual(expectedResult);
+				}
+			});
+		});
+        
+		describe("when the first note is null", function() {
+			it("returns false", function() {
+                expect(parser.areSameRootNotes(null, 1)).toBeFalsy();
+			});
+		});
+        
+        describe("when the second note is null", function() {
+			it("returns false", function() {
+                expect(parser.areSameRootNotes(1, null)).toBeFalsy();
+			});
+		});
+    });
+    
+    describe("includesRoot", function() {
+		describe("when checking if a root is included", function() {
+			it("returns a boolean", function() {
+				const testData = [
+					[[1], 1, true],
+                    [[1, 2, 3, 4], 5, false],
+                    [[1, 2, 3, 4], 26, true],
+                    [[], 26, false],
+                    [[24, 25], 12, true],
+				];
+				
+				for (let i in testData) {
+                    const data = testData[i];
+                    const notes = data[0];
+                    const root = data[1];
+                    const expectedResult = data[2];
+					const output = parser.includesRoot(notes, root);
+					expect(output).toEqual(expectedResult);
+				}
+			});
+		});
+        
+		describe("when the roots are null", function() {
+			it("returns false", function() {
+                expect(parser.includesRoot(null, 1)).toBeFalsy();
+			});
+		});
+        
+        describe("when the note is null", function() {
+			it("returns false", function() {
+                expect(parser.includesRoot([1], null)).toBeFalsy();
+			});
+		});
+    });    
+    
 	describe("findSymbols", function() {
 		describe("when the query is valid", function() {
 			it("should return the proper symbols", function() {

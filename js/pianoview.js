@@ -1,7 +1,8 @@
 class PianoView {
-	constructor($canvas, settings) {
+	constructor($canvas, settings, parser) {
 		this.$canvas = $canvas;
 		this.settings = settings;
+        this.parser = parser;
         this.isLEDOn = false;
 	}
   
@@ -224,7 +225,7 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;
-                } else if (rootNotes && rootNotes.includes(indexToCheck)) {
+                } else if (this.parser.includesRoot(rootNotes, indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
                 }
@@ -283,7 +284,7 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;   
-                } else if (rootNotes && rootNotes.includes(indexToCheck)) {
+                } else if (this.parser.includesRoot(rootNotes, indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
                 }            
