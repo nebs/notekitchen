@@ -37,7 +37,7 @@ class App {
 		if (!query || query.length == 0) {
 			return null;
 		}			
-
+        
 		this.$input.classList.remove(Config.validCommandCSSClass);
 		if (this.commandEngine.isCommand(query)) {
 			if (this.commandEngine.isValidCommand(query)) {
@@ -62,11 +62,25 @@ class App {
 		}				
 		
         return null;
-	}    
+	}
+    
+    toggleSoundEngine(query) {
+        if (query.includes('play')) {
+            this.pianoView.isLEDOn = true;
+            if (!this.soundEngine.isPlaying) {
+                this.soundEngine.play();   
+            }
+        } else {
+            this.pianoView.isLEDOn = false;
+            this.soundEngine.stop();
+            this.highlightedNotes = null;
+        }        
+    }
     
 	processInput() {
         const query = this.$input.value;
         const activeNotes = this.process(query);
+        this.toggleSoundEngine(query);
         this.updateActiveNotes(activeNotes);
 	}
 	
@@ -81,19 +95,12 @@ class App {
 				this.commandEngine.execute(this.$input.value);
 				this.$input.classList.remove(Config.validCommandCSSClass);				
 				this.$input.value = '';
-                this.updateActiveNotes(null);
+                this.processInput();
 			} else if (e.keyCode == 38) { // UP
 				this.$input.value = this.parser.transposeQuery(this.$input.value, 1);
-				this.processInput();				
+				this.processInput();
 			} else if (e.keyCode == 40) { // DOWN
 				this.$input.value = this.parser.transposeQuery(this.$input.value, -1);
-				this.processInput();
-			} else if (e.keyCode == 18) { // ALT
-                this.soundEngine.togglePlayback();
-                if (!this.soundEngine.isPlaying) {
-                    this.highlightedNotes = null;
-                }
-                this.pianoView.toggleLED();
 				this.processInput();
 			}
 		}.bind(this);

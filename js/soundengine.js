@@ -73,12 +73,4 @@ class SoundEngine {
         Tone.Transport.stop();
         this.sequence = null;
     }
-    
-    togglePlayback() {
-        if (!this.isPlaying) {
-            this.play();
-        } else {
-            this.stop();
-        }
-    }
 }

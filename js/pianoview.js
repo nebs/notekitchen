@@ -5,13 +5,9 @@ class PianoView {
         this.parser = parser;
         this.isLEDOn = false;
 	}
-  
-    toggleLED() {
-        this.isLEDOn = !this.isLEDOn;
-    }
     
   	clear() {
-  		this.draw([]);
+  		this.draw([], [], []);
   	}
   
     drawShadow(ctx, pianoX, pianoY, pianoW, pianoH, canvasW, canvasH) {
