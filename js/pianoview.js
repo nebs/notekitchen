@@ -85,9 +85,10 @@ class PianoView {
 		const whiteNoteCount = totalOctaves * whiteNotesPerOctaveCount;
 		const blackNoteCount = totalOctaves * blackNotesPerOctaveCount;
 		const whiteNoteWidth = keyboardContainerWidth / whiteNoteCount;
-		const blackNoteWidth = whiteNoteWidth * 0.5;
+		const blackNoteWidth = whiteNoteWidth * 0.6;
 		const whiteNoteHeight = keyboardContainerHeight;
 		const blackNoteHeight = whiteNoteHeight * 0.7;
+        const whiteNoteGap = 1;
         const pianoHighlightShadowSize = 2;
         
 		const ctx = this.$canvas.getContext('2d');
@@ -110,7 +111,7 @@ class PianoView {
         ch.fillRect(pianoX, pianoY, pianoW, pianoH);
         
         // Draw background behind the keys
-        ctx.fillStyle = this.settings.activeTheme().pianoShadowColor;
+        ctx.fillStyle = this.settings.activeTheme().pianoKeybedBackgroundColor;
         ctx.fillRect(keyboardContainerX, keyboardContainerY, keyboardContainerWidth, keyboardContainerHeight);
         
         // Draw shadow below the keys
@@ -202,13 +203,14 @@ class PianoView {
         ctx.fill();
         ctx.stroke();        
         
+        // Draw white keys
 		let i = 0;
 		let currentOctave = 0;		
 		for (i=0; i<whiteNoteCount; i++) {
 			currentOctave = Math.floor(i / whiteNotesPerOctaveCount);
 			const x = i * whiteNoteWidth + keyboardContainerX + 1;
 			const y = keyboardContainerY;
-			const w = whiteNoteWidth - 2;
+			const w = whiteNoteWidth - whiteNoteGap;
 			const h = whiteNoteHeight;
 			const noteIndex = whiteNoteIndexes[i % whiteNoteIndexes.length];
 			const indexToCheck = noteIndex + (currentOctave * notesPerOctave);
@@ -221,9 +223,6 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;
-                } else if (this.parser.includesRoot(rootNotes, indexToCheck)) {
-                    pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
-                    pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
                 }
                 
                 // Draw the key
@@ -242,7 +241,16 @@ class PianoView {
                 ctx.lineTo(x + 2, y);
                 ctx.closePath();
                 ctx.fillStyle = pianoNoteSelectedShadowColor;
-                ctx.fill();               
+                ctx.fill();
+                
+                // Draw the root dot
+                if (this.parser.includesRoot(rootNotes, indexToCheck)) {
+                    ctx.fillStyle = this.settings.activeTheme().pianoNoteRootDotColor;
+                    ctx.beginPath();
+                    ctx.arc(x + w/2, y+h - 6, 3, 0, Math.PI * 2, false);
+                    ctx.closePath();
+                    ctx.fill();
+                }
 			} else {
                 // Draw the key
 				ctx.fillStyle = this.settings.activeTheme().pianoWhiteNoteColor;
@@ -261,6 +269,7 @@ class PianoView {
 			}
 		}
 
+        // Draw black keys
 		const blackNoteOffsets = [1, 1, 2, 2, 2];
 		currentOctave = 0;
 		const octaveWidth = keyboardContainerWidth / totalOctaves;
@@ -280,10 +289,7 @@ class PianoView {
                 if (highlightedNotes && highlightedNotes.includes(indexToCheck)) {
                     pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteHighlightedColor;
                     pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteHighlightedShadowColor;   
-                } else if (this.parser.includesRoot(rootNotes, indexToCheck)) {
-                    pianoNoteSelectedColor = this.settings.activeTheme().pianoNoteRootColor;
-                    pianoNoteSelectedShadowColor = this.settings.activeTheme().pianoNoteRootShadowColor;
-                }            
+                }           
                 
                 // Draw the key
 				ctx.fillStyle = pianoNoteSelectedColor;
@@ -294,6 +300,15 @@ class PianoView {
 				ctx.fillRect(x, y, w, 2);
 				ctx.fillRect(x, y, 2, h);
 				ctx.fillRect(x, y + h - 2, w, 2);
+                
+                // Draw the root dot
+                if (this.parser.includesRoot(rootNotes, indexToCheck)) {
+                    ctx.fillStyle = this.settings.activeTheme().pianoNoteRootDotColor;
+                    ctx.beginPath();
+                    ctx.arc(x + w/2, y+h - 6, 2, 0, Math.PI * 2, false);
+                    ctx.closePath();
+                    ctx.fill();
+                }                
 			} else {
                 // Draw the key
 				ctx.fillStyle = this.settings.activeTheme().pianoBlackNoteColor;

@@ -10,14 +10,14 @@ class ThemeRed {
     static get pianoHighlightColor() { return '#e58a8a'; }
     static get pianoHighlightSpeckColor() { return '#e8c5c5'; }
     static get pianoShadowColor() { return '#b23b3b'; }
+    static get pianoKeybedBackgroundColor() { return '#6c0b0b'; }
 	static get pianoDarkTextColor() { return '#888'; }
 	static get pianoLightTextColor() { return '#DDD'; }
-	static get pianoNoteSelectedColor() { return '#D80152'; }
-	static get pianoNoteSelectedShadowColor() { return '#A1013D'; }
-    static get pianoNoteHighlightedColor() { return '#01c6f5'; }
-    static get pianoNoteHighlightedShadowColor() { return '#159dbe'; }
-    static get pianoNoteRootColor() { return '#96e24b'; }
-    static get pianoNoteRootShadowColor() { return '#74c129'; }
+	static get pianoNoteSelectedColor() { return '#1ba7d1'; }
+	static get pianoNoteSelectedShadowColor() { return '#077c9f'; }
+    static get pianoNoteHighlightedColor() { return '#56deff'; }
+    static get pianoNoteHighlightedShadowColor() { return '#13b4db'; }
+    static get pianoNoteRootDotColor() { return '#FFF'; }
 	static get pianoWhiteNoteColor() { return '#FFF'; }
 	static get pianoWhiteNoteShadowColor() { return '#CCC'; }
 	static get pianoBlackNoteColor() { return '#333'; }
