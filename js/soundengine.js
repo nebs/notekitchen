@@ -32,14 +32,30 @@ class SoundEngine {
         }
     }
     
-    queueNotes(notes) {
+    queueNotes(notes, rootNotes) {
         const wasPlaying = this.isPlaying;
         this.stop();
         
+        let startIndex = -1;
+        for (let i in rootNotes) {
+            startIndex = notes.indexOf(rootNotes[i]);
+            if (startIndex >= 0) {
+                break;
+            }
+        }
+        if (startIndex < 0) {
+            startIndex = 0;
+        }
+        
         let noteNames = [];
+        let insertIndex = startIndex;
         for (let i in notes) {
-            const name = this.noteIndexToString(notes[i]);
+            const name = this.noteIndexToString(notes[insertIndex]);
             noteNames.push(name);
+            insertIndex++;
+            if (insertIndex >= notes.length) {
+                insertIndex = 0;
+            }
         }
         
         const that = this;

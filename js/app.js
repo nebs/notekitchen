@@ -20,7 +20,7 @@ class App {
 		if (!this.activeNotes) {
             this.soundEngine.clear();
 		} else {
-            this.soundEngine.queueNotes(this.activeNotes);
+            this.soundEngine.queueNotes(this.activeNotes, this.rootNotes);
 		}
         this.draw();
     }
