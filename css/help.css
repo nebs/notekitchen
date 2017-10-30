@@ -11,18 +11,37 @@ body {
 	font-weight: 200;
 	font-size: 1.05em;
 	font-family: 'Cabin Condensed', sans-serif;
-    margin: 10px;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
+    text-align: center;
 	font-size: 50px;
 	font-family: 'Grand Hotel', cursive;
     margin: 0;
     padding: 0;
 }
 
+.copyright {
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+.video {
+    margin-bottom: 10px;
+}
+
+.column {
+    padding-top: 10px;
+    width: 320px;
+    margin: 0 auto;
+}
+
 .category {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .category header h2 {
@@ -32,6 +51,7 @@ h1 {
 
 .category header p {
     margin: 0;
+    margin-top: 5px;
     font-size: 15px;
     color: rgba(255, 255, 255, 0.9);
 }
@@ -53,6 +73,11 @@ h1 {
     margin-top: 10px;
 }
 
+.copyright a:link { color: #FFF; text-decoration: underline; }
+.copyright a:visited { color: #FFF; text-decoration: underline; }
+.copyright a:hover { color: #FFF; text-decoration: underline; }
+.copyright a:active { color: #FFF; text-decoration: underline; }
+
 h1 a:link { color: #FFF; text-decoration: none; }
 h1 a:visited { color: #FFF; text-decoration: none; }
 h1 a:hover { color: #FFF; text-decoration: underline; }
@@ -73,6 +98,6 @@ h1 a:active { color: #FFF; text-decoration: none; }
     background: rgba(255, 255, 255, 0.4);
     padding: 10px;
     border-top: rgba(255, 255, 255, 0.5) 4px solid;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
