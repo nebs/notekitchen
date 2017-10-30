@@ -31,8 +31,8 @@ class App {
 		} else {
 			this.pianoView.draw(this.activeNotes, this.highlightedNotes, this.rootNotes);
 		}
-	}
-	
+	}    
+    
 	process(query) {
 		if (!query || query.length == 0) {
 			return null;
@@ -85,6 +85,12 @@ class App {
 	}
 	
 	start() {
+        const urlQuery = this.parser.getQueryFromURL(window.location.href);
+        if (urlQuery) {
+            this.$input.value = urlQuery;
+            this.processInput();
+        }
+        
 		window.onresize = function() {
 			this.draw();
 		}.bind(this);	

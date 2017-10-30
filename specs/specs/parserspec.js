@@ -577,4 +577,35 @@ describe("Parser", function() {
 			});
 		});        
     });
+    
+    describe("getQueryFromURL", function() {
+		describe("when the url has a query", function() {
+			it("returns the query", function() {
+				const testData = {
+                    '': null,
+                    'http://www.example.com': null,
+                    'http://www.example.com?q=': null,
+                    'http://www.example.com?q=   ': null,
+                    'http://www.example.com?q=%20%20%20%20': null,
+                    'q=C': null,
+                    '?q=C': 'C',
+                    'http://www.example.com?q=C': 'C',
+                    'http://www.example.com?q=Cm9%20(b13)%20%20%20%2311%20%20%2B5%20%20%20-45': 'Cm9 (b13)   #11  +5   -45',
+                    'http://www.example.com?q=Bb%20mixolydian': 'Bb mixolydian',
+                    'http://www.example.com?q=BbM9&foo=Cm7&q=Gm7': 'BbM9',
+				};
+				
+				for (query in testData) {
+					const output = parser.getQueryFromURL(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the url is null", function() {
+			it("returns null", function() {
+                expect(parser.getQueryFromURL(null)).toEqual(null);
+			});
+		});        
+    });    
 });
