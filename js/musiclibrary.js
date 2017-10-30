@@ -17,10 +17,11 @@ class MusicLibrary {
             'mixolydian':            [2, 2, 1, 2, 2, 1, 2],
             'aeolian':               [2, 1, 2, 2, 1, 2, 2],
             'locrian':               [1, 2, 2, 1, 2, 2, 2],
-            
+
             // Melodic minor modes
             'melodic minor':         [2, 1, 2, 2, 2, 2, 1], // -1
-            'jazz minor':            [2, 1, 2, 2, 2, 2, 1], // -1          
+            'jazz minor':            [2, 1, 2, 2, 2, 2, 1], // -1
+            'dorian #7':             [2, 1, 2, 2, 2, 2, 1], // -1
             'phrygian #6':           [1, 2, 2, 2, 2, 1, 2], // 2
             'dorian b2':             [1, 2, 2, 2, 2, 1, 2], // 2 
             'lydian augmented':      [2, 2, 2, 2, 1, 2, 1], // -3
@@ -29,13 +30,18 @@ class MusicLibrary {
             'acoustic':              [2, 2, 2, 1, 2, 1, 2], // 4 
             'lydian dominant':       [2, 2, 2, 1, 2, 1, 2], // 4
             'lydian b7':             [2, 2, 2, 1, 2, 1, 2], // 4
+            'mixolydian #4':         [2, 2, 2, 1, 2, 1, 2], // 4
+            'mixolydian #11':        [2, 2, 2, 1, 2, 1, 2], // 4
+            'dominant #11':          [2, 2, 2, 1, 2, 1, 2], // 4
             'mixolydian b6':         [2, 2, 1, 2, 1, 2, 2], // -5
             'mixolydian b13':        [2, 2, 1, 2, 1, 2, 2], // -5
             'aeolian dominant':      [2, 2, 1, 2, 1, 2, 2], // -5 
             'aeolian major':         [2, 2, 1, 2, 1, 2, 2], // -5
             'melodic major':         [2, 2, 1, 2, 1, 2, 2], // -5
+            'aeolian #3':            [2, 2, 1, 2, 1, 2, 2], // -5
             'locrian #2':            [2, 1, 2, 1, 2, 2, 2], // 6
             'half diminished':       [2, 1, 2, 1, 2, 2, 2], // 6
+            'locrian natural 9':     [2, 1, 2, 1, 2, 2, 2], // 6
             'super locrian':         [1, 2, 1, 2, 2, 2, 2], // -7
             'altered':               [1, 2, 1, 2, 2, 2, 2], // -7
             'altered dominant':      [1, 2, 1, 2, 2, 2, 2], // -7
@@ -44,17 +50,31 @@ class MusicLibrary {
             'diminished whole tone': [1, 2, 1, 2, 2, 2, 2], // -7
             'dominant whole tone':   [1, 2, 1, 2, 2, 2, 2], // -7
             'locrian b4':            [1, 2, 1, 2, 2, 2, 2], // -7
+            'ionian #1':             [1, 2, 1, 2, 2, 2, 2], // -7
             
             // Harmonic minor modes
-            'harmonic minor':        [2, 1, 2, 2, 1, 3, 1],
-            'locrian #6':            [1, 2, 2, 1, 3, 1, 2],
-            'ionian #5':             [2, 2, 1, 3, 1, 2, 1],
-            'dorian #4':             [2, 1, 3, 1, 2, 1, 2],
-            'dorian #11':            [2, 1, 3, 1, 2, 1, 2],
-            'phrygian major':        [1, 3, 1, 2, 1, 2, 2],
-            'phrygian dominant':     [1, 3, 1, 2, 1, 2, 2],
-            'lydian #2':             [3, 1, 2, 1, 2, 2, 1],
-            'alt dominant':          [1, 2, 1, 2, 2, 1, 3],
+            'harmonic minor':        [2, 1, 2, 2, 1, 3, 1], // -1
+            'aeolian #7':            [2, 1, 2, 2, 1, 3, 1], // -1
+            'locrian #6':            [1, 2, 2, 1, 3, 1, 2], // 2
+            'ionian #5':             [2, 2, 1, 3, 1, 2, 1], // -3
+            'dorian #4':             [2, 1, 3, 1, 2, 1, 2], // 4
+            'dorian #11':            [2, 1, 3, 1, 2, 1, 2], // 4
+            'phrygian major':        [1, 3, 1, 2, 1, 2, 2], // -5
+            'phrygian dominant':     [1, 3, 1, 2, 1, 2, 2], // -5
+            'phrygian #3':           [1, 3, 1, 2, 1, 2, 2], // -5
+            'lydian #2':             [3, 1, 2, 1, 2, 2, 1], // 6
+            'alt dominant':          [1, 2, 1, 2, 2, 1, 3], // -7
+            'mixolydian #1':         [1, 2, 1, 2, 2, 1, 3], // -7
+            
+            // Harmonic major modes
+            'harmonic major':        [2, 2, 1, 2, 1, 3, 1],
+            'ionian b6':             [2, 2, 1, 2, 1, 3, 1],
+            'dorian b5':             [2, 1, 2, 1, 3, 1, 2],
+            'phrygian b4':           [1, 2, 1, 3, 1, 2, 2],
+            'lydian b3':             [2, 1, 3, 1, 2, 2, 1],
+            'mixolydian b2':         [1, 3, 1, 2, 2, 1, 2],
+            'aeolian b1':            [3, 1, 2, 2, 1, 2, 1],
+            'locrian b7':            [1, 2, 2, 1, 2, 1, 3],
             
             // Pentatonic
             'pentatonic major':      [2, 2, 3, 2, 3],
