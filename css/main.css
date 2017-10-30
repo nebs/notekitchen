@@ -19,8 +19,15 @@ body {
 .footer {
     position: absolute;
     bottom: 10px;
-    right: 10px;
     font-size: 0.9em;
+}
+
+.footer-right {
+    right: 10px;
+}
+
+.footer-left {
+    left: 10px;
 }
 
 .footer a:link { color: #fff; text-decoration: none; }
