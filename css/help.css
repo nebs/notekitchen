@@ -73,6 +73,11 @@ h1 {
     margin-top: 10px;
 }
 
+.category p a:link { color: #FFF; text-decoration: underline; }
+.category p a:visited { color: #FFF; text-decoration: underline; }
+.category p a:hover { color: #FFF; text-decoration: underline; }
+.category p a:active { color: #FFF; text-decoration: underline; }
+
 .copyright a:link { color: #FFF; text-decoration: underline; }
 .copyright a:visited { color: #FFF; text-decoration: underline; }
 .copyright a:hover { color: #FFF; text-decoration: underline; }
