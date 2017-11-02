@@ -113,6 +113,10 @@ input[type="text"] {
 	border: none;
 }
 
+.twitter-share-button {
+    margin-right: 1px;
+}
+
 /* THEMES */
 body.theme-red #piano-title { color: #f0c2c2; }
 body.theme-red ::-webkit-input-placeholder { color: #6EAAC2; }
