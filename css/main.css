@@ -37,6 +37,11 @@ body {
 .footer a:hover { color: #fff; text-decoration: underline; }
 .footer a:active { color: #fff; text-decoration: none; }
 
+.footer-right a:link { color: #fff; text-decoration: none; display: none; }
+.footer-right a:visited { color: #fff; text-decoration: none; display: none; }
+.footer-right a:hover { color: #fff; text-decoration: none; display: none; }
+.footer-right a:active { color: #fff; text-decoration: none; display: none; }
+
 #piano-title {
 	display: block;
 	text-align: center;
