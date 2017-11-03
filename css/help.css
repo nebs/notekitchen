@@ -25,58 +25,60 @@ h1 {
 
 .copyright {
     text-align: center;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 8px;
+    margin-top: 8px;
     font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .video {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .column {
-    padding-top: 10px;
+    padding-top: 12px;
     width: 320px;
     margin: 0 auto;
 }
 
 .category {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
 .category header h2 {
     font-size: 20px;
+    color: black;
     margin: 0;
 }
 
 .category header p {
     margin: 0;
-    margin-top: 5px;
+    margin-top: 12px;
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.category header {
-    margin-bottom: 10px;    
+    color: rgba(0, 0, 0, 0.6);
+    padding: 0;
 }
 
 .category li a {
-    padding: 5px;
+    padding: 4px;
     font-family: monospace;
 }
 
 .category li p {
-    color: #444;
-    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9em;
     padding: 0;
     margin: 0;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
-.category p a:link { color: #FFF; text-decoration: underline; }
-.category p a:visited { color: #FFF; text-decoration: underline; }
-.category p a:hover { color: #FFF; text-decoration: underline; }
-.category p a:active { color: #FFF; text-decoration: underline; }
+.category p a:link { color: #000; text-decoration: underline; }
+.category p a:visited { color: #000; text-decoration: underline; }
+.category p a:hover { color: #000; text-decoration: underline; }
+.category p a:active { color: #000; text-decoration: underline; }
 
 .copyright a:link { color: #FFF; text-decoration: underline; }
 .copyright a:visited { color: #FFF; text-decoration: underline; }
@@ -101,12 +103,14 @@ h1 a:active { color: #FFF; text-decoration: none; }
 
 .category li {
     background: rgba(255, 255, 255, 0.4);
-    padding: 10px;
+    padding: 12px;
     border-top: rgba(255, 255, 255, 0.5) 4px solid;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .1);
 }
 
 .no-description li {
-    padding-bottom: 14px;
+    padding-bottom: 16px;
 }
 
