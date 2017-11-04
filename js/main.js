@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	let $query = document.getElementById("query");
 	let $canvas = document.getElementById('canvas');
     let $title = document.getElementById('piano-title');
+    let $link = document.getElementById('link');
 	
 	const parser = new Parser();
 	const settings = new Settings();		
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const commandEngine = new CommandEngine(settings);
 	const app = new App($query, 
                         $title,
+                        $link,
                         soundEngine,
 					    noteEngine, 
 						chordEngine, 

@@ -608,4 +608,28 @@ describe("Parser", function() {
 			});
 		});        
     });    
+    
+    describe("getURLFromQuery", function() {
+		describe("when the query is present", function() {
+			it("returns the url", function() {
+				const testData = {
+                    '': null,
+                    'Cm6': '?q=Cm6',
+                    'Cm6(b5) #11   b13': '?q=Cm6(b5)%20%2311%20%20%20b13',
+                    '     Cm6(b5) #11   b13   ': '?q=Cm6(b5)%20%2311%20%20%20b13',
+				};
+				
+				for (query in testData) {
+					const output = parser.getURLFromQuery(query);
+					expect(output).toEqual(testData[query]);
+				}
+			});
+		});
+        
+		describe("when the query is null", function() {
+			it("returns null", function() {
+                expect(parser.getURLFromQuery(null)).toEqual(null);
+			});
+		});        
+    });    
 });

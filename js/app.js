@@ -1,7 +1,8 @@
 class App {
-	constructor($input, $title, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
+	constructor($input, $title, $link, soundEngine, noteEngine, chordEngine, scaleEngine, commandEngine, pianoView, parser, settings) {
 		this.$input = $input; 
         this.$title = $title;
+        this.$link = $link;
         this.soundEngine = soundEngine;
 		this.noteEngine = noteEngine;
 		this.chordEngine = chordEngine; 
@@ -36,7 +37,7 @@ class App {
 	process(query) {
 		if (!query || query.length == 0) {
 			return null;
-		}			
+        }
         
 		this.$input.classList.remove(Config.validCommandCSSClass);
 		if (this.commandEngine.isCommand(query)) {
@@ -64,6 +65,16 @@ class App {
         return null;
 	}
     
+    updateLink(query) {
+        const url = this.parser.getURLFromQuery(query);
+        this.$link.classList.remove(Config.hiddenCSSClass);
+        if (url) {
+            this.$link.href = url;
+        } else {
+            this.$link.classList.add(Config.hiddenCSSClass);            
+        }
+    }
+    
     toggleSoundEngine(query) {
         if (query.includes('play')) {
             this.pianoView.isLEDOn = true;
@@ -80,6 +91,7 @@ class App {
 	processInput() {
         const query = this.$input.value;
         const activeNotes = this.process(query);
+        this.updateLink(query);
         this.toggleSoundEngine(query);
         this.updateActiveNotes(activeNotes);
 	}

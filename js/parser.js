@@ -222,5 +222,12 @@ class Parser {
             return null;
         }
         return query;
-    }    
+    }
+    
+    getURLFromQuery(query) {
+        if (!query || query.trim().length == 0) {
+            return null;
+        }
+        return "?q=" + encodeURIComponent(query.trim());
+    }
 }

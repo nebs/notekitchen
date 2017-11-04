@@ -14,4 +14,8 @@ class Config {
 	static get validCommandCSSClass() {
 		return 'valid-command';
 	}	
+    
+    static get hiddenCSSClass() {
+        return 'hidden';
+    }
 }

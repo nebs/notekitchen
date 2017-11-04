@@ -36,6 +36,10 @@ body {
     padding-right: 5px;
 }
 
+.hidden {
+    display: none;
+}
+
 .footer a:link { color: #fff; text-decoration: none; }
 .footer a:visited { color: #fff; text-decoration: none; }
 .footer a:hover { color: #FFF134; text-decoration: none; }
