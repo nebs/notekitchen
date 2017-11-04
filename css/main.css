@@ -32,9 +32,13 @@ body {
     left: 10px;
 }
 
+.footer a {
+    padding-right: 5px;
+}
+
 .footer a:link { color: #fff; text-decoration: none; }
 .footer a:visited { color: #fff; text-decoration: none; }
-.footer a:hover { color: #fff; text-decoration: underline; }
+.footer a:hover { color: #FFF134; text-decoration: none; }
 .footer a:active { color: #fff; text-decoration: none; }
 
 .footer-right a:link { color: #fff; text-decoration: none; display: none; }
@@ -131,17 +135,3 @@ body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
 body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
 body.theme-blue :-ms-input-placeholder { color: #D47D71; }
 body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
-
-body.theme-green #piano-title { color: #def0bb; }
-body.theme-green ::-webkit-input-placeholder { color: #de8851; }
-body.theme-green :-moz-placeholder { color: #de8851; opacity: 1; }
-body.theme-green ::-moz-placeholder { color: #de8851; opacity: 1; }
-body.theme-green :-ms-input-placeholder { color: #de8851; }
-body.theme-green ::-ms-input-placeholder { color: #de8851; }
-
-body.theme-gold #piano-title { color: #e8d9a9; }
-body.theme-gold ::-webkit-input-placeholder { color: #be6889; }
-body.theme-gold :-moz-placeholder { color: #be6889; opacity: 1; }
-body.theme-gold ::-moz-placeholder { color: #be6889; opacity: 1; }
-body.theme-gold :-ms-input-placeholder { color: #be6889; }
-body.theme-gold ::-ms-input-placeholder { color: #be6889; }
