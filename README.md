@@ -1,7 +1,7 @@
-Note Kitchen
+**Note Kitchen**
 Interactive chord and scale search engine.
 
 Production:
-1. Combine and minify `./compressjs.sh js/*.js app.min.js`
-2. Obfuscate: https://javascriptobfuscator.herokuapp.com/
-3. Update `index.html` to include the new file.
+- Combine and minify `gulp dist`
+- Obfuscate: https://javascriptobfuscator.herokuapp.com/
+- Update `index.html` to include the new file.

@@ -1,0 +1,26 @@
+{
+  "name": "notekitchen",
+  "version": "1.0.0",
+  "description": "Note Kitchen Interactive chord and scale search engine.",
+  "main": "app.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/nebspetrovic/notekitchen.git"
+  },
+  "author": "Nebojsa Petrovic",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/nebspetrovic/notekitchen#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uglifyes": "^0.1.3",
+    "uglify-es": "^3.3.9"
+  }
+}
