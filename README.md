@@ -1,6 +1,9 @@
 **Note Kitchen**
 Interactive chord and scale search engine.
 
+Installation:
+- Run `npm install`
+
 Production:
-- Combine and minify `gulp dist`
-- Update `index.html` to include the new file.
+- Run `gulp build`
+- Upload `dist` folder to server

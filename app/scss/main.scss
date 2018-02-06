@@ -126,16 +126,18 @@ input[type="text"] {
 }
 
 /* THEMES */
+$theme-red-placeholder-color: #6EAAC2;
 body.theme-red #piano-title { color: #f0c2c2; }
-body.theme-red ::-webkit-input-placeholder { color: #6EAAC2; }
-body.theme-red :-moz-placeholder { color: #6EAAC2; opacity: 1; }
-body.theme-red ::-moz-placeholder { color: #6EAAC2; opacity: 1; }
-body.theme-red :-ms-input-placeholder { color: #6EAAC2; }
-body.theme-red ::-ms-input-placeholder { color: #6EAAC2; }
+body.theme-red ::-webkit-input-placeholder { color: $theme-red-placeholder-color; }
+body.theme-red :-moz-placeholder { color: $theme-red-placeholder-color; opacity: 1; }
+body.theme-red ::-moz-placeholder { color: $theme-red-placeholder-color; opacity: 1; }
+body.theme-red :-ms-input-placeholder { color: $theme-red-placeholder-color; }
+body.theme-red ::-ms-input-placeholder { color: $theme-red-placeholder-color; }
 
+$theme-blue-placeholder-color: #D47D71;
 body.theme-blue #piano-title { color: #d2e5f5; }
-body.theme-blue ::-webkit-input-placeholder { color: #D47D71; }
-body.theme-blue :-moz-placeholder { color: #D47D71; opacity: 1; }
-body.theme-blue ::-moz-placeholder { color: #D47D71; opacity: 1; }
-body.theme-blue :-ms-input-placeholder { color: #D47D71; }
-body.theme-blue ::-ms-input-placeholder { color: #D47D71; }
+body.theme-blue ::-webkit-input-placeholder { color: $theme-blue-placeholder-color; }
+body.theme-blue :-moz-placeholder { color: $theme-blue-placeholder-color; opacity: 1; }
+body.theme-blue ::-moz-placeholder { color: $theme-blue-placeholder-color; opacity: 1; }
+body.theme-blue :-ms-input-placeholder { color: $theme-blue-placeholder-color; }
+body.theme-blue ::-ms-input-placeholder { color: $theme-blue-placeholder-color; }
