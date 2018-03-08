@@ -1,13 +1,3 @@
-**Note Kitchen**
-Interactive chord and scale search engine.
-
-Installation:
-- Run `npm install`
-
-Production:
-- Run `gulp build`
-- Upload `dist` folder to server
-
 # Note Kichen
 
 Web app for visualizing piano chords and scales.
