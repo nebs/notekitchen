@@ -60,8 +60,12 @@ class SoundEngine {
     }
 
     const that = this;
-    this.initSequence(noteNames, that);
-    this.initChord(noteNames, that);
+    if (mode === 'sequence') {
+      this.initSequence(noteNames, that);
+    }
+    if (mode === 'chord') {
+      this.initChord(noteNames, that);
+    }
     
 
     if (wasPlaying) {
