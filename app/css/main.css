@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css?family=Cabin+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Grand+Hotel");
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+body,
+html {
+  overflow: hidden;
+  margin: 0;
+  padding: 0; }
+
+body {
+  color: #FFF;
+  font-weight: 200;
+  font-size: 1.05em;
+  font-family: 'Cabin Condensed', sans-serif; }
+
+.footer {
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.9em; }
+
+.footer-right {
+  right: 10px; }
+
+.footer-left {
+  left: 10px; }
+
+.footer a {
+  padding-right: 5px; }
+
+.hidden {
+  display: none; }
+
+.footer a:link {
+  color: #fff;
+  text-decoration: none; }
+
+.footer a:visited {
+  color: #fff;
+  text-decoration: none; }
+
+.footer a:hover {
+  color: #FFF134;
+  text-decoration: none; }
+
+.footer a:active {
+  color: #fff;
+  text-decoration: none; }
+
+.footer-right a:link {
+  color: #fff;
+  text-decoration: none;
+  display: none; }
+
+.footer-right a:visited {
+  color: #fff;
+  text-decoration: none;
+  display: none; }
+
+.footer-right a:hover {
+  color: #fff;
+  text-decoration: none;
+  display: none; }
+
+.footer-right a:active {
+  color: #fff;
+  text-decoration: none;
+  display: none; }
+
+#piano-title {
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  font-family: 'Grand Hotel', cursive;
+  position: absolute;
+  width: 300px;
+  cursor: default; }
+
+#query {
+  padding-bottom: 10px; }
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */ }
+
+::selection {
+  color: #7CBFDA;
+  background: #FFF134; }
+
+::-moz-selection {
+  color: #7CBFDA;
+  background: #FFF134; }
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0; }
+
+.middle {
+  display: table-cell;
+  vertical-align: middle; }
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  margin-bottom: 116px; }
+
+input[type="text"] {
+  color: #FFF;
+  background: none;
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-size: 1.6em;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none; }
+
+input[type="text"].valid-command {
+  color: #FFF134; }
+
+input[type="text"]:focus {
+  outline: none; }
+
+input[type="text"] {
+  border: none; }
+
+.twitter-share-button {
+  margin-right: 1px; }
+
+/* THEMES */
+body.theme-red #piano-title {
+  color: #f0c2c2; }
+
+body.theme-red ::-webkit-input-placeholder {
+  color: #6EAAC2; }
+
+body.theme-red :-moz-placeholder {
+  color: #6EAAC2;
+  opacity: 1; }
+
+body.theme-red ::-moz-placeholder {
+  color: #6EAAC2;
+  opacity: 1; }
+
+body.theme-red :-ms-input-placeholder {
+  color: #6EAAC2; }
+
+body.theme-red ::-ms-input-placeholder {
+  color: #6EAAC2; }
+
+body.theme-blue #piano-title {
+  color: #d2e5f5; }
+
+body.theme-blue ::-webkit-input-placeholder {
+  color: #D47D71; }
+
+body.theme-blue :-moz-placeholder {
+  color: #D47D71;
+  opacity: 1; }
+
+body.theme-blue ::-moz-placeholder {
+  color: #D47D71;
+  opacity: 1; }
+
+body.theme-blue :-ms-input-placeholder {
+  color: #D47D71; }
+
+body.theme-blue ::-ms-input-placeholder {
+  color: #D47D71; }
