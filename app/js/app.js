@@ -12,6 +12,7 @@ class App {
     this.parser = parser;
     this.settings = settings;
     this.activeNotes = null;
+    this.mode = null;
     this.highlightedNotes = null;
     this.rootNotes = null;
   }
@@ -20,8 +21,8 @@ class App {
     this.activeNotes = newActiveNotes;
     if (!this.activeNotes) {
       this.soundEngine.clear();
-    } else {
-      this.soundEngine.queueNotes(this.activeNotes, this.rootNotes);
+    } else if (this.mode) {
+      this.soundEngine.queueNotes(this.activeNotes, this.rootNotes, this.mode);
     }
     this.draw();
   }
@@ -78,13 +79,23 @@ class App {
   toggleSoundEngine(query) {
     if (query.includes('play')) {
       this.pianoView.isLEDOn = true;
-      if (!this.soundEngine.isPlaying) {
-        this.soundEngine.play();
+      if (query.includes('sequence')) {
+        this.mode = 'sequence';
       }
-    } else {
+      else if (query.includes('chord')) {
+        this.mode = 'chord';
+      } else {
+        this.mode = null;
+      }
+      if (!this.soundEngine.isPlaying && this.mode) {
+        this.soundEngine.play(this.mode);
+      }
+    }
+    else {
       this.pianoView.isLEDOn = false;
       this.soundEngine.stop();
       this.highlightedNotes = null;
+      this.mode = null;
     }
   }
 
@@ -103,11 +114,11 @@ class App {
       this.processInput();
     }
 
-    window.onresize = function() {
+    window.onresize = function () {
       this.draw();
     }.bind(this);
 
-    this.$input.onkeyup = function(e) {
+    this.$input.onkeyup = function (e) {
       e.preventDefault();
       if (e.keyCode == 13) { // ENTER
         this.commandEngine.execute(this.$input.value);
@@ -123,7 +134,7 @@ class App {
       }
     }.bind(this);
 
-    this.$input.onkeydown = function(e) {
+    this.$input.onkeydown = function (e) {
       if (e.keyCode == 38) { // UP
         e.preventDefault();
       } else if (e.keyCode == 40) { // DOWN
@@ -131,16 +142,16 @@ class App {
       }
     }.bind(this);
 
-    this.$input.oninput = function() {
+    this.$input.oninput = function () {
       this.processInput();
     }.bind(this);
 
-    this.$title.onclick = function(e) {
+    this.$title.onclick = function (e) {
       this.settings.toggleTheme();
       this.draw();
     }.bind(this);
 
-    this.soundEngine.playCallback = function(note) {
+    this.soundEngine.playCallback = function (note) {
       this.highlightedNotes = [note];
       this.draw();
     }.bind(this);

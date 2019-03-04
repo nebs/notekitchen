@@ -92,7 +92,7 @@
 					Note Kitchen is like a search engine and laboratory for exploring musical chords and scales. Simply type the name of a chord or a scale in the text field and see the notes light up on the keyboard.
 				</p>
 				<p>
-					You can also hear what the notes sound like by adding the keyword 'play' to your search. See below for a full list of commands and options.
+					You can also hear what the notes sound like by adding the keyword 'play sequence' or 'play chord' to your search. See below for a full list of commands and options.
 				</p>
 			</header>
 		</section>
@@ -135,9 +135,15 @@
 			</header>
 			<ul>
 				<li>
-					<a href="/?q=C play">play</a>
+					<a href="/?q=C play sequence">play</a>
 					<p>
-						When the 'play' keyword is present in the query the notes will begin playing and looping. Be sure to turn your speakers up! To stop playback either remove the 'play' keyword or press 'RETURN'.
+						When the 'play sequence' phrase is present in the query the notes will begin playing and looping in a sequence. Be sure to turn your speakers up! To stop playback either remove the 'play sequence' phrase or press 'RETURN'.
+					</p>
+				</li>
+				<li>
+					<a href="/?q=C play chord">play</a>
+					<p>
+						When the 'play chord' phrase is present in the query the notes will begin playing and looping as a chord. Be sure to turn your speakers up! To stop playback either remove the 'play chord' keyword or press 'RETURN'.
 					</p>
 				</li>
 				<li>
@@ -172,7 +178,7 @@
 					<a href="/?q=">RETURN</a>
 					<p>
 						If a valid settings command is present in the query (indicated by yellow text), pressing 'RETURN' will confirm and execute that command and clear the text. In all other cases the query will be cleared and all notes will be reset on the keyboard. This
-						will also cause playback to stop if the arpeggiator is on.
+						will also cause playback to stop.
 					</p>
 				</li>
 			</ul>

@@ -1,6 +1,7 @@
 class SoundEngine {
   constructor(parser) {
-    this.synth = new Tone.Synth().toMaster();
+    this.monoSynth = new Tone.Synth().toMaster();
+    this.polySynth = new Tone.PolySynth(7).toMaster();
     this.playCallback = null;
     this.parser = parser;
     this.baseOctave = 4;
@@ -30,9 +31,12 @@ class SoundEngine {
     if (this.sequence) {
       this.sequence.removeAll();
     }
+    if (this.loop) {
+      this.loop.stop();
+    }
   }
 
-  queueNotes(notes, rootNotes) {
+  queueNotes(notes, rootNotes, mode) {
     const wasPlaying = this.isPlaying;
     this.stop();
 
@@ -59,21 +63,32 @@ class SoundEngine {
     }
 
     const that = this;
-    this.sequence = new Tone.Sequence(function(time, note) {
-      that.synth.triggerAttackRelease(note, "8n", time);
-      if (that.playCallback) {
-        that.playCallback(that.noteStringToIndex(note));
-      }
-    }, noteNames, "4n");
+
+    if (mode === 'sequence') {
+      this.sequence = new Tone.Sequence(function (time, note) {
+        that.monoSynth.triggerAttackRelease(note, "8n", time);
+        if (that.playCallback) {
+          that.playCallback(that.noteStringToIndex(note));
+        }
+      }, noteNames, "4n");
+    }
+    if (mode === 'chord') {
+      this.loop = new Tone.Loop(function (time) {
+        that.polySynth.triggerAttackRelease(noteNames, "8n", time);
+      }, "2n");
+    }
 
     if (wasPlaying) {
-      this.play();
+      this.play(mode);
     }
   }
 
-  play() {
+  play(mode) {
     this.isPlaying = true;
-    if (this.sequence) {
+    if (this.loop && mode === 'chord') {
+      this.loop.start();
+    }
+    if (this.sequence && mode === 'sequence') {
       this.sequence.start();
     }
     Tone.Transport.start();
@@ -86,7 +101,12 @@ class SoundEngine {
       this.sequence.removeAll();
       this.sequence.dispose();
     }
+    if (this.loop) {
+      this.loop.stop();
+      this.loop.dispose();
+    }
     Tone.Transport.stop();
     this.sequence = null;
+    this.loop = null;
   }
 }
