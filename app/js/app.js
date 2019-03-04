@@ -21,7 +21,7 @@ class App {
     this.activeNotes = newActiveNotes;
     if (!this.activeNotes) {
       this.soundEngine.clear();
-    } else {
+    } else if (this.mode) {
       this.soundEngine.queueNotes(this.activeNotes, this.rootNotes, this.mode);
     }
     this.draw();

@@ -31,6 +31,9 @@ class SoundEngine {
     if (this.sequence) {
       this.sequence.removeAll();
     }
+    if (this.loop) {
+      this.loop.stop();
+    }
   }
 
   queueNotes(notes, rootNotes, mode) {
@@ -60,32 +63,24 @@ class SoundEngine {
     }
 
     const that = this;
+
     if (mode === 'sequence') {
-      this.initSequence(noteNames, that);
+      this.sequence = new Tone.Sequence(function (time, note) {
+        that.monoSynth.triggerAttackRelease(note, "8n", time);
+        if (that.playCallback) {
+          that.playCallback(that.noteStringToIndex(note));
+        }
+      }, noteNames, "4n");
     }
     if (mode === 'chord') {
-      this.initChord(noteNames, that);
+      this.loop = new Tone.Loop(function (time) {
+        that.polySynth.triggerAttackRelease(noteNames, "8n", time);
+      }, "2n");
     }
-    
 
     if (wasPlaying) {
       this.play(mode);
     }
-  }
-
-  initSequence(noteNames, obj) {
-    this.sequence = new Tone.Sequence(function (time, note) {
-      obj.monoSynth.triggerAttackRelease(note, "8n", time);
-      if (obj.playCallback) {
-        obj.playCallback(obj.noteStringToIndex(note));
-      }
-    }, noteNames, "4n");
-  }
-
-  initChord(noteNames, obj) {
-    this.loop = new Tone.Loop(function (time) {
-      obj.polySynth.triggerAttackRelease(noteNames, "8n", time);
-    }, "2n");
   }
 
   play(mode) {
